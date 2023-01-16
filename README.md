@@ -15,7 +15,13 @@ if you already installed node.js you can skip the first point.
 1. Download node <a href="https://nodejs.org/de/download/" target="_blank">hier</a> and install it on your PC.
 2. Create a new folder where you want to safe the Website and Copy all he stuff from github in thid folder
 3. Open the Terminal as **administrator** and navigate to the folder you just have created.
-4. now we init a node Projekt:
+4. now we init a node Projekt(optional):
+```
+$ npm init
+```
+Now you can set some informations about your projekt.
+
+6. install socket.io and express
 ```
 $ npm install --save socketio
 $ npm install --save express@4.15.2
