@@ -4,7 +4,7 @@
   <br>
   <br>
   <a target="_blank" href="https://www.youtube.com/channel/UCoif-_aktkxpc9-vPHEKAVw" title="Nightly Tests"><img src="assets/youtube.png" height="20px">Talk2 Studios</a>
-  <a target="_blank" href="talk2-studios.ch"><img alt="Website" src="assets/icon.png" height="20px"> talk2-studios.ch</a>
+  <a target="_blank" href="talk2-studios.ch"><img alt="Website" src="assets/icon.png" height="20px"> talk2-studios.ch</a><br>
   <img src="assets/Studio_Project.gif.png" alt="intro">
 </p>
 
