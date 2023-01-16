@@ -5,26 +5,38 @@
   <br>
   <a target="_blank" href="https://www.youtube.com/channel/UCoif-_aktkxpc9-vPHEKAVw" Tests"><img src="assets/youtube.png" height="20px">Talk2 Studios</a>
   <a target="_blank" href="talk2-studios.ch"><img alt="Website" src="assets/icon.png" height="20px"> talk2-studios.ch</a><br><br>
-  <a href="#installation">Installation</a>
+  <a href="#einleitung">Talk2 Chat</a>
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#installation">Installation</a> 
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#port">Port</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#styles">Styles</a><br><br>
+  <a href="#styles">Styles</a>               
+  <br><br>
   <img src="assets/Studio_Project.gif" alt="intro">
 </p>
-
+<a id="einleitung"></a>
+                  
 # Talk2 Chat
-Talk2 Chat usere eigen entwikelte Webchatapp zum Donloaden und selbst ausprobieren.<br>
+Our own chatapp to download and try for yourself. A product of the third laboratory work of the 2022 Wibilea Bassislehrjahr.<br>
 Explain video: <a href="https://youtu.be/SobWpdG1_NE">Video</a>
-
+                                                 
+## contributing
+                                                  
+### Frontend
+- Colin Heggli
+                                                  
+### Backend
+- Niklaus Külling<br>
+                                                  
 # Installation
 
-## install node modules
-if you already installed node.js you can skip the first point.
+## Install node modules
+if You already installed node.js you can skip the first point.
 1. Download node <a href="https://nodejs.org/de/download/" target="_blank">hier</a> and install it on your PC.
-2. Create a new folder where you want to safe the Website and Copy all he stuff from github in thid folder
+2. Create a new folder where you want to save the Website and copy all he stuff from github in this folder
 3. Open the Terminal as **administrator** and navigate to the folder you just have created.
-4. now we init a node Projekt (optional):
+4. Now we init a node Projekt (optional):
 ```
 $ npm init
 
