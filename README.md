@@ -11,6 +11,7 @@
 Talk2 Chat usere eigen entwikelte Webchatapp zum Donloaden und selbst ausprobieren.
 # Instalation
 ## install node.js
+if you already installed node.js you can skip the first point.
 1. Download node <a href="https://nodejs.org/de/download/">hier</a> and install it on your PC.
 2. Create a new folder where you want to safe the Website and Copy all he stuff from github in thid folder
 3. Open the Terminal as **administrator** and navigate to the folder you just have created.
@@ -21,4 +22,9 @@ $ npm install --save express@4.15.2
 ```
 ## Port
 If you would like to chanche the Port the server is linsten on, open the index.js file and chanche the number in the 8. line of the file to the port you like. <br>
-<img src="assets/port.jpg" alt="Logo">
+<img src="assets/port.jpg" alt="Logo">  
+
+## Styles
+- Romme style: The main stile for the room.htmls is in the maine Directory `/style.css` and `/styles/style.css`<br>
+- Waiting room style: The style for the wait.html is in `/styles/wait.css`<br>
+- Main Page style: The Style for the main index.html is in `/styles/mainstyle.css`<br>
