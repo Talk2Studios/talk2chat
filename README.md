@@ -8,9 +8,11 @@
 </p>
 
 # Talk2 Chat
-Talk2 Chat usere eigen entwikelte Webchatapp zum Donloaden und selbst ausprobieren.
+Talk2 Chat usere eigen entwikelte Webchatapp zum Donloaden und selbst ausprobieren.<br>
+Explain video: <a href="https://youtu.be/SobWpdG1_NE">Video</a>
 # Instalation
-## install node.js
+
+## install node modules
 if you already installed node.js you can skip the first point.
 1. Download node <a href="https://nodejs.org/de/download/" target="_blank">hier</a> and install it on your PC.
 2. Create a new folder where you want to safe the Website and Copy all he stuff from github in thid folder
@@ -18,12 +20,14 @@ if you already installed node.js you can skip the first point.
 4. now we init a node Projekt(optional):
 ```
 $ npm init
+
+// Now you can set some informations about your projekt.
 ```
-Now you can set some informations about your projekt.
 
 6. install socket.io and express
 ```
 $ npm install --save socketio
+
 $ npm install --save express@4.15.2
 ```
 ## Port
