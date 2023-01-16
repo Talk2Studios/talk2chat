@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang=de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/icon.png" type="image/x-icon">
+    <title>Talk2 Chat</title>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<link rel="stylesheet" type="text/css" href="/style.css">
+
+<body>
+    <h1>Talk2 Chat <img src="assets/icon.png" alt="logo"></h1>
+    <main>
+        <div id="messages">
+        </div>
+        <div class="inputfiled">
+            <span class="savename">Your name: <span id="savename"></span><Span class="auser">Active User: <span
+                        id="auser"></span></Span><Span class="mlength"><span id="mlength">0</span>/500</Span></span>
+            <form>
+                <input id="m" autocomplete="off" placeholder="Message" maxlength="500" /><button
+                    id="button">Send</button>
+            </form>
+        </div>
+
+
+    </main>
+
+    <script>
+        var lmsgname
+        //länge des inputs
+        window.onload = function leng() {
+            let ml = document.getElementById('m');
+            ml.addEventListener("keyup", function () {
+                document.getElementById("mlength").innerText = ml.value.length;
+                if (ml.value.length > 470) {
+                    document.getElementById("mlength").style.color = "red"
+                } else {
+                    document.getElementById("mlength").style.color = "white"
+                }
+            });
+        }
+        var auser = ["admin", "Colin", "Niklaus"]
+        var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz"]
+        var userpass = ["admin", "passwd", "passwd", "1234", "user", "1234"]
+        // Name des Nutzers 1
+        const name = login();
+        console.log(`name: ${name}`);
+        function login() {
+            let value;
+            logname = prompt("Your name (max. 20)");
+            console.log("Name: " + logname)
+            logpass = prompt("Your Password (max. 20)");
+            console.log("Pas: " + logpass)
+            var userposition = users.indexOf(logname)
+            if (users.includes(logname) && userpass[userposition] === logpass) {
+                console.log("yes sir")
+                document.getElementById("savename").innerText = logname
+                let usercookie = document.cookie = "username=" + logname + "; path=/";
+                let passcookie = document.cookie = "password=" + logpass + "; path=/";
+                console.log("cName" + usercookie)
+                console.log("cPass" + passcookie)
+            }
+            else {
+                login()
+            }
+            return logname
+        }
+        document.getElementById("savename").innerText = name
+        //das Passiert wenn ein signal Useer Join kommt 6
+        $(function () {
+            var socket = io();
+
+            socket.on("user join", function (numuser) {
+                console.log(numuser)
+                $("#messages").append($("<span class='new-user'></span>").text
+                    ("A new user has joined the chat."));
+                document.getElementById("auser").innerText = numuser
+                scrolldown()
+            });
+            //das Passiert wenn ein signal User leave kommt
+            socket.on("user leave", function (numuser) {
+                console.log(numuser)
+                $("#messages").append($("<span class='user-left'></span>").text
+                    ("A user left the chat."));
+                document.getElementById("auser").innerText = numuser
+                scrolldown()
+            });
+            //wen eine nachricht erhalten wird erstellt es ein Nachricht element 9
+            //Wen der gleiche die nachricht davor gesendet hat wird der name zwei den folgenden Nachrichten entfernt
+            socket.on("chat message", function (msg, bname) {
+                if (auser.includes(bname)) {
+                    if (bname === name) {
+                        if (lmsgname === name) {
+                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                        else {
+                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"><span  class="adminicon">admin</span>You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                    } else {
+                        if (lmsgname === bname) {
+                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                        else {
+                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme">' + bname + '<span class="adminicon">admin</span></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                    }
+                } else {
+                    if (bname === name) {
+                        if (lmsgname === name) {
+                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                        else {
+                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username">You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                    } else {
+                        if (lmsgname === bname) {
+                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                        else {
+                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username">' + bname + '</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+
+                    }
+                }
+
+                lmsgname = bname
+                scrolldown()
+            });
+            //nachricht abschicken 7
+            $("form").submit(function (e) {
+                e.preventDefault();
+                if (document.getElementById("m").value === "" || document.getElementById("m").value === " ") {
+                    $("#m").val("");
+                    return false
+                }
+                else {
+                    socket.emit("chat message", $("#m").val(), name)
+                    $("#m").val("");
+                    return false
+
+                }
+            });
+        });
+        //Sende Datum
+        function checkTime(l) {
+            if (l < 10) {
+                l = "0" + l;
+            }
+            return l;
+        }
+
+        function time() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            var d = today.getDate();
+            var mo = today.getMonth();
+            var y = today.getFullYear();
+            mo++
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
+            var alltime = ("<span class='senddate'>" + d + "." + mo + "." + y + "   " + h + ":" + m + ":" + s + "</span>")
+            return alltime;
+        }
+        //auto scroll
+        function scrolldown() {
+            var element = document.getElementById("messages");
+            element.scrollTop = element.scrollHeight + 300;
+        };
+
+    </script>
+</body>
+
+</html>

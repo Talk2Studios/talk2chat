@@ -1,0 +1,231 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+
+html,
+body {
+    height: 100%;
+    font-family: "Lexend", sans-serif;
+    margin: 0;
+}
+
+* {
+    font-family: "Lexend", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #160161;
+    background: rgb(22, 1, 98);
+}
+
+.new-user {
+    color: rgb(193, 167, 251);
+    list-style-type: none;
+    font-style: italic;
+    text-align: center;
+}
+
+.user-left {
+    color: rgb(138, 97, 225);
+    list-style-type: none;
+    font-style: italic;
+    text-align: center;
+}
+
+#messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    overflow-y: auto;
+}
+
+/* ------------------------------username bei connect oder disconnect--------------------------------------------------------------------------------------------------------------fix overflow bei messages */
+.chatmsg {
+    word-break: break-all;
+    background: rgba(207, 187, 255, 0.5);
+    padding: 10px 7px 5px 7px;
+    border-radius: 5px;
+    line-height: 16px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-height: 700px;
+    width: 600px;
+    background: rgb(66, 21, 163);
+}
+
+#m {
+    margin-bottom: 0px;
+    color: #fff;
+}
+
+#m::placeholder {
+    color: rgb(255, 255, 255, 0.5);
+}
+
+.nachricht {
+    color: white;
+    text-align: start;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0px 10px;
+    display: flex;
+    align-self: start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-repeat: no-repeat;
+    max-width: 500px;
+    text-decoration: none;
+}
+
+.nachricht span .senddate {
+    font-size: 10px;
+    color: rgb(220, 204, 254);
+    display: flex;
+    margin: 2px 0 0 0;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+form {
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    padding: 0;
+}
+
+input {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    background: rgb(193, 167, 251);
+    height: 50px;
+    font-size: 20px;
+    padding: 0 20px 0 20px;
+}
+
+.inputfiled {
+    width: 100%;
+}
+
+.inputfiled span {
+    font-size: 10px;
+    color: rgb(220, 204, 254);
+}
+
+button {
+    height: 50px;
+    background: rgb(138, 97, 225);
+    border-radius: 0;
+    border: none;
+    font-weight: bold;
+    color: #fff;
+    padding: 0 20px;
+}
+
+button:hover {
+    background: rgb(164, 131, 236);
+}
+
+input:focus-visible {
+    border: none;
+    outline: none;
+}
+
+h1 {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 50px;
+    width: 600px;
+    background: rgb(22, 1, 98);
+    margin: 0;
+}
+
+img {
+    height: 80px;
+    padding-left: 15px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.info {
+    margin: 0 0 6px 0;
+}
+
+.mymsg {
+    display: flex;
+    align-self: flex-end;
+}
+
+.mymsg .info {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+
+div.mymsg.nachricht {
+    align-items: flex-end;
+}
+
+.mymsg .chatmsg {
+    align-self: flex-end;
+    background: rgba(25, 6, 94, 0.5);
+}
+
+.auser,
+.savename,
+.mlength {
+    padding-left: 15px;
+}
+
+#auser,
+#savename,
+#mlength {
+    text-decoration: underline;
+    color: white;
+}
+
+.adminicon {
+    font-size: 10px;
+    background: rgba(253, 40, 40, 0.347);
+    color: rgb(255, 0, 0);
+    border-radius: 8px;
+    height: 16px;
+    width: 32px;
+    padding: 0 5px;
+    margin: 0 5px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(193, 167, 251);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(138, 97, 225);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(97, 31, 240);
+}

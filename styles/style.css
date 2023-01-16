@@ -1,0 +1,83 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+iframe {
+
+    height: 790px !important;
+    width: 610px !important;
+    border: none;
+    overflow: none;
+    overflow: hidden;
+}
+
+article {
+    height: 1000px;
+    background: none !important;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end !important;
+}
+
+.chatrooms {
+    color: white;
+    width: 220px;
+    height: 790px;
+    background: rgb(22, 1, 98);
+    padding: 0 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.chatrooms img {
+    height: 30px;
+    width: auto;
+    border-radius: 15px;
+}
+.chatrooms a {
+    color: #fff;
+    text-decoration: none;
+}
+.chatroom {
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 50px;
+    display: flex;
+    padding: 0 0 0 10px;
+}
+h2 {
+    height: 85px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lmsg {
+    color: rgb(220, 204, 254);
+    font-size: 12px;
+}
+.name {
+    display: flex;
+    flex-direction: column;
+}
+.chatroom:hover {
+    background: rgb(60, 29, 173);
+    cursor: pointer;
+}
+.curroom {
+    background: rgb(39, 7, 154);
+}

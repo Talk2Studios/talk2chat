@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/mainstyle.css">
+</head>
+
+<body>
+    <header>
+        <div class="titlecon">
+            <h1 id="title">Talk2 Studios<a href="/"></h1><a href=""><img src="/assets/icon.png" alt="logo"
+                    class="headerlogo"></a>
+        </div>
+        <nav>
+            <ul class="navigation">
+                <li><a href="/">Home</a></li>
+                <li>
+                    <a href="/programms/rechner/">Calculator <img src="/assets/dropdown.png" class="dropicon"
+                            alt="dropdownicon"></a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="/programms/rechner/#simplemath">SIMPLE MATH</a>
+                            <ul class="subsubmenu">
+                                <li><a href="/programms/rechner/#addition">addition</a></li>
+                                <li><a href="/programms/rechner/#">substraction</a></li>
+                                <li><a href="/programms/rechner/#">division</a></li>
+                                <li><a href="/programms/rechner/#">multiplication</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/programms/rechner/#arithmetic">ARITMETIC</a>
+                            <ul class="subsubmenu">
+                                <li><a href="/programms/rechner/#phytagoras">phytagoras</a></li>
+                                <li><a href="/programms/rechner/#fibonacci">fibonacci</a></li>
+                                <li><a href="/programms/rechner/#proportionality">proportionality</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/programms/rechner/#physic">PHYSIC</a>
+                            <ul class="subsubmenu">
+                                <li><a href="#">link</a></li>
+                                <li><a href="#">link</a></li>
+                                <li><a href="#">link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/games">Games <img src="/assets/dropdown.png" class="dropicon" alt="dropdownicon"></a>
+                    <ul class="submenu">
+                        <li><a href="/games/#snake">Snake</a></li>
+                        <li><a href="/games/#blackjack">Blackjack</a></li>
+                        <li><a href="/games/#tictactoe">Tic Tac Toe</a></li>
+                    </ul>
+                <li><a href="/aboutus">About us <img src="/assets/dropdown.png" class="dropicon" alt="dropdownicon"></a>
+                    <ul class="submenu">
+                        <li><a href="/aboutus/#team">Team</a></li>
+                        <li><a href="#">Ziele</a></li>
+                    </ul>
+                </li>
+                <li id="chat-link"><a href="/chat/" class="current">Chat</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="atw">
+            <p class="name-ov-atw">Talk2 Studios</p>
+            <p>Chat</p>
+        </div>
+        <article class="theme">
+            <div class="chatrooms">
+                <h2>Rooms</h2>
+                <div id="waitroom-1" onclick="chancheroom('/wait.html','waitroom-1')" class="roomcon curroom">
+                    <span class="chatroom">
+                        <img src="/assets/icon.png" alt="chaticon"><span id="wr-1-name" class="name">Waiting Room<span
+                                class="lmsg">login & sign up</span></span>
+                    </span>
+                </div>
+                <div id="chatroom-1" onclick="chancheroom('/room1.html','chatroom-1')" class="roomcon">
+                    <span class="chatroom">
+                        <img src="/assets/icon.png" alt="chaticon"><span id="cr-1-name" class="name">Room 1<span
+                                class="lmsg">last
+                                message</span></span>
+                    </span>
+                </div>
+                <div id="chatroom-2" onclick="chancheroom('/room2.html','chatroom-2')" class="roomcon">
+                    <span class="chatroom">
+                        <img src="/assets/icon.png" alt="chaticon"><span id="cr-2-name" class="name">Room 2<span
+                                class="lmsg">last
+                                message</span></span>
+                    </span>
+                </div>
+                <div id="chatroom-3" onclick="chancheroom('/room3.html','chatroom-3')" class="roomcon">
+                    <span class="chatroom">
+                        <img src="/assets/icon.png" alt="chaticon"><span id="cr-3-name" class="name">Room 3<span
+                                class="lmsg">last
+                                message</span></span>
+                    </span>
+                </div>
+            </div>
+            <iframe src="/wait.html" id="roomframe"></iframe>
+        </article>
+    </main>
+    <footer id="footerin">
+    </footer>
+    <script src="/script.js"></script>
+</body>
+
+</html>
