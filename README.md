@@ -3,9 +3,13 @@
   <img src="assets/icon.png" alt="Logo">
   <br>
   <br>
-  <a target="_blank" href="https://www.youtube.com/channel/UCoif-_aktkxpc9-vPHEKAVw" title="Nightly Tests"><img src="assets/youtube.png" height="20px">Talk2 Studios</a>
-  <a target="_blank" href="talk2-studios.ch"><img alt="Website" src="assets/icon.png" height="20px"> talk2-studios.ch</a><br>
-  <a href="#installation">Installation</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#Port">Port</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#Styles">Styles</a><br>
+  <a target="_blank" href="https://www.youtube.com/channel/UCoif-_aktkxpc9-vPHEKAVw" Tests"><img src="assets/youtube.png" height="20px">Talk2 Studios</a>
+  <a target="_blank" href="talk2-studios.ch"><img alt="Website" src="assets/icon.png" height="20px"> talk2-studios.ch</a><br><br>
+  <a href="#installation">Installation</a>
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#port">Port</a>
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#styles">Styles</a><br><br>
   <img src="assets/Studio_Project.gif" alt="intro">
 </p>
 
