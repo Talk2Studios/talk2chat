@@ -9,6 +9,8 @@
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#windows">install on Windows</a> 
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#ubuntu">install on Ubuntu</a> 
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#port">Port</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#styles">Styles</a>               
@@ -29,7 +31,7 @@ Explain video: <a href="https://youtu.be/SobWpdG1_NE">Video</a>
 ### Backend
 - Niklaus Külling<br>
                                                   
-# Installation Windows
+# Installation
 
 ## Windows
 if You already installed node.js you can skip the first point.
@@ -49,6 +51,7 @@ $ npm install --save socketio
 
 $ npm install --save express@4.15.2
 ```
+## Ubuntu
 ## Port
 If you would like to chanche the Port the server is linsten on, open the index.js file and chanche the number in the 8. line of the file to the port you like. <br>
 <img src="assets/port.jpg" alt="Logo">  
