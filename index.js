@@ -40,24 +40,29 @@ io.emit("some event", { for: "everyone" });
 //Sendet die erhaltene Nachricht eines Clients an alle Clients zurück 8
 io.on("connection", function (socket) {
     socket.on("chat message", function (msg, bname) {
-        if (msg.length < 501) {
-            if (msg.includes("<")) {
-                if (msg.includes("<img") || msg.includes("<a") || !msg.includes("<script")) {
+        if (msg != "") {
+            if (msg.length < 501) {
+                if (msg.includes("<")) {
+                    if (msg.includes("<img") || msg.includes("<a") || !msg.includes("<script")) {
+                        console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
+                        io.emit("chat message", msg, bname);
+                    } else {
+                        console.log("📧🟥 html injection |" + bname + "|");
+                        io.emit("chat message", "HTML is not allowed", bname);
+                    }
+                }
+                else {
                     console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
                     io.emit("chat message", msg, bname);
-                } else {
-                    console.log("📧🟥 html injection |" + bname + "|");
-                    io.emit("chat message", "HTML is not allowed", bname);
                 }
-            }
-            else {
-                console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
-                io.emit("chat message", msg, bname);
-            }
-        } else {
+            } else {
 
-            console.log("📧🟥 to long |" + bname + "|" + msg.length);
+                console.log("📧🟥 to long |" + bname + "|" + msg.length);
+            }
+        }else {
+            console.log("📧🟥 spam |" + bname + "|");
         }
+
 
     });
 });
