@@ -7,7 +7,7 @@
   <a target="_blank" href="talk2-studios.ch"><img alt="Website" src="assets/icon.png" height="20px"> talk2-studios.ch</a><br><br>
   <a href="#einleitung">Talk2 Chat</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#installation windows">Installation</a> 
+  <a href="#installation windows">Installation Windows</a> 
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#port">Port</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
