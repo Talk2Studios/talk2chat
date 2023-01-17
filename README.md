@@ -31,7 +31,7 @@ Explain video: <a href="https://youtu.be/SobWpdG1_NE">Video</a>
                                                   
 # Installation Windows
 
-## Install node modules
+## Windows
 if You already installed node.js you can skip the first point.
 1. Download node <a href="https://nodejs.org/de/download/" target="_blank">hier</a> and install it on your PC.
 2. Create a new folder where you want to save the Website and copy all he stuff from github in this folder
