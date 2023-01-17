@@ -9,12 +9,13 @@ body {
 }
 
 iframe {
-
+    padding: 0 !important;
     height: 790px !important;
     width: 610px !important;
     border: none;
     overflow: none;
     overflow: hidden;
+    border-radius: 0 5px 5px 0;
 }
 
 article {
@@ -26,31 +27,39 @@ article {
     align-items: flex-start !important;
 }
 
-nav {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end !important;
-}
-
 .chatrooms {
     color: white;
     width: 220px;
-    height: 790px;
+    max-height: 790px;
+    height: 100%;
     background: rgb(22, 1, 98);
     padding: 0 0 0 30px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    border-radius: 5px 0 0 5px;
 }
-.chatrooms img {
-    height: 30px;
+
+.chatrooms .chatrooms {
+    padding: 0;
+}
+
+.chatrooms img,
+.profile-logo {
+    height: 35px;
     width: auto;
+    margin: 0 5px 0 0;
     border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .chatrooms a {
     color: #fff;
     text-decoration: none;
 }
+
 .chatroom {
     display: flex;
     align-items: center;
@@ -59,6 +68,7 @@ nav {
     display: flex;
     padding: 0 0 0 10px;
 }
+
 h2 {
     height: 85px;
     margin: 0;
@@ -66,18 +76,67 @@ h2 {
     align-items: center;
     justify-content: center;
 }
+
 .lmsg {
     color: rgb(220, 204, 254);
     font-size: 12px;
 }
+
 .name {
     display: flex;
     flex-direction: column;
 }
+
+.chatroom {
+    border-radius: 5px;
+    margin: 2px 0 0 0;
+}
+
 .chatroom:hover {
     background: rgb(60, 29, 173);
     cursor: pointer;
 }
+
 .curroom {
     background: rgb(39, 7, 154);
+    border-radius: 5px;
+}
+
+.chat-form {
+    background: rgb(66, 21, 163);
+    color: white;
+}
+
+.chat-form input {
+    border-radius: 5px;
+    border: none;
+    background: rgb(193, 167, 251);
+    height: 50px;
+    font-size: 20px;
+    padding: 0 20px 0 20px;
+    color: #fff;
+    border-color: white;
+}
+
+.chat-form .ibutton {
+    border-radius: 5px;
+    background: rgb(138, 97, 225);
+}
+
+.chat-form .ibutton:hover {
+    background: rgb(164, 131, 236);
+}
+
+.g-article {
+    background: rgb(22, 1, 98);
+}
+
+.gen::placeholder {
+    color: rgb(255, 255, 255, 0.5);
+}
+
+div#profile.roomcon {
+    display: flex;
+    align-self: flex-end;
+    margin: 0 0 4px 0;
 }

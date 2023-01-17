@@ -47,12 +47,12 @@ h1 {
 }
 
 h2 {
+  padding: 0 30px;
   color: white;
 }
 
 .ch2 h2:hover {
   color: rgb(22, 1, 97);
-  ;
 }
 
 
@@ -89,7 +89,7 @@ h3 {
 
 main {
   width: 100%;
-  max-width: 1300px;
+  max-width: 75%;
   border-radius: 10px;
   min-height: 100%;
   display: flex;
@@ -100,11 +100,11 @@ main {
 
 article {
   width: 100%;
-  padding: 0 30px;
   /*background: linear-gradient(147deg,
       rgba(156, 0, 255, 1) 0%,
       rgba(192, 81, 163, 1) 45%,
       rgba(255, 224, 0, 1) 100%);*/
+      padding: 0 20px 0;
   background: linear-gradient(145deg, rgba(79, 44, 203, 0.7) 0%, rgba(207, 187, 255, 0.7) 100%);
   border-radius: 10px;
   margin-top: 30px;
@@ -153,7 +153,10 @@ header .headerlogo {
   display: flex;
   align-items: center;
 }
-
+.titlecon a {
+  display: flex;
+  align-items: center;
+}
 head h1 a {
   display: flex;
   align-items: flex-start;
@@ -241,23 +244,33 @@ iframe {
 /*autotextwrite*/
 /*autotextwrite*/
 
-footer {
+#footerin {
   height: 100%;
-  max-height: 300px;
+  max-height: 1000px;
   width: 100%;
-  max-width: 1300px;
+  padding: 0 20px 20px;
+  max-width: 75%;
   color: white;
-  background: none;
   width: 100%;
   text-align: center;
   border-radius: 10px 10px 0 0;
   margin-top: 60px;
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 20px;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(145deg, rgba(79, 44, 203, 0.7) 0%, rgba(207, 187, 255, 0.7) 100%);
 }
-
+footer a:hover{
+  color: rgb(202, 163, 255);
+}
+.webdesign {
+  text-decoration: none;
+  color: white;
+}
+.webdesign:hover {
+  color: rgb(202, 163, 255);
+  text-decoration: underline;
+}
 footer p {
   margin: 10px 0;
 }
@@ -277,6 +290,47 @@ footer p {
   align-items: center;
 }
 
+.footer-nav {
+  display: flex;
+  margin: 30px 0 0 0;
+}
+
+.footer-nav-con {
+  margin: 0 30px 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-nav-container {
+  display: flex;
+}
+
+.footer-nav-wrap {
+  display: flex;
+
+}
+
+.footer-nav-title {
+  text-decoration: none;
+  color: white;
+  margin: 10px 0;
+}
+
+p.rbundig {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.footer-nav-links {
+  color: rgba(255, 255, 255, 0.829);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 0 0 0 5px;
+  margin: 5px 0;
+}
+
 .social {
   display: flex;
   flex-direction: column;
@@ -284,19 +338,9 @@ footer p {
   margin-right: 20px;
 }
 
-.rbundig {
-  text-align: right;
-  margin-right: 30px;
-}
-
-.lbundig {
-  text-align: left;
-}
-
 footer img {
   height: 30px;
   width: auto;
-  margin: 5px 0;
 }
 
 nav {
@@ -617,11 +661,27 @@ article li a:hover {
   color: rgb(22, 1, 100);
 }
 
-@media screen and (max-width: 1500px) {
-  article {
-    max-width: 1000px;
-  }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #160161;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #26069b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(177, 151, 237);
+}
+
+@media screen and (max-width: 1500px) {
   .aboutuscont p {
     font-size: 16px;
     color: #ffffff;
@@ -632,14 +692,34 @@ article li a:hover {
     float: left;
   }
 
-  header,
-  footer {
+  header {
     width: 100%;
     max-width: 1060px;
+  }
+
+  footer {
+    flex-direction: column;
+  }
+
+  .footer-nav-con {
+    margin: 0 20px 0 40px;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-nav-container {
+    margin: 20px 0;
   }
 }
 
 @media screen and (max-width: 1100px) {
+  #title {
+    padding: 20px 0;
+  }
+
   nav {
     margin: 0;
     padding-top: 20px;
@@ -649,10 +729,6 @@ article li a:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  article {
-    max-width: 800px;
   }
 
   header {
@@ -667,9 +743,9 @@ article li a:hover {
     align-items: center;
   }
 
-  footer {
-    width: 100%;
-    max-width: 800px;
+  .footer-nav {
+    flex-direction: column;
+    align-items: center;
   }
 
   header .headerlogo {
@@ -687,28 +763,47 @@ article li a:hover {
     padding: 0;
     height: 60px;
   }
+
   #navigation {
     position: absolute;
   }
-  #navigation,.submenu,.subsubmenu {
+
+  #navigation,
+  .submenu,
+  .subsubmenu {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
   }
+
   .submenu a {
     text-align: center;
+  }
+
+  nav ul {
+    display: none !important;
+  }
+
+  nav li {
+    display: flex !important;
   }
 }
 
 @media screen and (max-width: 915px) {
-  .rechner {
-    flex-direction: row;
+  header {
+    max-width: 620px;
+    justify-content: space-between;
   }
 
-  article {
-    width: 100%;
-    max-width: 560px;
+  iframe {
+    padding-bottom: 25px;
+    width: 420px;
+    height: 236.25px;
+  }
+
+  .rechner {
+    flex-direction: row;
   }
 
   h2,
@@ -786,14 +881,16 @@ article li a:hover {
   footer {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    max-height: 1000px;
   }
 
-  .rbundig {
-    text-align: left;
-    margin-left: 30px;
-    margin-right: 0;
+  .footer-nav-container {
+    flex-wrap: wrap;
+  }
+
+  .footer-nav-wrap {
+    flex-direction: column;
   }
 
   .atw p {
@@ -807,9 +904,20 @@ article li a:hover {
 }
 
 @media screen and (max-width: 724px) {
-  article {
-    max-width: 280px;
-    width: 100%;
+  #title {
+    font-size: 30px;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header .headerlogo {
+    display: flex;
+    padding: 0;
+    height: 50px;
   }
 
   .rechner {
@@ -826,16 +934,20 @@ article li a:hover {
     font-size: 40px;
   }
 
+  h2 {
+    font-size: 16px;
+  }
+
+  h2 .dropicon {
+    height: 12px;
+    width: auto;
+  }
+
   footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  .rbundig {
-    text-align: left;
-    margin-left: 0;
   }
 
   .footer-l-div {
@@ -855,6 +967,10 @@ article li a:hover {
     padding-bottom: 15px;
   }
 
+  article {
+    margin: 15px 0 0 0;
+  }
+
   .theme {
     display: flex;
     flex-direction: row;
@@ -863,7 +979,7 @@ article li a:hover {
 
   .atw p {
     font-size: 40px;
-
+    margin: 0;
   }
 
   .atw span {
@@ -871,6 +987,6 @@ article li a:hover {
   }
 
   .atw .name-ov-atw {
-    margin-top: 90px;
+    margin-top: 50px;
   }
 }

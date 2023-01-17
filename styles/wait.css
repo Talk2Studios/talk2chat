@@ -40,3 +40,6 @@ main.waitmain button {
 main.waitmain img {
     padding: 0;
 }
+button {
+    cursor: pointer;
+}

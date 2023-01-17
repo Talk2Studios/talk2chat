@@ -2,112 +2,141 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/mainstyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/icon.png">
+  <title>Talk2 Chat | Beta</title>
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/mainstyle.css">
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 </head>
 
 <body>
-    <header>
-        <div class="titlecon">
-            <h1 id="title">Talk2 Studios<a href="/"></h1><a href=""><img src="/assets/icon.png" alt="logo"
-                    class="headerlogo"></a>
+  <header>
+    <nav>
+      <div class="titlecon">
+        <a href="https://talk2-studios.ch">
+          <h1 id="title">Talk2 Studios</h1><img src="/assets/icon.png" alt="logo" class="headerlogo">
+        </a>
+      </div>
+      <ul id="navigation">
+        <li><a href="https://talk2-studios.ch">Home</a></li>
+        <li>
+          <a href="https://talk2-studios.ch/programms/rechner/">Calculator <img src="/assets/dropdown.png"
+              class="dropicon" alt="dropdownicon"></a>
+          <ul class="submenu">
+            <li>
+              <a href="https://talk2-studios.ch/programms/rechner/#simplemath">SIMPLE MATH</a>
+              <ul class="subsubmenu">
+                <li><a href="https://talk2-studios.ch/programms/rechner/#addition">addition</a></li>
+                <li><a href="https://talk2-studios.ch/programms/rechner/#">substraction</a></li>
+                <li><a href="https://talk2-studios.ch/programms/rechner/#">division</a></li>
+                <li><a href="https://talk2-studios.ch/programms/rechner/#">multiplication</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="https://talk2-studios.ch/programms/rechner/#arithmetic">ARITMETIC</a>
+              <ul class="subsubmenu">
+                <li><a href="https://talk2-studios.ch/programms/rechner/#phytagoras">phytagoras</a></li>
+                <li><a href="https://talk2-studios.ch/programms/rechner/#fibonacci">fibonacci</a></li>
+                <li><a href="https://talk2-studios.ch/programms/rechner/#proportionality">proportionality</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="https://talk2-studios.ch/programms/rechner/#physic">PHYSIC</a>
+              <ul class="subsubmenu">
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+                <li><a href="#">link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="https://talk2-studios.ch/games">Games <img src="/assets/dropdown.png" class="dropicon"
+              alt="dropdownicon"></a>
+          <ul class="submenu">
+            <li><a href="https://talk2-studios.ch/games/#snake">Snake</a></li>
+            <li><a href="https://talk2-studios.ch/games/#blackjack">Blackjack</a></li>
+            <li><a href="https://talk2-studios.ch/games/#tictactoe">Tic Tac Toe</a></li>
+          </ul>
+        <li><a href="https://talk2-studios.ch/aboutus">About us <img src="/assets/dropdown.png" class="dropicon"
+              alt="dropdownicon"></a>
+          <ul class="submenu">
+            <li><a href="https://talk2-studios.ch/aboutus/#team">Team</a></li>
+            <li><a href="#">Ziele</a></li>
+          </ul>
+        </li>
+        <li id="chat-link"><a href="http://talk2chat.internet-box.ch:5500/talk2chat" class="current">Chat</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="atw">
+      <p class="name-ov-atw">Talk2 Studios</p>
+      <p>Chat</p>
+    </div>
+    <article class="theme">
+
+      <div class="chatrooms">
+        <div class="chatrooms">
+          <h2>Rooms</h2>
+          <div id="waitroom-1" onclick="chancheroom('/wait.html','waitroom-1')" class="roomcon curroom">
+            <span class="chatroom">
+              <img src="/assets/icon.png" alt="chaticon"><span id="wr-1-name" class="name">Waiting Room<span
+                  class="lmsg">login & sign up</span></span>
+            </span>
+          </div>
+          <div id="chatroom-1" onclick="chancheroom('/room1.html','chatroom-1')" class="roomcon">
+            <span class="chatroom">
+              <img src="/assets/icon.png" alt="chaticon"><span id="cr-1-name" class="name">Room 1<span class="lmsg">last
+                  message</span></span>
+            </span>
+          </div>
+          <div id="chatroom-2" onclick="chancheroom('/room2.html','chatroom-2')" class="roomcon">
+            <span class="chatroom">
+              <img src="/assets/icon.png" alt="chaticon"><span id="cr-2-name" class="name">Room 2<span class="lmsg">last
+                  message</span></span>
+            </span>
+          </div>
+          <div id="chatroom-3" onclick="chancheroom('/room3.html','chatroom-3')" class="roomcon">
+            <span class="chatroom">
+              <img src="/assets/icon.png" alt="chaticon"><span id="cr-3-name" class="name">Room 3<span class="lmsg">last
+                  message</span></span>
+            </span>
+          </div>
+
+
+
         </div>
-        <nav>
-            <ul class="navigation">
-                <li><a href="/">Home</a></li>
-                <li>
-                    <a href="/programms/rechner/">Calculator <img src="/assets/dropdown.png" class="dropicon"
-                            alt="dropdownicon"></a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="/programms/rechner/#simplemath">SIMPLE MATH</a>
-                            <ul class="subsubmenu">
-                                <li><a href="/programms/rechner/#addition">addition</a></li>
-                                <li><a href="/programms/rechner/#">substraction</a></li>
-                                <li><a href="/programms/rechner/#">division</a></li>
-                                <li><a href="/programms/rechner/#">multiplication</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/programms/rechner/#arithmetic">ARITMETIC</a>
-                            <ul class="subsubmenu">
-                                <li><a href="/programms/rechner/#phytagoras">phytagoras</a></li>
-                                <li><a href="/programms/rechner/#fibonacci">fibonacci</a></li>
-                                <li><a href="/programms/rechner/#proportionality">proportionality</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/programms/rechner/#physic">PHYSIC</a>
-                            <ul class="subsubmenu">
-                                <li><a href="#">link</a></li>
-                                <li><a href="#">link</a></li>
-                                <li><a href="#">link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="/games">Games <img src="/assets/dropdown.png" class="dropicon" alt="dropdownicon"></a>
-                    <ul class="submenu">
-                        <li><a href="/games/#snake">Snake</a></li>
-                        <li><a href="/games/#blackjack">Blackjack</a></li>
-                        <li><a href="/games/#tictactoe">Tic Tac Toe</a></li>
-                    </ul>
-                <li><a href="/aboutus">About us <img src="/assets/dropdown.png" class="dropicon" alt="dropdownicon"></a>
-                    <ul class="submenu">
-                        <li><a href="/aboutus/#team">Team</a></li>
-                        <li><a href="#">Ziele</a></li>
-                    </ul>
-                </li>
-                <li id="chat-link"><a href="/chat/" class="current">Chat</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <div class="atw">
-            <p class="name-ov-atw">Talk2 Studios</p>
-            <p>Chat</p>
+        <div id="profile" class="roomcon">
+          <span class="chatroom">
+            <img src="/assets/icon.png" alt="chaticon"><span id="profil-name" class="name">Username</span>
+          </span>
         </div>
-        <article class="theme">
-            <div class="chatrooms">
-                <h2>Rooms</h2>
-                <div id="waitroom-1" onclick="chancheroom('/wait.html','waitroom-1')" class="roomcon curroom">
-                    <span class="chatroom">
-                        <img src="/assets/icon.png" alt="chaticon"><span id="wr-1-name" class="name">Waiting Room<span
-                                class="lmsg">login & sign up</span></span>
-                    </span>
-                </div>
-                <div id="chatroom-1" onclick="chancheroom('/room1.html','chatroom-1')" class="roomcon">
-                    <span class="chatroom">
-                        <img src="/assets/icon.png" alt="chaticon"><span id="cr-1-name" class="name">Room 1<span
-                                class="lmsg">last
-                                message</span></span>
-                    </span>
-                </div>
-                <div id="chatroom-2" onclick="chancheroom('/room2.html','chatroom-2')" class="roomcon">
-                    <span class="chatroom">
-                        <img src="/assets/icon.png" alt="chaticon"><span id="cr-2-name" class="name">Room 2<span
-                                class="lmsg">last
-                                message</span></span>
-                    </span>
-                </div>
-                <div id="chatroom-3" onclick="chancheroom('/room3.html','chatroom-3')" class="roomcon">
-                    <span class="chatroom">
-                        <img src="/assets/icon.png" alt="chaticon"><span id="cr-3-name" class="name">Room 3<span
-                                class="lmsg">last
-                                message</span></span>
-                    </span>
-                </div>
-            </div>
-            <iframe src="/wait.html" id="roomframe"></iframe>
-        </article>
-    </main>
-    <footer id="footerin">
-    </footer>
-    <script src="/script.js"></script>
+      </div>
+      <iframe src="/wait.html" id="roomframe"></iframe>
+    </article>
+    <article class="g-article">
+      <form class="chat-form">
+        <h3>Generate Link</h3>
+        URL: <br><input type="text" class="gen" id="generate-link-in1" placeholder="https://example.com"><br>
+        Placeholder:
+        <input type="text" class="gen" id="generate-link-in2" placeholder="example.com">
+        <input class="ibutton" type="button" onclick="glink('copylink')" value="Generate and copy link" id="copylink">
+      </form>
+      <form class="chat-form">
+        <h3>Generate image</h3>
+        URL: <br><input type="text" class="gen" id="generate-img-in1" placeholder="https://img.png"><br>
+        Alt (optional):
+        <input type="text" class="gen" id="generate-img-in2" placeholder="IMG">
+        <input class="ibutton" type="button" onclick="gimg('copyimg')" value="Generate and copy img" id="copyimg">
+      </form>
+    </article>
+  </main>
+  <footer id="footerin">
+  </footer>
+  <script src="/script.js"></script>
 </body>
 
 </html>

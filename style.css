@@ -5,6 +5,9 @@ body {
     height: 100%;
     font-family: "Lexend", sans-serif;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 * {
@@ -59,12 +62,15 @@ main {
     height: 100%;
     max-height: 700px;
     width: 600px;
-    background: rgb(66, 21, 163);
+    background: rgb(66,21,163);
+    background: linear-gradient(180deg, rgba(66,21,163,1) 0%, rgba(79,33,176,1) 100%);
+    border-radius: 5px;
 }
 
 #m {
     margin-bottom: 0px;
     color: #fff;
+    border-radius: 5px 0 0 5px;
 }
 
 #m::placeholder {
@@ -74,7 +80,7 @@ main {
 .nachricht {
     color: white;
     text-align: start;
-    padding: 5px;
+    padding: 0 5px;
     border-radius: 5px;
     margin: 0px 10px;
     display: flex;
@@ -85,6 +91,14 @@ main {
     background-repeat: no-repeat;
     max-width: 500px;
     text-decoration: none;
+}
+
+.nachricht a {
+    color: rgb(184, 90, 242);
+}
+
+.nachricht a:hover {
+    color: rgb(168, 131, 248);
 }
 
 .nachricht span .senddate {
@@ -123,6 +137,7 @@ input {
 }
 
 button {
+    cursor: pointer;
     height: 50px;
     background: rgb(138, 97, 225);
     border-radius: 0;
@@ -130,6 +145,7 @@ button {
     font-weight: bold;
     color: #fff;
     padding: 0 20px;
+    border-radius: 0 5px 5px 0;
 }
 
 button:hover {
@@ -151,6 +167,7 @@ h1 {
     width: 600px;
     background: rgb(22, 1, 98);
     margin: 0;
+    height: 80px;
 }
 
 img {
