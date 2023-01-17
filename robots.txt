@@ -1,6 +1,0 @@
-# robots.txt http://talk2chat.internet-box.ch
-
-user-agent: *
-Disallow: /styles/
-Disallow: /node_modules/
-
