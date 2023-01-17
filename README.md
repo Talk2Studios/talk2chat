@@ -55,6 +55,6 @@ If you would like to chanche the Port the server is linsten on, open the index.j
 
 ## Styles
 - Roome style: The main style for the room.htmls is in the maine Directory `/style.css`<br>
-- Iframe and room switch: the style for the Iframe and the chat room icons in in `/styles/style.css`<br>                              
+- Iframe and room switch: The style for the Iframe and the chat room icons in in `/styles/style.css`<br>                              
 - Waiting room style: The style for the wait.html is in `/styles/wait.css`<br>
 - Main Page style: The Style for the main index.html is in `/styles/mainstyle.css`<br>
