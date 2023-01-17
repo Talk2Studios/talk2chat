@@ -7,7 +7,7 @@
   <a target="_blank" href="talk2-studios.ch"><img alt="Website" src="assets/icon.png" height="20px"> talk2-studios.ch</a><br><br>
   <a href="#einleitung">Talk2 Chat</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#installation">Installation</a> 
+  <a href="#installation windows">Installation</a> 
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#port">Port</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -29,7 +29,7 @@ Explain video: <a href="https://youtu.be/SobWpdG1_NE">Video</a>
 ### Backend
 - Niklaus Külling<br>
                                                   
-# Installation
+# Installation Windows
 
 ## Install node modules
 if You already installed node.js you can skip the first point.
