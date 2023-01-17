@@ -7,9 +7,7 @@
   <a target="_blank" href="talk2-studios.ch"><img alt="Website" src="assets/icon.png" height="20px"> talk2-studios.ch</a><br><br>
   <a href="#einleitung">Talk2 Chat</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#windows">install on Windows</a> 
-  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#ubuntu">install on Ubuntu</a> 
+  <a href="#installation">Installation</a> 
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#port">Port</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -33,7 +31,7 @@ Explain video: <a href="https://youtu.be/SobWpdG1_NE">Video</a>
                                                   
 # Installation
 
-## Windows
+## install and init node.js
 if You already installed node.js you can skip the first point.
 1. Download node <a href="https://nodejs.org/de/download/" target="_blank">hier</a> and install it on your PC.
 2. Create a new folder where you want to save the Website and copy all he stuff from github in this folder
@@ -51,7 +49,7 @@ $ npm install --save socketio
 
 $ npm install --save express@4.15.2
 ```
-## Ubuntu
+
 ## Port
 If you would like to chanche the Port the server is linsten on, open the index.js file and chanche the number in the 8. line of the file to the port you like. <br>
 <img src="assets/port.jpg" alt="Logo">  
