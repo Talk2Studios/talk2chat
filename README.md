@@ -24,9 +24,11 @@ Explain video: <a href="https://youtu.be/SobWpdG1_NE">Video</a>
 ## contributing
                                                   
 ### Frontend
+
 - Colin Heggli
                                                   
 ### Backend
+
 - Niklaus Külling<br>
                                                   
 # Installation
@@ -48,6 +50,14 @@ $ npm init
 $ npm install --save socketio
 
 $ npm install --save express@4.15.2
+```
+
+## start the server
+
+1. Open the CMD, Terminal or a terminal thats build in a programm and navigate to the folder where you have the Chat files.
+2. Type in this command to start de Server
+```
+$ node index.js
 ```
 
 ## Port
