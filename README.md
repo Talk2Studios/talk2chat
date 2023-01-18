@@ -37,7 +37,7 @@ Explain video: <a href="https://youtu.be/SobWpdG1_NE">Video</a>
 if You already installed node.js you can skip the first point.
 1. Download node <a href="https://nodejs.org/de/download/" target="_blank">hier</a> and install it on your PC.
 2. Create a new folder where you want to save the Website and copy all he stuff from github in this folder
-3. Open the Terminal as **administrator** and navigate to the folder you just have created.
+3. Open the Terminal as <strong><u>administrator</u></strong> and navigate to the folder you just have created.
 4. Now we init a node Projekt (optional):
 ```
 $ npm init
@@ -52,7 +52,7 @@ $ npm install --save socketio
 $ npm install --save express@4.15.2
 ```
 
-## start the server
+## Start the server
 
 1. Open the CMD, Terminal or a terminal thats build in a programm and navigate to the folder where you have the Chat files.
 2. Type in this command to start de Server
