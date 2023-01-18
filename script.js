@@ -70,8 +70,8 @@ var broom = "waitroom-1"
 
 function chancheroom(iroom, croom) {
   document.getElementById("roomframe").src = iroom;
-  document.getElementById(croom).classList.add("curroom");
   document.getElementById(broom).classList.remove("curroom")
+  document.getElementById(croom).classList.add("curroom");
   broom = croom
 }
 // Copy Button link--------------------------------------------------------------------------------------------------

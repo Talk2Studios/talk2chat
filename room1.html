@@ -31,6 +31,8 @@
         var arraypass
         var arrayuser
         var array
+        var id
+        var name
         function functiongetCookie() {
             if (document.cookie.length != 0) {
                 var array = document.cookie.split(";");
@@ -43,7 +45,6 @@
                 console.log("Cookie not available");
             }
         }
-
         //länge des inputs
         window.onload = function leng() {
             let ml = document.getElementById('m');
@@ -57,59 +58,45 @@
             });
         }
         var auser = ["admin", "Colin", "Niklaus"]
-        var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian"]
-        var userpass = ["admin", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
-        // Name des Nutzers 1
-        const name = login();
-        // console.log(`name: ${name}`);
-        function login() {
-            if (document.cookie.length != 0) {
-                functiongetCookie()
-                if (users.includes(arrayuser[1])) {
-                    var userposi = users.indexOf(arrayuser[1])
-                    if (userpass[userposi] == arraypass[1]) {
-                        document.getElementById("savename").innerText = arrayuser[3]
-                        return arrayuser[1]
-                    } else {
-                        logindirect()
-                        return logname
-                    }
-                } else {
-                    logindirect()
-                    return logname
-                }
-            } else {
-                logindirect()
-                return logname
-            }
-        }
 
-        function logindirect() {
+        function logindirect(id) {
+            var socket = io();
             logname = prompt("Your name (max. 20)");
             // console.log("Name: " + logname)
             logpass = prompt("Your Password (max. 20)");
             // console.log("Pas: " + logpass)
-            var userposition = users.indexOf(logname)
-            if (users.includes(logname) && userpass[userposition] === logpass) {
-                console.log("yes sir")
-                document.getElementById("savename").innerText = logname
-                var usercookie = document.cookie = "username=" + logname + "; path=/";
-                var passcookie = document.cookie = "password=" + logpass + "; path=/";
-            }
-            else {
-                logindirect()
-            }
-            return logname
+            socket.emit("trylogin", logname, logpass, id)
         }
-        document.getElementById("savename").innerText = name
-        //das Passiert wenn ein signal Useer Join kommt 6
+
         $(function () {
             var socket = io();
 
-            socket.on("user join", function (numuser) {
+            socket.on("getid", function (sid) {
+                // console.log(sid)
+                id = sid
+
+                if (document.cookie.length != 0) {
+                    functiongetCookie()
+                    socket.emit("trylogin", arrayuser[1], arraypass[1], id)
+                } else {
+                    logindirect(id)
+                }
+                socket.on("logintrue", function (uname, upass) {
+                    // console.log("yes")
+                    document.cookie = "username=" + uname + "; path=/";
+                    document.cookie = "password=" + upass + "; path=/";
+                    document.getElementById("savename").innerText = uname
+                    name = uname
+                });
+                socket.on("loginfalse", function () {
+                    logindirect(id)
+                });
+            });
+
+            socket.on("user join", function (numuser, ujname) {
                 console.log(numuser)
                 $("#messages").append($("<span class='new-user'></span>").text
-                    ("A new user has joined the chat."));
+                    (ujname + " has joined the chat."));
                 document.getElementById("auser").innerText = numuser
                 scrolldown()
             });

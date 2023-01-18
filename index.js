@@ -1,15 +1,18 @@
-//inpoertieren der Libarys 2
+//inpoertieren der Libarys 
 var app = require("express")();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
+var net = require('net');
+var client = net.connect(8888, 'localhost');
+
 var usernum = 0
 
-//Server hosten auf port 80 3
+//Server hosten auf port 80 
 http.listen(80, function () {
     console.log("Server is started")
 });
 
-//dem Client die Websiten Daten schicken 4
+
 app.use((req, res) => {
 
     if (req.url.slice(-1) == "/") {
@@ -18,15 +21,11 @@ app.use((req, res) => {
         res.sendFile(__dirname + req.url)
     }
 })
-// Löst eine Funktion aus wen ein neuer Nutzer sich verbindet 5
+
 io.on("connection", function (socket) {
-    console.log("🟩 new user joined")
-    //wie viele User online sind
-    usernum = usernum + 1
-    io.emit("user join", usernum, { for: "everyone" })
 
+    io.to(socket.id).emit("getid", socket.id)
 
-    // Löst eine Funktion aus wen ein neuer Nutzer die Verbindung aufhebt
     socket.on("disconnect", function () {
         //wie viele User online sind
         usernum = usernum - 1
@@ -35,35 +34,64 @@ io.on("connection", function (socket) {
 
     });
 });
-io.emit("some event", { for: "everyone" });
 
-//Sendet die erhaltene Nachricht eines Clients an alle Clients zurück 8
+
+var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian"]
+var userpass = ["admin", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
+
+
 io.on("connection", function (socket) {
+
+    socket.on("trylogin", function (user, pass, sid) {
+        console.log("🟩 new user joined | id: " + sid + " | " + user)
+        if (users.includes(user)) {
+            var userposi = users.indexOf(user)
+            if (userpass[userposi] == pass) {
+                io.to(sid).emit("logintrue", user, pass)
+
+                //wie viele User online sind
+                usernum = usernum + 1
+                io.emit("user join", usernum, user, { for: "everyone" })
+            } else {
+                io.to(sid).emit("loginfalse")
+            }
+        } else {
+            console.log("user nicht vorhanden")
+            io.to(sid).emit("loginfalse")
+        }
+    });
+
     socket.on("chat message", function (msg, bname) {
-        if (msg != "") {
-            if (msg.length < 501) {
-                if (msg.includes("<")) {
-                    if (msg.includes("<img") || msg.includes("<a") || !msg.includes("<script")) {
+        if (bname.length > 20) {
+            bname = bname.slice(0, 20)
+        } else {
+            if (msg != "") {
+                if (msg.length < 501) {
+                    if (msg.includes("<")) {
+                        if (msg.includes("<img") || msg.includes("<a") || !msg.includes("<script")) {
+                            console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
+                            io.emit("chat message", msg, bname);
+                            client.write('Hello from node.js');
+                            client.end()
+                        } else {
+                            console.log("📧🟥 html injection |" + bname + "|");
+                            io.emit("chat message", "HTML is not allowed", bname);
+                        }
+                    }
+                    else {
                         console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
                         io.emit("chat message", msg, bname);
-                    } else {
-                        console.log("📧🟥 html injection |" + bname + "|");
-                        io.emit("chat message", "HTML is not allowed", bname);
                     }
-                }
-                else {
-                    console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
-                    io.emit("chat message", msg, bname);
+                } else {
+
+                    console.log("📧🟥 to long |" + bname + "|" + msg.length);
                 }
             } else {
-
-                console.log("📧🟥 to long |" + bname + "|" + msg.length);
+                console.log("📧🟥 spam |" + bname + "|");
             }
-        }else {
-            console.log("📧🟥 spam |" + bname + "|");
         }
-
 
     });
 });
+
 
