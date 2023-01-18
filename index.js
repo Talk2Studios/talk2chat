@@ -2,8 +2,9 @@
 var app = require("express")();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
-var net = require('net');
-var client = net.connect(8888, 'localhost');
+const net = require("net")
+
+const client = net.connect({port: 8888, host: process.argv[2] ?? "192.168.128.100"})
 
 var usernum = 0
 
@@ -25,25 +26,33 @@ app.use((req, res) => {
 io.on("connection", function (socket) {
 
     io.to(socket.id).emit("getid", socket.id)
-
-    socket.on("disconnect", function () {
-        //wie viele User online sind
-        usernum = usernum - 1
-        console.log("🟥 a user Leved");
-        io.emit("user leave", usernum, { for: "everyone" });
-
-    });
 });
-
 
 var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian"]
 var userpass = ["admin", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
 
 
+
 io.on("connection", function (socket) {
 
+    socket.on("waitlogin", function (user, pass, sid) {
+        if (users.includes(user)) {
+            var userposi = users.indexOf(user)
+            if (userpass[userposi] == pass) {
+                io.to(sid).emit("waittrue", user, pass)
+                console.log("🟩 logged in | id: " + sid + " | " + user)
+            } else {
+                io.to(sid).emit("waitfalse")
+                console.log("❗ falsches pw")
+            }
+        } else {
+            console.log("❗ user existiert nicht")
+            io.to(sid).emit("waitfalse")
+        }
+    });
+
     socket.on("trylogin", function (user, pass, sid) {
-        console.log("🟩 new user joined | id: " + sid + " | " + user)
+        console.log("🟩 new user joined Room 1 | id: " + sid + " | " + user)
         if (users.includes(user)) {
             var userposi = users.indexOf(user)
             if (userpass[userposi] == pass) {
@@ -59,19 +68,24 @@ io.on("connection", function (socket) {
             console.log("user nicht vorhanden")
             io.to(sid).emit("loginfalse")
         }
+        socket.on("disconnect", function () {
+            //wie viele User online sind
+            usernum = usernum - 1
+            console.log("🟥 a user Leved");
+            io.emit("user leave", usernum, { for: "everyone" });
+
+        });
     });
 
     socket.on("chat message", function (msg, bname) {
-        if (bname.length > 20) {
-            bname = bname.slice(0, 20)
-        } else {
+        if (users.includes(bname)) {
             if (msg != "") {
                 if (msg.length < 501) {
                     if (msg.includes("<")) {
                         if (msg.includes("<img") || msg.includes("<a") || !msg.includes("<script")) {
                             console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
                             io.emit("chat message", msg, bname);
-                            client.write('Hello from node.js');
+                            client.write("GET /")
                             client.end()
                         } else {
                             console.log("📧🟥 html injection |" + bname + "|");
@@ -87,11 +101,18 @@ io.on("connection", function (socket) {
                     console.log("📧🟥 to long |" + bname + "|" + msg.length);
                 }
             } else {
+
                 console.log("📧🟥 spam |" + bname + "|");
+            }
+        } else {
+            if (bname.length > 15) {
+                bname = bname.slice(0, 14)
+                console.log("📧🟥 kein gültiger Name |" + bname + "|");
+            } else {
+                console.log("📧🟥 kein gültiger Name |" + bname + "|");
             }
         }
 
+
     });
 });
-
-
