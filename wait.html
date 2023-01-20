@@ -26,9 +26,11 @@
 
         </div>
         <script>
+
             var logname
             var logpass
             var id
+
             // login -------------------------------------------------------------------------------------------------------------------------------
 
             function logindirect() {
@@ -42,27 +44,33 @@
 
             $(function () {
                 var socket = io()
+
                 socket.on("getid", function (sid) {
                     id = sid
-                    console.log(sid)
+
+                    socket.on("waittrue", function (uname, upass) {
+                        var usercookie = document.cookie = "username=" + logname + "; path=/";
+                        var passcookie = document.cookie = "password=" + logpass + "; path=/";
+                        alert("You are logged in as " + logname + ", page will be reloaded.")
+                        name = uname
+                        window.top.location.reload();
+
+                    });
+
+                    socket.on("waitfalse", function () {
+                        console.log("false login")
+                        alert("Incorrect login information, try again")
+                    });
                 });
+
             });
 
             function login() {
                 var socket = io();
                 logindirect()
-                socket.on("waittrue", function (uname, upass) {
-                    console.log(uname + upass)
-                    var usercookie = document.cookie = "username=" + logname + "; path=/";
-                    var passcookie = document.cookie = "password=" + logpass + "; path=/";
-                    alert("You are logged in as " + logname)
-                    document.getElementById("savename").innerText = uname
-                    name = uname
-                });
-                socket.on("waitfalse", function () {
-                    alert("Incorrect login information, try again")
-                });
-            }
+            };
+
+
         </script>
     </main>
 </body>

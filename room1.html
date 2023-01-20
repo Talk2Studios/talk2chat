@@ -36,15 +36,16 @@
         function functiongetCookie() {
             if (document.cookie.length != 0) {
                 var array = document.cookie.split(";");
-                arraypass = array[1].split("=")
-                // console.log(arraypass)
                 arrayuser = array[0].split("=")
+                // console.log(arraypass)
+                arraypass = array[1].split("=")
                 // console.log(arrayuser)
             }
             else {
                 console.log("Cookie not available");
             }
         }
+
         //länge des inputs
         window.onload = function leng() {
             let ml = document.getElementById('m');
@@ -57,6 +58,7 @@
                 }
             });
         }
+
         var auser = ["admin", "Colin", "Niklaus"]
 
         function logindirect(id) {
@@ -88,18 +90,20 @@
                     document.getElementById("savename").innerText = uname
                     name = uname
                 });
+
                 socket.on("loginfalse", function () {
                     logindirect(id)
                 });
             });
 
             socket.on("user join", function (numuser, ujname) {
-                console.log(numuser)
+                // console.log(numuser)
                 $("#messages").append($("<span class='new-user'></span>").text
                     (ujname + " has joined the chat."));
                 document.getElementById("auser").innerText = numuser
                 scrolldown()
             });
+
             //das Passiert wenn ein signal User leave kommt
             socket.on("user leave", function (numuser) {
                 console.log(numuser)
@@ -108,6 +112,7 @@
                 document.getElementById("auser").innerText = numuser
                 scrolldown()
             });
+
             //wen eine nachricht erhalten wird erstellt es ein Nachricht element 9
             //Wen der gleiche die nachricht davor gesendet hat wird der name zwei den folgenden Nachrichten entfernt
             var lmsgname

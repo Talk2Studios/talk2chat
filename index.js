@@ -2,9 +2,9 @@
 var app = require("express")();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
-const net = require("net")
+// const net = require("net")
 
-const client = net.connect({port: 8888, host: process.argv[2] ?? "192.168.128.100"})
+// const client = net.connect({port: 8888, host: process.argv[2] ?? "localhost"})
 
 var usernum = 0
 
@@ -23,36 +23,82 @@ app.use((req, res) => {
     }
 })
 
-io.on("connection", function (socket) {
-
-    io.to(socket.id).emit("getid", socket.id)
-});
-
 var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian"]
 var userpass = ["admin", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
 
+var rooms = `<div class="chatrooms">
+<h2>Rooms</h2>
+<div id="waitroom-1" onclick="chancheroom('/wait.html','waitroom-1')" class="roomcon curroom">
+  <span class="chatroom">
+    <img src="/assets/icon.png" alt="chaticon"><span id="wr-1-name" class="name">Waiting Room<span
+        class="lmsg">login & sign up</span></span>
+  </span>
+</div>
+<div id="chatroom-1" onclick="chancheroom('/room1.html','chatroom-1')" class="roomcon">
+  <span class="chatroom">
+    <img src="/assets/icon.png" alt="chaticon"><span id="cr-1-name" class="name">Room 1<span class="lmsg" id="lmsg1" >last
+        message</span></span>
+  </span>
+</div>
+<div id="chatroom-2" onclick="chancheroom('/room2.html','chatroom-2')" class="roomcon">
+  <span class="chatroom">
+    <img src="/assets/icon.png" alt="chaticon"><span id="cr-2-name" class="name">Room 2<span class="lmsg">last
+        message</span></span>
+  </span>
+</div>
+<div id="chatroom-3" onclick="chancheroom('/room3.html','chatroom-3')" class="roomcon">
+  <span class="chatroom">
+    <img src="/assets/icon.png" alt="chaticon"><span id="cr-3-name" class="name">Room 3<span class="lmsg">last
+        message</span></span>
+  </span>
+</div>
+</div>
+<div id="profile" class="roomcon">
+<span class="chatroom">
+  <img src="/assets/icon.png" alt="chaticon"><span id="profil-name" class="name">Username<span
+      class="lmsg">settings</span></span>
+</span>
+</div>`
 
 
 io.on("connection", function (socket) {
+
+    io.to(socket.id).emit("getid", socket.id)
+
+    socket.on("check wait", function (user, pass, sid) {
+        if (users.includes(user)) {
+            var userposi = users.indexOf(user)
+            if (userpass[userposi] == pass) {
+                io.to(sid).emit("check true", user, rooms)
+                console.log(time() + " 🟩 " + user + " logged in bc | id: " + sid)
+            } else {
+                console.log(time() + " ❗ falsches pw bc")
+                return false
+            }
+        } else {
+            console.log(time() + " ❗ user existiert nicht bc" + user + pass)
+            return false
+        }
+    });
 
     socket.on("waitlogin", function (user, pass, sid) {
         if (users.includes(user)) {
             var userposi = users.indexOf(user)
             if (userpass[userposi] == pass) {
                 io.to(sid).emit("waittrue", user, pass)
-                console.log("🟩 logged in | id: " + sid + " | " + user)
+                console.log(time() + " 🟩 " + user + " logged in bl | id: " + sid)
             } else {
                 io.to(sid).emit("waitfalse")
-                console.log("❗ falsches pw")
+                console.log(time() + " ❗ falsches pw")
             }
         } else {
-            console.log("❗ user existiert nicht")
+            console.log(time() + " ❗ user existiert nicht")
             io.to(sid).emit("waitfalse")
         }
     });
 
     socket.on("trylogin", function (user, pass, sid) {
-        console.log("🟩 new user joined Room 1 | id: " + sid + " | " + user)
+        console.log(time() + " 🟩 " + user + " joined Room 1 | id: " + sid)
         if (users.includes(user)) {
             var userposi = users.indexOf(user)
             if (userpass[userposi] == pass) {
@@ -63,15 +109,16 @@ io.on("connection", function (socket) {
                 io.emit("user join", usernum, user, { for: "everyone" })
             } else {
                 io.to(sid).emit("loginfalse")
+                console.log(time() + " ❗ falsches pw")
             }
         } else {
-            console.log("user nicht vorhanden")
+            console.log(time() + " ❗ user existiert nicht")
             io.to(sid).emit("loginfalse")
         }
         socket.on("disconnect", function () {
             //wie viele User online sind
             usernum = usernum - 1
-            console.log("🟥 a user Leved");
+            console.log(time() + " 🟥 a user Leved");
             io.emit("user leave", usernum, { for: "everyone" });
 
         });
@@ -83,36 +130,59 @@ io.on("connection", function (socket) {
                 if (msg.length < 501) {
                     if (msg.includes("<")) {
                         if (msg.includes("<img") || msg.includes("<a") || !msg.includes("<script")) {
-                            console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
+                            console.log(time() + " 📧 Nachricht versendet von | " + bname + " | " + msg);
                             io.emit("chat message", msg, bname);
-                            client.write("GET /")
-                            client.end()
+                            // client.write("GET /")
+                            // client.end()
                         } else {
-                            console.log("📧🟥 html injection |" + bname + "|");
+                            console.log(time() + " 📧🟥 html injection |" + bname + "|");
                             io.emit("chat message", "HTML is not allowed", bname);
                         }
                     }
                     else {
-                        console.log("📧 Nachricht versendet von |" + bname + "|" + msg);
+                        console.log(time() + " 📧 Nachricht versendet von | " + bname + " | " + msg);
                         io.emit("chat message", msg, bname);
                     }
                 } else {
 
-                    console.log("📧🟥 to long |" + bname + "|" + msg.length);
+                    console.log(time() + " 📧🟥 to long |" + bname + "|" + msg.length);
                 }
             } else {
 
-                console.log("📧🟥 spam |" + bname + "|");
+                console.log(time() + " 📧🟥 spam |" + bname + "|");
             }
         } else {
             if (bname.length > 15) {
                 bname = bname.slice(0, 14)
-                console.log("📧🟥 kein gültiger Name |" + bname + "|");
+                console.log(time() + " 📧❗ kein gültiger Name |" + bname + "|");
             } else {
-                console.log("📧🟥 kein gültiger Name |" + bname + "|");
+                console.log(time() + " 📧❗ kein gültiger Name |" + bname + "|");
             }
         }
 
 
     });
 });
+function checkTime(l) {
+    if (l < 10) {
+        l = "0" + l;
+    }
+    return l;
+}
+
+function time() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    var d = today.getDate();
+    var mo = today.getMonth();
+    var y = today.getFullYear();
+    var ms = today.getMilliseconds();
+    mo++
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+    var alltime = ("[" +/*d + "." + mo + "." + y + " " + */h + ":" + m + ":" + s + "." + ms + "]")
+    return alltime;
+}

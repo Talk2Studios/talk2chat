@@ -9,6 +9,7 @@
   <title>Talk2 Chat | Beta</title>
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/mainstyle.css">
+  <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 </head>
 
@@ -78,7 +79,7 @@
     </div>
     <article class="theme">
 
-      <div class="chatrooms">
+      <div id="room-container" class="chatrooms">
         <div class="chatrooms">
           <h2>Rooms</h2>
           <div id="waitroom-1" onclick="chancheroom('/wait.html','waitroom-1')" class="roomcon curroom">
@@ -87,32 +88,6 @@
                   class="lmsg">login & sign up</span></span>
             </span>
           </div>
-          <div id="chatroom-1" onclick="chancheroom('/room1.html','chatroom-1')" class="roomcon">
-            <span class="chatroom">
-              <img src="/assets/icon.png" alt="chaticon"><span id="cr-1-name" class="name">Room 1<span class="lmsg">last
-                  message</span></span>
-            </span>
-          </div>
-          <div id="chatroom-2" onclick="chancheroom('/room2.html','chatroom-2')" class="roomcon">
-            <span class="chatroom">
-              <img src="/assets/icon.png" alt="chaticon"><span id="cr-2-name" class="name">Room 2<span class="lmsg">last
-                  message</span></span>
-            </span>
-          </div>
-          <div id="chatroom-3" onclick="chancheroom('/room3.html','chatroom-3')" class="roomcon">
-            <span class="chatroom">
-              <img src="/assets/icon.png" alt="chaticon"><span id="cr-3-name" class="name">Room 3<span class="lmsg">last
-                  message</span></span>
-            </span>
-          </div>
-
-
-
-        </div>
-        <div id="profile" class="roomcon">
-          <span class="chatroom">
-            <img src="/assets/icon.png" alt="chaticon"><span id="profil-name" class="name">Username<span class="lmsg">settings</span></span>
-          </span>
         </div>
       </div>
       <iframe src="/wait.html" id="roomframe"></iframe>
@@ -136,6 +111,96 @@
   </main>
   <footer id="footerin">
   </footer>
+  <script>
+    var arraypass
+    var arrayuser
+    var array
+    var lastname
+    var lastpass
+    var id
+    var name
+
+
+    function relo() {
+      window.location.reload();
+    }
+
+    checkname()
+
+    function checkname() {
+      if (document.cookie.length = 0) {
+        functiongetCookie()
+        lastname = arrayuser[1]
+        lastpass = arraypass[1]
+        if (lastname != arrayuser[1] && lastpass != arraypass[1]) {
+          document.getElementById("profil-name").innerHTML = arrayuser[1] + `<span
+      class="lmsg">settings</span>`
+          if (document.cookie.length != 0) {
+            functiongetCookie();
+            socket.emit("check wait", arrayuser[1], arraypass[1], id)
+            setTimeout(relo, 2000)
+          } else {
+            setTimeout(checkname, 1000)
+          }
+        }
+        else {
+          setTimeout(checkname, 1000)
+        }
+      }
+
+    }
+
+    function functiongetCookie() {
+      if (document.cookie.length != 0) {
+        var array = document.cookie.split(";");
+        // console.log(array)
+        arrayuser = array[0].split("=")
+        arraypass = array[1].split("=")
+        // console.log(arrayuser)
+        // console.log(arraypass)
+      }
+      else {
+        console.log("Cookie not available");
+      }
+    }
+
+    $(function () {
+      var socket = io();
+      socket.on("getid", function (sid) {
+        id = sid
+
+        if (document.cookie.length != 0) {
+          functiongetCookie();
+          socket.emit("check wait", arrayuser[1], arraypass[1], id)
+        } else {
+          return false
+        }
+
+        socket.on("chat message", function (msg, bname) {
+          if (msg.length > 12) {
+            msg = msg.slice(0, 12)
+            document.getElementById("lmsg1").innerText = bname + ": " + msg + " ..."
+          } else {
+            document.getElementById("lmsg1").innerText = bname + ": " + msg
+          }
+
+        });
+      });
+
+      socket.on("check true", function (uname, rooms) {
+        document.getElementById("room-container").innerHTML = rooms
+        document.getElementById("profil-name").innerHTML = uname + `<span
+      class="lmsg">settings</span>`
+      });
+
+      // socket.on("waittrue", function (uname, upass, rooms) {
+      //   document.getElementById("room-container").innerHTML = rooms
+      //   document.getElementById("profil-name").innerHTML = uname + `<span
+      // class="lmsg">settings</span>`
+      // });
+
+    });
+  </script>
   <script src="/script.js"></script>
 </body>
 
