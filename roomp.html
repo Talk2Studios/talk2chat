@@ -14,17 +14,17 @@
 
 <body>
     <div class="allcontainer">
-        <h1>Room 3</h1>
+        <h1>Private Room</h1>
         <main>
             <div id="messages">
             </div>
             <div class="inputfiled">
-                <span class="savename">beta <span id="savename"></span><Span class="mlength"><span
-                            id="mlength">0</span>/500</Span></span>
-                <form>
-                    <input id="m" autocomplete="off" placeholder="Message" maxlength="500" /><button
-                        id="button">Send</button>
-                </form>
+                <span class="savename">beta <span id="savename"></span><span class="savename">ID: <span
+                            id="roomid"></span><Span class="mlength"><span id="mlength">0</span>/500</Span></span>
+                    <form>
+                        <input id="m" autocomplete="off" placeholder="Message" maxlength="500" /><button
+                            id="button">Send</button>
+                    </form>
             </div>
         </main>
     </div>
@@ -42,9 +42,23 @@
         var id
         var name
         var localarray = []
-
+        var roomid = prompt("Room ID (min. 12)");
         // The room your in
-        const thisroom = "3"
+        var thisroom = getinproom()
+        function getinproom() {
+            if (roomid.length < 13) {
+                var idlength = 12 - roomid.length
+                for (var idl = -1; idl < idlength; idl++) {
+                    roomid += "0"
+                }
+                document.getElementById("roomid").innerText = roomid
+                return roomid
+            } else {
+                document.getElementById("roomid").innerText = roomid
+                return roomid
+            }
+        }
+
 
         function functiongetCookie() {
             if (document.cookie.length != 0) {

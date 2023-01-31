@@ -13,7 +13,7 @@
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 </head>
 
-<body>
+<body id="body-con">
   <header>
     <nav>
       <div class="titlecon">
@@ -72,7 +72,7 @@
       </ul>
     </nav>
   </header>
-  <main>
+  <main id="main-con">
     <div class="atw">
       <p class="name-ov-atw">Talk2 Studios</p>
       <p>Chat</p>
@@ -92,7 +92,7 @@
       </div>
       <iframe src="/wait.html" id="roomframe"></iframe>
     </article>
-    <article class="g-article">
+    <!-- <article class="g-article">
       <form class="chat-form">
         <h3>Generate Link</h3>
         URL: <br><input type="text" class="gen" id="generate-link-in1" placeholder="https://example.com"><br>
@@ -107,11 +107,12 @@
         <input type="text" class="gen" id="generate-img-in2" placeholder="IMG">
         <input class="ibutton" type="button" onclick="gimg('copyimg')" value="Generate and copy img" id="copyimg">
       </form>
-    </article>
+    </article> -->
+
   </main>
   <footer id="footerin">
   </footer>
-  <script>
+  <script id="thisscript">
     var arraypass
     var arrayuser
     var array
@@ -119,7 +120,10 @@
     var lastpass
     var id
     var name
+    var tl = 0
 
+    // The room your in
+    const thisroom = "overroom"
 
     function relo() {
       window.location.reload();
@@ -138,7 +142,7 @@
           if (document.cookie.length != 0) {
             functiongetCookie();
             socket.emit("check wait", arrayuser[1], arraypass[1], id)
-            setTimeout(relo, 2000)
+            setTimeout(relo, 100)
           } else {
             setTimeout(checkname, 1000)
           }
@@ -149,7 +153,10 @@
       }
 
     }
-
+    function getrgb() {
+      var o = Math.round, r = Math.random, s = 255;
+      return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    }
     function functiongetCookie() {
       if (document.cookie.length != 0) {
         var array = document.cookie.split(";");
@@ -166,40 +173,83 @@
 
     $(function () {
       var socket = io();
-      socket.on("getid", function (sid) {
+      socket.on("getid", function (sid, ver) {
         id = sid
-
+        document.title = "Talk2 Chat | Beta " + ver
         if (document.cookie.length != 0) {
           functiongetCookie();
           socket.emit("check wait", arrayuser[1], arraypass[1], id)
         } else {
           return false
         }
-
-        socket.on("chat message", function (msg, bname) {
+        socket.on("lastmsg", function (chatroom, msg, bname) {
+          var lastmsgroom = "room" + chatroom + "lastmsg"
           if (msg.length > 12) {
             msg = msg.slice(0, 12)
-            document.getElementById("lmsg1").innerText = bname + ": " + msg + " ..."
+            document.getElementById(lastmsgroom).innerText = bname + ": " + msg + " ..."
           } else {
-            document.getElementById("lmsg1").innerText = bname + ": " + msg
+            document.getElementById(lastmsgroom).innerText = bname + ": " + msg
           }
-
         });
       });
 
-      socket.on("check true", function (uname, rooms) {
+      socket.on("check true", function (uname, rooms, addterminal, terminalscript) {
         document.getElementById("room-container").innerHTML = rooms
         document.getElementById("profil-name").innerHTML = uname + `<span
       class="lmsg">settings</span>`
+        if (addterminal === undefined) {
+          // || terminalscript === undefined
+        } else {
+          // try {
+          //   document.getElementById("serverlog")
+          // } catch (err) {
+          //   console.log(err)
+          //   document.getElementById("main-con").innerHTML += addterminal
+          // }
+
+          // document.getElementById("thisscript").innerHTML += terminalscript
+          document.getElementById("main-con").innerHTML += addterminal
+        }
+
+        if (uname.includes(" ")) {
+          var spaceindex = uname.split(" ")
+          document.getElementById("profile-logo").innerText = spaceindex[0].slice(0, 1) + spaceindex[1].slice(0, 1)
+          document.getElementById("profile-logo").style.backgroundColor = getrgb()
+        } else {
+          document.getElementById("profile-logo").innerText = uname.slice(0, 2)
+          document.getElementById("profile-logo").style.backgroundColor = getrgb()
+        }
       });
 
-      // socket.on("waittrue", function (uname, upass, rooms) {
-      //   document.getElementById("room-container").innerHTML = rooms
-      //   document.getElementById("profil-name").innerHTML = uname + `<span
-      // class="lmsg">settings</span>`
-      // });
-
     });
+    $(function () {
+      var socket = io()
+      socket.on("consolelog", function (terminallog) {
+        // console.log("erhlten")
+        if (tl === 0) {
+          document.getElementById("serverlog").innerHTML += '<div>' + terminallog + '</div>'
+          tl++
+        } else {
+          document.getElementById("serverlog").innerHTML += '<div class="serverlog-1">' + terminallog + '</div>'
+          tl--
+        }
+        scrolldown()
+      });
+    });
+    function scrolldown() {
+      var element = document.getElementById("serverlog");
+      element.scrollTop = element.scrollHeight + 300;
+    };
+
+    var broom = "waitroom-1"
+    function chancheroom(iroom, croom, otherroomid) {
+      document.getElementById("roomframe").src = iroom;
+      var socket = io()
+      document.getElementById(broom).classList.remove("curroom");
+      document.getElementById(croom).classList.add("curroom");
+      broom = croom
+      socket.emit("ctor", id, otherroomid)
+    }
   </script>
   <script src="/script.js"></script>
 </body>

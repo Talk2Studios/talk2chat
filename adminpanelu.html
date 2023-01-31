@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/panel.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+
+<body>
+    <h1>Admin Panel</h1>
+    <main class="waitmain">
+        <div class="container">
+            <div id="panelnav">
+                <a href="adminpanels.html" class="apnav">Dashboard</a>
+                <a href="adminpanelu.html" class="apnav current">Users</a>
+                <a href="adminpanelr.html" class="apnav">Rooms</a>
+                <a href="adminpanelcl.html" class="apnav">Changelogs</a>
+            </div>
+            <div class="content-el" id="user-list">
+                <button> +</button>
+                <div class="user-el">
+                    <div class="user-container"><Span class="name">username</Span><span
+                            class="rooms-of-user">rooms</span></div>
+                    <div class="user-btn"></div>
+                </div>
+                <div class="user-el" id="Username">
+                    <div class="user-container"><Span class="name" id="name-username">Username</Span><span
+                            class="rooms-of-user" id="rooms-username">1 2 3 4 5
+                            65</span></div>
+                    <div><button class="user-button" onclick="edituser('Username')">edit</button><button
+                            onclick="deluser=('Username')" class="user-button">delete</button></div>
+                </div>
+            </div>
+
+        </div>
+        <script>
+
+
+            var id
+
+            $(function () {
+                var socket = io()
+
+                socket.on("getid", function (sid) {
+                    id = sid
+
+                    socket.emit("requsers", sid)
+                });
+                socket.on("resusers", function (USER, ROOMS) {
+                    
+                    document.getElementById("user-list").innerHTML = `<div class="user-el" id="` + USER + `">
+                    <div class="user-container"><Span class="name" id="name-`+ USER + `">` + USER + `</Span><span
+                            class="rooms-of-user" id="rooms-`+ USER + `">1 2 3 4 5
+                            65</span></div>
+                    <div><button class="user-button" onclick="edituser('`+ USER + `')">edit</button><button
+                            onclick="deluser=('`+ USER + `')" class="user-button">delete</button></div>
+                </div>`
+
+                });
+            });
+        </script>
+    </main>
+</body>
+
+</html>

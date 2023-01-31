@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/panel.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+
+<body>
+    <h1>Admin Panel</h1>
+    <main class="waitmain">
+        <div class="container">
+            <div id="panelnav">
+                <a href="adminpanels.html" class="apnav current">Dashboard</a>
+                <a href="adminpanelu.html" class="apnav">Users</a>
+                <a href="adminpanelr.html" class="apnav">Rooms</a>
+                <a href="adminpanelcl.html" class="apnav">Changelogs</a>
+            </div>
+
+            <div class="content-el">
+                <span id="lastrefresh"></span>
+                <span class="aptitles-titles">Users</span>
+                <div class="info-items">
+                    <span class="info-items-text"><img src="assets/users.png" alt="Users">Existing users <img
+                            src="/assets/info.png" alt="info" class="infoicon"><span class="ifi">How many users
+                            <br>exist in Talk2 Chat</span></span><span class="info-value" id="info-value-eusers"></span>
+                </div>
+                <div class="info-items">
+                    <span class="info-items-text"><img src="assets/users.png" alt="Users">Active users <img
+                            src="/assets/info.png" alt="info" class="infoicon"><span class="ifi">Multiple Login
+                            <br>count as well</span></span><span class="info-value" id="info-value-ausers"></span>
+                </div>
+                <div class="info-items">
+                    <span class="info-items-text"><img src="assets/users.png" alt="Users">Pending users <img
+                            src="/assets/info.png" alt="info" class="infoicon"><span class="ifi">All Users they have<br>
+                            not been acceptet<br> by an admin</span></span><span class="info-value"
+                        id="info-value-ausers"></span>
+                </div>
+                <span class="aptitles-titles">Rooms</span>
+                <div class="info-items">
+                    <span class="info-items-text"><img src="assets/rooms.png" alt="Users">Num of open rooms <img
+                            src="/assets/info.png" alt="info" class="infoicon"><span class="ifi">How many rooms <br>are
+                            open</span></span><span class="info-value" id="info-value-oproomsn"></span>
+                </div>
+                <div class="info-items">
+                    <span class="info-items-text"><img src="assets/rooms.png" alt="Users">Open room IDs <img
+                            src="/assets/info.png" alt="info" class="infoicon"><span class="ifi">The IDs of all<br> open
+                            Rooms</span></span><span class="info-value" id="info-value-oprooms"></span>
+                </div>
+                <span class="aptitles-titles">Messges</span>
+                <div class="info-items">
+                    <span class="info-items-text"><img src="assets/msgicon.png" alt="Users">Send messages <img
+                            src="/assets/info.png" alt="info" class="infoicon"><span class="ifi">How many msg has
+                            <br>been send in total</span></span><span class="info-value" id="info-value-sendmsg"></span>
+                </div>
+                <div class="info-items">
+                    <span class="info-items-text"><img src="assets/msgicon.png" alt="Users">Last message <img
+                            src="/assets/info.png" alt="info" class="infoicon"><span class="ifi">The last msg that<br>
+                            has been send in<br> normal rooms</span></span><span class="info-value"
+                        id="info-value-lastmsg"></span>
+                </div>
+            </div>
+            <button onclick="inforefresh()" class="refesh-button">REFRESH</button>
+        </div>
+        <script>
+
+            var id
+
+            // login ------------------------------------------------------------------------------------------------------------------------------
+
+            $(function () {
+                var socket = io()
+
+                socket.on("getid", function (sid) {
+                    id = sid
+                    setTimeout(inforefresh(), 100)
+                });
+                socket.on("resinfo", function (eusers, ausers, oprooms) {
+                    document.getElementById("lastrefresh").innerText = time()
+                    document.getElementById("info-value-eusers").innerText = eusers
+                    document.getElementById("info-value-ausers").innerText = ausers
+                    document.getElementById("info-value-oproomsn").innerText = oprooms.length
+                    document.getElementById("info-value-oprooms").innerText = ""
+                    var oproomsi = 0
+                    for (var i = 0; oprooms.length != i; i++) {
+                        document.getElementById("info-value-oprooms").innerHTML += oprooms[oproomsi] + "<br>"
+                        oproomsi++
+                    }
+                });
+                socket.on("lastmsg", function (clientroom, msg, bname) {
+                    document.getElementById("info-value-lastmsg").innerText = bname + "@" + clientroom + ": " + msg
+                });
+            });
+
+            function inforefresh() {
+                var socket = io()
+                socket.emit("reqinfo", id)
+            }
+
+            function checkTime(l) {
+                if (l < 10) {
+                    l = "0" + l;
+                }
+                return l;
+            }
+
+            function time() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                var d = today.getDate();
+                var mo = today.getMonth();
+                var y = today.getFullYear();
+                var ms = today.getMilliseconds();
+                mo++
+                // add a zero in front of numbers<10
+                m = checkTime(m);
+                s = checkTime(s);
+                var alltime = (/*d + "." + mo + "." + y + " " + */"  " + h + ":" + m + ":" + s)
+                return alltime;
+            }
+        </script>
+    </main>
+</body>
+
+</html>

@@ -6,6 +6,9 @@ body {
   font-family: "Lexend", sans-serif;
   margin: 0;
 }
+a {
+  transition: all .25s ease-in;
+}
 
 body {
   display: flex;
@@ -49,6 +52,7 @@ h1 {
 h2 {
   padding: 0 30px;
   color: white;
+  transition: all .25s ease-in;
 }
 
 .ch2 h2:hover {
@@ -104,7 +108,7 @@ article {
       rgba(156, 0, 255, 1) 0%,
       rgba(192, 81, 163, 1) 45%,
       rgba(255, 224, 0, 1) 100%);*/
-      padding: 0 20px 0;
+  padding: 0 20px 0;
   background: linear-gradient(145deg, rgba(79, 44, 203, 0.7) 0%, rgba(207, 187, 255, 0.7) 100%);
   border-radius: 10px;
   margin-top: 30px;
@@ -153,10 +157,12 @@ header .headerlogo {
   display: flex;
   align-items: center;
 }
+
 .titlecon a {
   display: flex;
   align-items: center;
 }
+
 head h1 a {
   display: flex;
   align-items: flex-start;
@@ -231,7 +237,7 @@ iframe {
 .atw span {
   color: rgb(193, 167, 251);
   font-size: 70px;
-  text-shadow: rgb(193, 167, 251) 1px 0 5px;
+  text-shadow: rgb(193, 167, 251, 0.4) 1px 0 5px;
 }
 
 .atw .name-ov-atw {
@@ -260,17 +266,23 @@ iframe {
   align-items: center;
   background: linear-gradient(145deg, rgba(79, 44, 203, 0.7) 0%, rgba(207, 187, 255, 0.7) 100%);
 }
-footer a:hover{
-  color: rgb(202, 163, 255);
+
+footer a:hover {
+  color: rgb(22, 1, 97);
+  font-weight: bold;
 }
+
 .webdesign {
   text-decoration: none;
   color: white;
+  transition: all .25s ease-in;
 }
+
 .webdesign:hover {
-  color: rgb(202, 163, 255);
+  color: rgb(22, 1, 97);
   text-decoration: underline;
 }
+
 footer p {
   margin: 10px 0;
 }
@@ -291,8 +303,14 @@ footer p {
 }
 
 .footer-nav {
+  width: 100%;
   display: flex;
   margin: 30px 0 0 0;
+  justify-content: space-between;
+}
+
+.footer-l-div img {
+  margin: 5px 0;
 }
 
 .footer-nav-con {
@@ -304,6 +322,7 @@ footer p {
 
 .footer-nav-container {
   display: flex;
+  margin: 5% 0 5% 1.8%;
 }
 
 .footer-nav-wrap {
@@ -329,6 +348,7 @@ p.rbundig {
   font-size: 14px;
   padding: 0 0 0 5px;
   margin: 5px 0;
+  transition: all .25s ease-in;
 }
 
 .social {
@@ -394,6 +414,7 @@ nav li:hover li a {
   padding: 10px 20px;
   background: rgb(193, 167, 251, 0.7);
   margin: 0;
+  transition: all .25s ease-in;
 }
 
 #chat-link:hover {
@@ -411,6 +432,7 @@ nav a {
   text-decoration: none;
   font-weight: bold;
   padding: 5px 10px;
+  transition: all .25s ease-in;
 }
 
 input {
@@ -651,6 +673,7 @@ article li a {
   font-size: 16px;
   text-decoration: none;
   padding: 8px;
+  border-radius: 5px;
   margin: 5px 0;
   font-weight: bold;
 }
@@ -887,6 +910,11 @@ article li a:hover {
 
   .footer-nav-container {
     flex-wrap: wrap;
+
+  }
+
+  .footer-nav-con {
+    margin: 0 20px 0 20px;
   }
 
   .footer-nav-wrap {
@@ -978,12 +1006,12 @@ article li a:hover {
   }
 
   .atw p {
-    font-size: 40px;
+    font-size: 30px;
     margin: 0;
   }
 
   .atw span {
-    font-size: 40px;
+    font-size: 30px;
   }
 
   .atw .name-ov-atw {

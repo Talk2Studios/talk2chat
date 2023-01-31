@@ -13,26 +13,39 @@
 <link rel="stylesheet" type="text/css" href="/style.css">
 
 <body>
-    <h1>Room 1</h1>
-    <main>
-        <div id="messages">
+    <div class="allcontainer">
+        <h1>Room 1</h1>
+        <main>
+            <div id="messages">
+            </div>
+            <div class="inputfiled">
+                <span class="savename">beta <span id="savename"></span><Span class="mlength"><span
+                            id="mlength">0</span>/500</Span></span>
+                <form>
+                    <input id="m" autocomplete="off" placeholder="Message" maxlength="500" /><button
+                        id="button">Send</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <div id="onlineusers">
+        <h2>Online Users</h2>
+        <div id="onlinusersin">
         </div>
-        <div class="inputfiled">
-            <span class="savename">Your name: <span id="savename"></span><Span class="auser">Active User: <span
-                        id="auser"></span></Span><Span class="mlength"><span id="mlength">0</span>/500</Span></span>
-            <form>
-                <input id="m" autocomplete="off" placeholder="Message" maxlength="500" /><button
-                    id="button">Send</button>
-            </form>
-        </div>
-    </main>
-
+    </div>
     <script>
+
+        //some Variables
         var arraypass
         var arrayuser
         var array
         var id
         var name
+        var localarray = []
+
+        // The room your in
+        const thisroom = "1"
+
         function functiongetCookie() {
             if (document.cookie.length != 0) {
                 var array = document.cookie.split(";");
@@ -46,8 +59,75 @@
             }
         }
 
+        function userjoin(ousers) {
+            localarray = ousers
+            var arrayplace = 0
+            // console.log(ousers)
+            document.getElementById("onlinusersin").innerHTML = ""
+            for (var i = 0; i < ousers.length; i++) {
+                // console.log(ousers)
+                if (ousers[arrayplace].includes("@" + thisroom)) {
+                    document.getElementById("onlinusersin").innerHTML += `
+                <div class="onlineuser" id="`+ ousers[arrayplace] + `">
+                    <span class="onlineuser-content">
+                        <img src="/assets/icon.png" alt="chaticon"><span class="name">`+ ousers[arrayplace].split("@")[0] + `<span class="typing"
+                                id="`+ ousers[arrayplace].split("@")[0] + `status">online</span></span>
+                    </span>
+                </div>`
+                    // console.log(ousers[arrayplace])
+                }
+                arrayplace++
+            }
+        }
+
+        function userleave(ousers) {
+            var arrayplace = 0
+            for (var i = -1; i < ousers.length; i++) {
+                if (ousers.includes(localarray[arrayplace])) {
+                    // console.log(arrayplace)
+                    // console.log(localarray[arrayplace])
+                    arrayplace++
+                    // console.log(arrayplace)
+                    // console.log()
+                } else {
+                    // console.log(localarray[arrayplace])
+                    var child = document.getElementById(localarray[arrayplace])
+                    document.getElementById("onlinusersin").removeChild(child)
+                    // console.log(parent)
+                    // document.getElementById("onlinusersin").removeChild()
+                    // localarray[arrayplace]
+                    return localarray[arrayplace].split("@")[0]
+                    localarray = ousers
+                }
+
+            }
+
+        }
+
+        // Typing or no typing
+
+        function istyping() {
+            var socket = io();
+            // console.log("is working")
+            let ml = document.getElementById('m');
+            if (ml.value != "") {
+                var status = "typing..."
+                socket.emit("istyping", name, thisroom, status)
+                // console.log("send type")
+                setTimeout(istyping, 1000)
+            } else {
+                var status = "online"
+                socket.emit("istyping", name, thisroom, status)
+                // console.log("send online")
+                setTimeout(istyping, 1000)
+            }
+        }
+
+
         //länge des inputs
+
         window.onload = function leng() {
+            setTimeout(istyping, 1000)
             let ml = document.getElementById('m');
             ml.addEventListener("keyup", function () {
                 document.getElementById("mlength").innerText = ml.value.length;
@@ -59,7 +139,7 @@
             });
         }
 
-        var auser = ["admin", "Colin", "Niklaus"]
+        var auser = ["admin", "Colin", "Niklaus", "Oliver Macher"]
 
         function logindirect(id) {
             var socket = io();
@@ -79,15 +159,16 @@
 
                 if (document.cookie.length != 0) {
                     functiongetCookie()
-                    socket.emit("trylogin", arrayuser[1], arraypass[1], id)
+                    socket.emit("trylogin", arrayuser[1], arraypass[1], id, thisroom)
                 } else {
                     logindirect(id)
                 }
-                socket.on("logintrue", function (uname, upass) {
+                socket.on("logintrue", function (uname, upass, version) {
                     // console.log("yes")
                     document.cookie = "username=" + uname + "; path=/";
                     document.cookie = "password=" + upass + "; path=/";
-                    document.getElementById("savename").innerText = uname
+                    document.getElementById("savename").innerHTML = version
+                    // document.getElementById("savename").innerText = uname
                     name = uname
                 });
 
@@ -96,61 +177,80 @@
                 });
             });
 
-            socket.on("user join", function (numuser, ujname) {
-                // console.log(numuser)
-                $("#messages").append($("<span class='new-user'></span>").text
-                    (ujname + " has joined the chat."));
-                document.getElementById("auser").innerText = numuser
-                scrolldown()
+            socket.on("user join", function (ujname, ousers, connectuser) {
+                userjoin(ousers)
+                if (connectuser) {
+
+                } else {
+                    $("#messages").append($("<span class='new-user'></span>").text
+                        (ujname + " has joined the chat."));
+                    // document.getElementById("auser").innerText = numuser
+                    scrolldown()
+                }
+
             });
 
             //das Passiert wenn ein signal User leave kommt
-            socket.on("user leave", function (numuser) {
-                console.log(numuser)
+            socket.on("user leave", function (ousers) {
+
+                // console.log(ousers)
+
                 $("#messages").append($("<span class='user-left'></span>").text
-                    ("A user left the chat."));
-                document.getElementById("auser").innerText = numuser
+                    (userleave(ousers) + " left the chat."));
+                // document.getElementById("auser").innerText = numuser
                 scrolldown()
+            });
+
+            // If a user is typing
+            socket.on("useristyping", function (istypinguser, status) {
+                var stusvar = istypinguser + "status"
+                // console.log(stusvar)
+                document.getElementById(stusvar).innerText = status
             });
 
             //wen eine nachricht erhalten wird erstellt es ein Nachricht element 9
             //Wen der gleiche die nachricht davor gesendet hat wird der name zwei den folgenden Nachrichten entfernt
             var lmsgname
             socket.on("chat message", function (msg, bname) {
-                if (auser.includes(bname)) {
-                    if (bname === name) {
-                        if (lmsgname === name) {
-                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                        }
-                        else {
-                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"><span  class="adminicon tage">admin</span>You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                        }
-                    } else {
-                        if (lmsgname === bname) {
-                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                        }
-                        else {
-                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme">' + bname + '<span class="adminicon tage">admin</span></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                        }
-                    }
+                if (msg === "") {
+                    console.log("kein spam 🤣")
                 } else {
-                    if (bname === name) {
-                        if (lmsgname === name) {
-                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                        }
-                        else {
-                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username">You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                    if (auser.includes(bname)) {
+                        if (bname === name) {
+                            if (lmsgname === name) {
+                                $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                            }
+                            else {
+                                $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"><span  class="adminicon tage">admin</span>You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                            }
+                        } else {
+                            if (lmsgname === bname) {
+                                $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                            }
+                            else {
+                                $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme">' + bname + '<span class="adminicon tage">admin</span></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                            }
                         }
                     } else {
-                        if (lmsgname === bname) {
-                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                        }
-                        else {
-                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username">' + bname + '</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                        }
+                        if (bname === name) {
+                            if (lmsgname === name) {
+                                $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                            }
+                            else {
+                                $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username">You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                            }
+                        } else {
+                            if (lmsgname === bname) {
+                                $("#messages").append($('<div class="nachricht"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                            }
+                            else {
+                                $("#messages").append($('<div class="nachricht"><div class="info"><span class="username">' + bname + '</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                            }
 
+                        }
                     }
                 }
+
 
                 lmsgname = bname
                 scrolldown()
@@ -161,7 +261,7 @@
                     return false
                 }
                 e.preventDefault();
-                socket.emit("chat message", $("#m").val(), name)
+                socket.emit("chat message", $("#m").val(), name, thisroom)
                 $("#m").val("");
                 return false
             });

@@ -66,14 +66,7 @@ function curdate() {
   document.getElementById("footerin").innerHTML = footerinhalt;
 }
 
-var broom = "waitroom-1"
 
-function chancheroom(iroom, croom) {
-  document.getElementById("roomframe").src = iroom;
-  document.getElementById(broom).classList.remove("curroom")
-  document.getElementById(croom).classList.add("curroom");
-  broom = croom
-}
 // Copy Button link--------------------------------------------------------------------------------------------------
 
 function glink(copybtn) {

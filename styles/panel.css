@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+
+html,
+body {
+    height: 100%;
+    font-family: "Lexend", sans-serif;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgb(10, 0, 47);
+}
+
+main.waitmain {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    overflow: auto;
+}
+
+span {
+    color: white;
+    text-align: center;
+    cursor: default;
+}
+
+main.waitmain .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 15px 0 0 25px;
+    height: 100%;
+    width: 90%;
+}
+
+main.waitmain button {
+    border-radius: 5px;
+}
+
+main.waitmain img {
+    padding: 0;
+}
+
+.refesh-button {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+button {
+    height: 20px;
+    margin: 20px 0;
+}
+
+button:active {
+    background: rgb(36, 0, 167);
+}
+
+.apnav {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    padding: 15px 10px 5px;
+    border-radius: 0 0 5px 5px;
+    font-size: 18px;
+    background: rgb(77, 56, 152);
+}
+
+.apnav.current {
+    background: rgb(22, 1, 98);
+}
+
+.apnav:hover {
+    background: rgb(50, 21, 158);
+}
+
+#panelnav {
+    margin: 0 0 30px 0;
+    position: absolute;
+}
+
+.content-el {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 40px 0 0 20px;
+    height: 100%;
+    width: 100%;
+}
+
+.aptitles {
+    font-size: 30px;
+}
+
+.aptitles-titles {
+    font-size: 26px;
+    padding: 10px 0 0 0;
+}
+
+.info-items-text {
+    display: flex;
+    align-items: center;
+    margin: 5px 2px;
+}
+
+.info-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 0 0 15px;
+}
+
+.info-value {
+    color: rgb(220, 204, 254);
+    margin: 0 0 0 32px;
+    text-align: left;
+}
+
+.info-items img {
+    height: 25px;
+    margin: 0 5px 0 0;
+}
+
+img.infoicon {
+    height: 15px;
+    margin: 0 0 0 5px;
+}
+
+#lastrefresh,
+.ifi,
+.input-info {
+    color: rgb(220, 204, 254);
+    font-size: 12px;
+}
+
+.ifi {
+    position: absolute;
+    display: none;
+    transition: all .25s ease-in;
+    left: 30%;
+    text-align: left;
+}
+
+.info-items-text:hover .ifi {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.addlog,
+.minuslog {
+    width: 25px;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 16px;
+    margin: 0 5px 0 0;
+}
+
+.slashlog {
+    width: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 16px;
+    margin: 0 5px 0 0;
+}
+
+.addlog {
+    color: green;
+}
+
+.minuslog {
+    color: red;
+}
+
+.slashlog {
+    color: gray;
+}
+
+.log-items {
+    display: flex;
+    align-items: flex-start;
+}
+
+.panel-input {
+    height: 25px;
+    font-size: 16px;
+    padding: 0 5px;
+    color: rgb(10, 0, 47);
+    border-radius: 2px;
+}
+
+.notalowed {
+    color: red;
+}
+
+.content-el:nth-child(2) {
+    margin: 50px 0 0 20px;
+}
+
+.content-el:last-child {
+    padding-bottom: 100px;
+}
+
+.user-el {
+    background: rgb(22, 1, 98);
+    display: flex;
+    align-items: center;
+    height: 45px;
+    border-radius: 5px;
+    justify-content: space-between;
+    width: 100%;
+    margin: 2px 0;
+}
+
+.user-el:nth-child(2) {
+    background: none;
+}
+
+.name {
+    padding: 0 0 0 10px;
+}
+
+.user-button {
+    margin: 0 5px 0 0;
+    height: 35px;
+    padding: 0 10px;
+}
+
+.rooms-of-user {
+    padding: 0 0 0 150px;
+}
+.user-btn {
+    width: 116px;
+}
+.user-container {
+    display: flex;
+    align-items: center;
+}

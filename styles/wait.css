@@ -12,8 +12,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #160161;
-    background: radial-gradient(circle, #26069b 0%, #160161 100%);
+    background: rgb(10, 0, 47);
 }
 
 main.waitmain {
@@ -29,20 +28,25 @@ main.waitmain span {
     font-size: 20px;
     margin: 0 0 10px 0;
 }
+
 main.waitmain .container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 main.waitmain button {
     border-radius: 5px;
 }
+
 main.waitmain img {
     padding: 0;
 }
+
 button {
     cursor: pointer;
 }
+
 button:active {
     background: rgb(22, 1, 98);
 }

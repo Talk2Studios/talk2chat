@@ -16,13 +16,68 @@ body {
 
 body {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: #160161;
     background: rgb(22, 1, 98);
 }
 
+.allcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #160161;
+    background: rgb(22, 1, 98);
+    height: 100%;
+}
+
+#onlineusers {
+    width: 250px;
+    background: rgb(22, 1, 98);
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+
+#onlineusers .onlineuser, .onlineuser-content {
+    height: 50px;
+    width: 220px;
+}
+.onlineuser {
+    padding: 0 0 0 30px;
+}
+#onlineusers span, #onlineusers h2 {
+    color: white;
+}
+#onlineusers h2 {
+    height: 85px;
+    margin: 0;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#onlineusers img {
+    height: 35px;
+    width: 35px;
+    margin: 0 5px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.onlineuser-content {
+    display: flex;
+    align-items: center;
+}
+#onlineusers span.typing {
+    color: rgb(220, 204, 254);
+    font-size: 12px;
+}
+.name {
+    display: flex;
+    flex-direction: column;
+}
 .new-user {
     color: rgb(193, 167, 251);
     list-style-type: none;
@@ -41,14 +96,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
+    width: 800px;
     overflow-y: auto;
 }
 
 /* ------------------------------username bei connect oder disconnect--------------------------------------------------------------------------------------------------------------fix overflow bei messages */
 .chatmsg {
     word-break: break-all;
-    background: rgba(207, 187, 255, 0.5);
+    background: rgba(164, 129, 245, 0.5);
     padding: 10px 7px 5px 7px;
     border-radius: 5px;
     line-height: 16px;
@@ -61,10 +116,14 @@ main {
     align-items: center;
     height: 100%;
     max-height: 700px;
-    width: 600px;
-    background: rgb(66,21,163);
-    background: linear-gradient(180deg, rgba(66,21,163,1) 0%, rgba(79,33,176,1) 100%);
+    width: 800px;
+    /* background: rgb(66,21,163);
+    background: linear-gradient(180deg, rgba(66,21,163,1) 0%, rgba(79,33,176,1) 100%); */
+    background-color: rgb(10, 0, 47);
     border-radius: 5px;
+}
+main.waitmain {
+    width: 1050px;
 }
 
 #m {
@@ -74,7 +133,7 @@ main {
 }
 
 #m::placeholder {
-    color: rgb(255, 255, 255, 0.5);
+    color: #e0d5fff8;
 }
 
 .nachricht {
@@ -122,7 +181,7 @@ input {
     border-radius: 0;
     border: none;
     background: rgb(193, 167, 251);
-    height: 50px;
+    height: 45px;
     font-size: 20px;
     padding: 0 20px 0 20px;
 }
@@ -138,7 +197,7 @@ input {
 
 button {
     cursor: pointer;
-    height: 50px;
+    height: 45px;
     background: rgb(138, 97, 225);
     border-radius: 0;
     border: none;
@@ -149,7 +208,7 @@ button {
 }
 
 button:hover {
-    background: rgb(164, 131, 236);
+    background: rgb(113, 85, 216);
 }
 
 input:focus-visible {
@@ -177,6 +236,7 @@ img {
 
 .username {
     font-weight: bold;
+    /* margin: 20px 0 0 0; */
 }
 
 .info {
@@ -200,7 +260,7 @@ div.mymsg.nachricht {
 
 .mymsg .chatmsg {
     align-self: flex-end;
-    background: rgba(25, 6, 94, 0.5);
+    background: rgba(35, 14, 108, 0.5);
 }
 
 .auser,
@@ -211,7 +271,8 @@ div.mymsg.nachricht {
 
 #auser,
 #savename,
-#mlength {
+#mlength,
+#roomid {
     text-decoration: underline;
     color: white;
 }
