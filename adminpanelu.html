@@ -19,53 +19,253 @@
             <div id="panelnav">
                 <a href="adminpanels.html" class="apnav">Dashboard</a>
                 <a href="adminpanelu.html" class="apnav current">Users</a>
+                <a href="adminpanelp.html" class="apnav">Pending</a>
                 <a href="adminpanelr.html" class="apnav">Rooms</a>
                 <a href="adminpanelcl.html" class="apnav">Changelogs</a>
             </div>
             <div class="content-el" id="user-list">
-                <button> +</button>
+                <button onclick="creusermenu()" class="addbutton">+</button>
                 <div class="user-el">
-                    <div class="user-container"><Span class="name">username</Span><span
-                            class="rooms-of-user">rooms</span></div>
-                    <div class="user-btn"></div>
+                    <div class="user-container"><Span class="name">username</Span></div>
+                    <div class="flex-div"><span class="rooms-of-user-title">rooms</span><span class="admin-perms-indi"
+                            id="admin-perms-Username">A</span>
+                        <div class="user-btn"></div>
+                    </div>
                 </div>
-                <div class="user-el" id="Username">
-                    <div class="user-container"><Span class="name" id="name-username">Username</Span><span
-                            class="rooms-of-user" id="rooms-username">1 2 3 4 5
-                            65</span></div>
-                    <div><button class="user-button" onclick="edituser('Username')">edit</button><button
-                            onclick="deluser=('Username')" class="user-button">delete</button></div>
+                <!-- <div class="user-el" id="testUsername">
+                    <div class="user-container"><Span class="name" id="name-testUsername">testUsername</Span></div>
+                    <div><span class="rooms-of-user" id="rooms-testUsername">1 2 3 4 5
+                            65</span><span class="admin-perms-indi"
+                            id="admin-perms-testUsername">&nbsp;&nbsp;&nbsp;</span><button class="user-button"
+                            onclick="editusermenu('testUsername')">edit</button><button
+                            onclick="deluser('testUsername')" class="user-button">delete</button></div>
+                </div>
+                <div class="user-el" id="Colin">
+                    <div class="user-container"><Span class="name" id="name-Colin">Colin</Span></div>
+                    <div><span class="rooms-of-user" id="rooms-Colin">1 2 3 4 5
+                            65</span><span class="admin-perms-indi" id="admin-perms-Colin">A</span><button
+                            class="user-button" onclick="editusermenu('Colin')">edit</button><button
+                            onclick="deluser('Colin')" class="user-button">delete</button></div>
+                </div> -->
+            </div>
+
+        </div>  
+        <form action="" id="createuser-form">
+            <span class="aptitles-titles">Create user <img src="/assets/grab.png" alt="grabbing"
+                    id="createuser-form-grabber"></span>
+            <div class="info-items">
+                <span class="info-items-text">username</span>
+            </div>
+            <div class="info-items">
+                <input type="text" class="panel-input" maxlength="20" id="user-name" autocomplete="off">
+                <span class="input-info" id="input-info-user"></span>
+            </div>
+            <div class="info-items">
+                <span class="info-items-text">password</span>
+            </div>
+            <div class="info-items">
+                <input type="text" class="panel-input" maxlength="20" id="user-pw" autocomplete="off">
+                <span class="input-info" id="input-info-pw"></span>
+            </div>
+            <div class="info-items">
+                <span class="info-items-text">rooms</span>
+            </div>
+            <div class="info-items">
+                <input type="text" class="panel-input" maxlength="20" id="user-pw" autocomplete="off">
+                <span class="input-info">separated by spaces</span>
+            </div>
+            <div class="info-items info-items-btn">
+                <button onclick="creusermenu(false)" type="button" class="shouldnot">Cancel</button>
+                <button onclick="creuser()" type="button">Create</button>
+            </div>
+        </form>
+        <form action="" id="edituser-form">
+            <span class=" aptitles-titles">Edit user <img src="/assets/grab.png" alt="grabbing"
+                    id="edituser-form-grabber"></span>
+            <div class="info-items">
+                <span class="info-items-text" id="edt-user-name">username</span>
+            </div>
+            <div class="info-items">
+                <span class="info-items-text">rooms</span>
+            </div>
+            <div class="info-items">
+                <input type="text" class="panel-input" maxlength="20" id="user-rooms" autocomplete="off">
+                <span class="input-info">separated by spaces</span>
+            </div>
+            <div class="info-items">
+                <span class="info-items-text">Administrator</span>
+            </div>
+            <div class="info-items">
+                <div class="checkbox-wrapper-55">
+                    <label class="rocker rocker-small">
+                        <input type="checkbox" id="admin-true-false">
+                        <span class="switch-left">Yes</span>
+                        <span class="switch-right">No</span>
+                    </label>
                 </div>
             </div>
 
-        </div>
-        <script>
-
-
-            var id
-
-            $(function () {
-                var socket = io()
-
-                socket.on("getid", function (sid) {
-                    id = sid
-
-                    socket.emit("requsers", sid)
-                });
-                socket.on("resusers", function (USER, ROOMS) {
-                    
-                    document.getElementById("user-list").innerHTML = `<div class="user-el" id="` + USER + `">
-                    <div class="user-container"><Span class="name" id="name-`+ USER + `">` + USER + `</Span><span
-                            class="rooms-of-user" id="rooms-`+ USER + `">1 2 3 4 5
-                            65</span></div>
-                    <div><button class="user-button" onclick="edituser('`+ USER + `')">edit</button><button
-                            onclick="deluser=('`+ USER + `')" class="user-button">delete</button></div>
-                </div>`
-
-                });
-            });
-        </script>
+            <div class="info-items info-items-btn">
+                <button onclick="editusermenu(false)" type="button"  class="shouldnot">Cancel</button>
+                <button onclick="edituser()" type="button">Edit</button>
+            </div>
+        </form>
     </main>
+
+    <script>
+
+
+        var id
+
+        $(function () {
+            var socket = io()
+
+            socket.on("getid", function (sid) {
+                id = sid
+                socket.emit("requsers", sid)
+            });
+
+            socket.on("resusers", function (USER, ROOMS, ADMINS) {
+                var adminindi = "&nbsp;&nbsp;&nbsp;"
+                if (ADMINS.includes(USER)) {
+                    adminindi = "A"
+                    ROOMS = "*"
+                }
+                document.getElementById("user-list").innerHTML += ` <div class="user-el" id="` + USER + `">
+                    <div class="user-container"><Span class="name" id="name-` + USER + `">` + USER + `</Span></div>
+                    <div><span class="rooms-of-user" id="rooms-` + USER + `">` + ROOMS + `</span>
+                        <span class="admin-perms-indi" id="admin-perms-` + USER + `">` + adminindi + `</span><button
+                            class="user-button" onclick="editusermenu('` + USER + `')">edit</button><button
+                            onclick="deluser('` + USER + `')" class="user-button">delete</button></div>
+                </div><div class="spacer"></div>`
+
+            });
+        });
+        function creusermenu(i) {
+            if (i == false) {
+                document.getElementById("createuser-form").classList.toggle("form-on")
+                return false
+            }
+            if (document.getElementById("edituser-form").classList.remove("form-on")) {
+                document.getElementById("createuser-form").classList.toggle("form-on")
+                dragElement(document.getElementById("createuser-form"));
+            } else {
+                document.getElementById("createuser-form").classList.toggle("form-on")
+                dragElement(document.getElementById("createuser-form"));
+            }
+        }
+
+        function editusermenu(roomuser) {
+            if (roomuser == false) {
+                document.getElementById("edituser-form").classList.toggle("form-on")
+                return false
+            }
+            document.getElementById("edt-user-name").innerText = roomuser
+            var adminel = "admin-perms-" + roomuser
+            if (roomuser != "undefined") {
+                if (document.getElementById(adminel).innerText == "A") {
+                    document.getElementById("admin-true-false").checked = true
+                } else {
+                    document.getElementById("admin-true-false").checked = false
+                }
+
+                if (document.getElementById("createuser-form").classList.remove("form-on")) {
+                    dragElement(document.getElementById("edituser-form"));
+                    document.getElementById("edituser-form").classList.toggle("form-on")
+                } else {
+                    dragElement(document.getElementById("edituser-form"));
+                    document.getElementById("edituser-form").classList.toggle("form-on")
+                }
+                document.getElementById("user-rooms").value = ""
+            }
+
+
+        }
+
+        function edituser(event) {
+            var socket = io()
+
+            var USERNAME = document.getElementById("edt-user-name").innerText
+            var ROOMS = document.getElementById("user-rooms").value
+            var AFT = document.getElementById("admin-true-false").checked
+            var aperms = "admin-perms-" + USERNAME
+            if (AFT) {
+                document.getElementById(aperms).innerHTML = "A"
+            } else {
+                document.getElementById(aperms).innerHTML = "&nbsp;&nbsp;&nbsp;"
+            }
+            socket.emit("USER EDIT", USERNAME, ROOMS, AFT)
+            document.getElementById("edituser-form").classList.toggle("form-on")
+        }
+
+        function creuser(event) {
+            var socket = io()
+            var USERNAME = document.getElementById("user-name").value
+            var PASSWORD = document.getElementById("user-name").value
+            var ROOMS = document.getElementById("user-name").value
+            document.getElementById("createuser-form").classList.toggle("form-on")
+            if (USERNAME.includes(";", ":", " ") || PASSWORD.includes(";", ":", " ")) {
+                console.log("no")
+            } else {
+                socket.emit("USER CREATE", USERNAME, PASSWORD, ROOMS)
+            }
+
+        }
+        function deluser(USERNAME) {
+            if (confirm("Do you realy want do delete the user " + USERNAME)) {
+                var socket = io()
+                var child = document.getElementById(USERNAME)
+                document.getElementById("user-list").removeChild(child)
+                socket.emit("USER DEL", USERNAME)
+            }
+
+        }
+
+
+
+
+
+        function dragElement(elmnt) {
+            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            if (document.getElementById(elmnt.id + "-grabber")) {
+                // if present, the header is where you move the DIV from:
+                document.getElementById(elmnt.id + "-grabber").onmousedown = dragMouseDown;
+            } else {
+                // otherwise, move the DIV from anywhere inside the DIV:
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // calculate the new cursor position:
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                // stop moving when mouse button is released:
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+    </script>
 </body>
 
 </html>

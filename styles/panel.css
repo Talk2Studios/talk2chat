@@ -5,6 +5,7 @@ body {
     height: 100%;
     font-family: "Lexend", sans-serif;
     margin: 0;
+    overflow: hidden;
 }
 
 body {
@@ -22,6 +23,7 @@ main.waitmain {
     justify-content: flex-start;
     height: 100%;
     overflow: auto;
+
 }
 
 span {
@@ -39,7 +41,8 @@ main.waitmain .container {
     width: 90%;
 }
 
-main.waitmain button {
+main.waitmain button,
+body button {
     border-radius: 5px;
 }
 
@@ -52,6 +55,8 @@ main.waitmain img {
     position: absolute;
     right: 10px;
     bottom: 10px;
+    margin: 20px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 button {
@@ -95,6 +100,22 @@ button:active {
     width: 100%;
 }
 
+.info-el {
+    display: flex;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.spacer:last-child {
+    min-width: 400px;
+    min-height: 50px;
+    border: 2px rgba(0, 0, 0, 0) solid;
+    display: flex;
+}
+
 .aptitles {
     font-size: 30px;
 }
@@ -102,6 +123,7 @@ button:active {
 .aptitles-titles {
     font-size: 26px;
     padding: 10px 0 0 0;
+    margin: 0 0 0 15px;
 }
 
 .info-items-text {
@@ -123,15 +145,27 @@ button:active {
     text-align: left;
 }
 
-.info-items img {
+.info-items img,
+form img {
     height: 25px;
     margin: 0 5px 0 0;
+}
+
+.info-items-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.info-items-btn button {
+    margin-right: 5px;
 }
 
 img.infoicon {
     height: 15px;
     margin: 0 0 0 5px;
 }
+
 
 #lastrefresh,
 .ifi,
@@ -140,7 +174,7 @@ img.infoicon {
     font-size: 12px;
 }
 
-.ifi {
+/* .ifi {
     position: absolute;
     display: none;
     transition: all .25s ease-in;
@@ -152,7 +186,7 @@ img.infoicon {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
+} */
 
 .addlog,
 .minuslog {
@@ -186,10 +220,12 @@ img.infoicon {
 .log-items {
     display: flex;
     align-items: flex-start;
+    text-align: left;
 }
 
 .panel-input {
     height: 25px;
+    width: 200px;
     font-size: 16px;
     padding: 0 5px;
     color: rgb(10, 0, 47);
@@ -202,21 +238,23 @@ img.infoicon {
 
 .content-el:nth-child(2) {
     margin: 50px 0 0 20px;
-}
-
-.content-el:last-child {
-    padding-bottom: 100px;
+    box-shadow: none;
 }
 
 .user-el {
     background: rgb(22, 1, 98);
     display: flex;
     align-items: center;
-    height: 45px;
+    min-height: 45px;
     border-radius: 5px;
     justify-content: space-between;
     width: 100%;
     margin: 2px 0;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.addbutton {
+    min-height: 45px;
 }
 
 .user-el:nth-child(2) {
@@ -234,12 +272,283 @@ img.infoicon {
 }
 
 .rooms-of-user {
-    padding: 0 0 0 150px;
+    padding: 0 150px 0 0;
 }
+
+.rooms-of-user-title {
+    padding: 0 150px 0 0;
+    text-align: end;
+}
+
+.rooms-of-user-title span {
+    font-weight: bold;
+}
+
+.pw-of-user-title {
+    padding: 0 193px 0 0;
+    text-align: end;
+}
+
+.flex-div {
+    display: flex;
+    align-items: center;
+}
+
 .user-btn {
     width: 116px;
 }
+
 .user-container {
     display: flex;
     align-items: center;
+}
+
+#createuser-form,
+#edituser-form {
+    background: rgb(22, 1, 98);
+    position: absolute;
+    height: 300px;
+    width: 250px;
+    padding: 10px;
+    display: none;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: 5px;
+}
+
+#createuser-form-grabber,
+#edituser-form-grabber {
+    cursor: pointer;
+}
+
+#edit-grabber:active,
+#cre-grabber:active {
+    cursor: grabbing;
+}
+
+.form-on {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#admin-true-false {
+    height: 20px;
+    height: 20px;
+}
+
+.admin-perms-indi {
+    color: red;
+    padding: 0 100px 0 0;
+    max-width: 13.5px;
+    width: 100%;
+}
+
+.checkbox-wrapper-55 input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+}
+
+.checkbox-wrapper-55 *,
+.checkbox-wrapper-55 ::after,
+.checkbox-wrapper-55 ::before {
+    box-sizing: border-box;
+}
+
+.checkbox-wrapper-55 .rocker {
+    display: inline-block;
+    position: relative;
+    /*
+    SIZE OF SWITCH
+    ==============
+    All sizes are in em - therefore
+    changing the font-size here
+    will change the size of the switch.
+    See .rocker-small below as example.
+    */
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #888;
+    width: 7em;
+    height: 4em;
+    overflow: hidden;
+    border-bottom: 0.5em solid #eee;
+}
+
+.checkbox-wrapper-55 .rocker-small {
+    font-size: 0.75em;
+}
+
+.checkbox-wrapper-55 .rocker::before {
+    content: "";
+    position: absolute;
+    top: 0.5em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #999;
+    border: 0.5em solid #eee;
+    border-bottom: 0;
+}
+
+.checkbox-wrapper-55 .switch-left,
+.checkbox-wrapper-55 .switch-right {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5em;
+    width: 3em;
+    transition: 0.2s;
+    user-select: none;
+}
+
+.checkbox-wrapper-55 .switch-left {
+    height: 2.4em;
+    width: 2.75em;
+    left: 0.85em;
+    bottom: 0.4em;
+    background-color: #ddd;
+    transform: rotate(15deg) skewX(15deg);
+}
+
+.checkbox-wrapper-55 .switch-right {
+    right: 0.5em;
+    bottom: 0;
+    background-color: #bd5757;
+    color: #fff;
+}
+
+.checkbox-wrapper-55 .switch-left::before,
+.checkbox-wrapper-55 .switch-right::before {
+    content: "";
+    position: absolute;
+    width: 0.4em;
+    height: 2.45em;
+    bottom: -0.45em;
+    background-color: #ccc;
+    transform: skewY(-65deg);
+}
+
+.checkbox-wrapper-55 .switch-left::before {
+    left: -0.4em;
+}
+
+.checkbox-wrapper-55 .switch-right::before {
+    right: -0.375em;
+    background-color: transparent;
+    transform: skewY(65deg);
+}
+
+.checkbox-wrapper-55 input:checked+.switch-left {
+    background-color: #0084d0;
+    color: #fff;
+    bottom: 0px;
+    left: 0.5em;
+    height: 2.5em;
+    width: 3em;
+    transform: rotate(0deg) skewX(0deg);
+}
+
+.checkbox-wrapper-55 input:checked+.switch-left::before {
+    background-color: transparent;
+    width: 3.0833em;
+}
+
+.checkbox-wrapper-55 input:checked+.switch-left+.switch-right {
+    background-color: #ddd;
+    color: #888;
+    bottom: 0.4em;
+    right: 0.8em;
+    height: 2.4em;
+    width: 2.75em;
+    transform: rotate(-15deg) skewX(-15deg);
+}
+
+.checkbox-wrapper-55 input:checked+.switch-left+.switch-right::before {
+    background-color: #ccc;
+}
+
+/* Keyboard Users */
+.checkbox-wrapper-55 input:focus+.switch-left {
+    color: #333;
+}
+
+.checkbox-wrapper-55 input:checked:focus+.switch-left {
+    color: #fff;
+}
+
+.checkbox-wrapper-55 input:focus+.switch-left+.switch-right {
+    color: #fff;
+}
+
+.checkbox-wrapper-55 input:checked:focus+.switch-left+.switch-right {
+    color: #333;
+}
+
+.shouldnot {
+    background: rgba(7, 0, 30, 0.566);
+}
+
+
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(22, 1, 98);
+    text-align: center;
+    color: #fff;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip .tooltiptext {
+    top: -5px;
+    left: 105%;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent rgb(22, 1, 98) transparent transparent;
+  }
+
+.tooltip .tooltiptext {
+    opacity: 0;
+    transition: opacity 0.3;
+}
+
+.tooltip:hover .tooltiptext {
+    opacity: 1;
+}
+.info-sheet {
+    margin: 5px;
+    background: rgb(22, 1, 98);
+    border-radius: 5px;
+    padding: 20px 20px 60px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }

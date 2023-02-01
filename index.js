@@ -1,3 +1,5 @@
+const { pid } = require("process");
+
 //inpoertieren der Libarys 
 try {
     // const { stat } = require("fs");
@@ -28,9 +30,17 @@ try {
 
     var openroomsdouble = []
 
+    // max number of signups per min
+
+    var signup = 10
+
+    var signupindex = 0
+
+    var signupdelay = 30000
+
     // Version of the chat
 
-    var version = "v0.4.4"
+    var version = "v0.4.7"
 
     //Hosting server on port 80
 
@@ -87,10 +97,12 @@ try {
     // }
 
 
-    var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian", "Nico", "Benjamin", "Loris", "Nat", "Florian", "Robin", "Silvan", "Timi", "Dilay", "Oliver Macher"]
-    var userpass = ["password", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
+    var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian", "Nico", "Benjamin", "Loris", "Nat", "Florian", "Robin", "Silvan", "Timi", "Dilay", "Oliver_Macher", "Rubén_Fructuoso"]
+    var userpass = ["password", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
+    var pusers = []
+    var puserpass = []
 
-    var roomsalowed = [0, 1, 2, 3,]
+    var roomsalowed = [1, 2, 3,]
 
     var roompasrt1 = `<div id="chatroom-`
     var roompasrt2 = `" onclick="chancheroom('/room`
@@ -149,7 +161,7 @@ try {
 </div>
 </article`
 
-    var auser = ["admin", "Colin", "Niklaus", "Oliver Macher"]
+    var auser = ["admin", "Colin", "Niklaus", "Oliver_Macher"]
 
     io.on("connection", function (socket) {
         io.to(socket.id).emit("getid", socket.id, version)
@@ -160,8 +172,8 @@ try {
                     usernum++
                     if (auser.includes(user)) {
                         var arooms = ""
-                        var ararray = 1
-                        for (var i = 1; roomsalowed.length > i; i++) {
+                        var ararray = 0
+                        for (var i = 0; roomsalowed.length > i; i++) {
                             arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
                             ararray++
                         }
@@ -173,8 +185,8 @@ try {
                         io.emit("consolelog", time() + " 🟩 " + user + " logged in @wait bc")
                     } else {
                         var arooms = ""
-                        var ararray = 1
-                        for (var i = 1; roomsalowed.length > i; i++) {
+                        var ararray = 0
+                        for (var i = 0; roomsalowed.length > i; i++) {
                             arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
                             ararray++
                         }
@@ -205,22 +217,119 @@ try {
         });
 
         socket.on("reqinfo", function (regid) {
-            console.log(time() + " ❔ Informtions requested")
-            io.emit("consolelog", time() + " ❔ Informtions requested")
-            socket.to(regid).emit("resinfo", users.length, usernum, openrooms)
+            // console.log(time() + " ❔ Informtions requested")
+            // io.emit("consolelog", time() + " ❔ Informtions requested")
+            socket.to(regid).emit("resinfo", users.length, usernum, openrooms, pusers)
         });
 
         socket.on("requsers", function (sid) {
-            send("USER " + "LIST")
-            do {
-                client.on('data', function (data) {
-                    console.log('Received from server: ' + data.toString());
-                    socket.to(sid).emit("resusers", data.toString())
-                    // client.write("EOF");
-                });
-            } while (data == undefined)
+            var USERi = 0
+            for (var i = 0; users.length != i; i++) {
+                socket.emit("resusers", users[USERi], roomsalowed, auser)
+                USERi++
+            }
+        });
+
+        socket.on("requsersp", function (sid) {
+            var USERi = 0
+            for (var i = 0; pusers.length != i; i++) {
+                socket.emit("resusersp", pusers[USERi], puserpass[USERi])
+                USERi++
+            }
+        });
+
+        socket.on("USER EDIT", function (USERNAME, ROOMS, AFT) {
+            if (AFT == true) {
+                if (!auser.includes(USERNAME)) {
+                    auser.push(USERNAME)
+                    // send("ADMIN " + "ADD " + USERNAME)
+                    io.emit("consolelog", time() + " 📝  Edit " + USERNAME + "[A]")
+
+                }
+            } else {
+                if (auser.includes(USERNAME)) {
+                    auser.splice(auser.indexOf(USERNAME), 1)
+                    // send("ADMIN " + "REMOVE " + USERNAME)
+                    io.emit("consolelog", time() + " 📝  Edit " + USERNAME + "[-A]")
+                }
+            }
+            // socket.emit("relodeall")
+        });
+
+        socket.on("USER CREATE", function (USERNAME, PASSWORD, ROOMS) {
+            if (!users.includes(USERNAME)) {
+                users.push(USERNAME)
+                userpass.push(PASSWORD)
+                // send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
+            }
+
+            io.emit("consolelog", time() + " 📝 Create " + USERNAME + " [" + ROOMS + "]")
+        });
+
+        socket.on("USER PENDING", function (USERNAME, PASSWORD) {
+            if (signup > signupindex) {
+                if (!users.includes(USERNAME) && !pusers.includes(USERNAME)) {
+                    pusers.push(USERNAME)
+                    puserpass.push(PASSWORD)
+                    // send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
+                    signupindex++
+                    setTimeout(signupindexminus, signupdelay)
+                }
+            }
+            io.emit("consolelog", time() + " 📝  Sign Up " + USERNAME)
 
         });
+
+        socket.ip
+        socket.on("CONFIRM USER", function (USERNAME, PASSWORD) {
+            if (pusers.includes(USERNAME)) {
+                var index = pusers.indexOf(USERNAME)
+                users.push(USERNAME)
+                userpass.push(puserpass[index])
+                puserpass.splice(index, 1)
+                pusers.splice(index, 1)
+                // send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
+                io.emit("consolelog", time() + " 📝 Pending " + USERNAME + "[confirmed]")
+
+            }
+        });
+
+        socket.on("REMOVE PENDING", function (USERNAME) {
+            if (pusers.includes(USERNAME)) {
+                puserpass.splice(pusers.indexOf(USERNAME), 1)
+                pusers.splice(pusers.indexOf(USERNAME), 1)
+            }
+            io.emit("consolelog", time() + " 📝 Pending " + USERNAME + " [removed]")
+        });
+
+        socket.on("USER DEL", function (USERNAME) {
+            if (users.includes(USERNAME)) {
+                userpass.splice(users.indexOf(USERNAME), 1)
+                users.splice(users.indexOf(USERNAME), 1)
+                // send("USER " + DELETE " + USERNAME)
+            }
+            if (auser.includes(USERNAME)) {
+                auser.splice(auser.indexOf(USERNAME), 1)
+            }
+            io.emit("consolelog", time() + " 📝 Delete " + USERNAME)
+
+            // socket.emit("relodeall")
+        });
+
+        // socket.on("requsers", function (sid) {
+        //     send("USER " + "LIST")
+        //     do {
+        //         client.on('data', function (data) {
+        //             console.log('Received from server: ' + data.toString());
+        //             // client.write("EOF");
+        //         });
+        //     } while (data == undefined)
+
+        // });
+
+        function signupindexminus() {
+            signupindex--
+        }
 
         socket.on("waitlogin", function (user, pass, sid) {
             if (users.includes(user)) {
@@ -232,7 +341,7 @@ try {
                     io.emit("consolelog", time() + " 🟩 " + user + " logged in bl")
 
                 } else {
-                    io.to(sid).emit("waitfalse")
+                    io.to(sid).emit("waitfalse", false)
                     console.log(time() + " ❗ falsches pw")
 
                     io.emit("consolelog", time() + " ❗ falsches pw")
@@ -243,7 +352,7 @@ try {
 
                 io.emit("consolelog", time() + " ❗ user existiert nicht")
 
-                io.to(sid).emit("waitfalse")
+                io.to(sid).emit("waitfalse", true)
             }
         });
 

@@ -191,6 +191,9 @@
             document.getElementById(lastmsgroom).innerText = bname + ": " + msg
           }
         });
+        socket.on("relodeall", function(){
+          location.reload()
+        });
       });
 
       socket.on("check true", function (uname, rooms, addterminal, terminalscript) {
@@ -226,14 +229,17 @@
       var socket = io()
       socket.on("consolelog", function (terminallog) {
         // console.log("erhlten")
-        if (tl === 0) {
-          document.getElementById("serverlog").innerHTML += '<div>' + terminallog + '</div>'
-          tl++
-        } else {
-          document.getElementById("serverlog").innerHTML += '<div class="serverlog-1">' + terminallog + '</div>'
-          tl--
+        if (document.getElementById("serverlog")) {
+          if (tl === 0) {
+            document.getElementById("serverlog").innerHTML += '<div>' + terminallog + '</div>'
+            tl++
+          } else {
+            document.getElementById("serverlog").innerHTML += '<div class="serverlog-1">' + terminallog + '</div>'
+            tl--
+          }
+          scrolldown()
         }
-        scrolldown()
+
       });
     });
     function scrolldown() {

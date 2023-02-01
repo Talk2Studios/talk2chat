@@ -17,12 +17,23 @@
     <main class="waitmain">
         <div class="container">
             <img src="/assets/icon.png" alt="logo">
-            <span>
-                Login or sign up to Talk2 Chat</span>
-            <div>
-                <button onclick="login()">LOGIN</button>
-                <button>SIGN UP</button>
-            </div>
+            <span>Login or sign up to Talk2 Chat</span>
+            <form action="">
+                <span>Username <span class="dontdo" id="dontdoname"></span></span>
+
+                <input type="text" class="loginsignup" maxlength="20" autocomplete="off" id="name">
+                <span>Password <span class="dontdo" id="dontdopass"></span></span>
+                <div class="passinput"><input type="password" class="loginsignup" maxlength="100" id="pass"
+                        autocomplete="off">
+                    <div class="show-pass-div"><input type="checkbox" name="" id="showPassword"><span>Show
+                            password</span></div>
+                </div>
+
+                <div>
+                    <button onclick="login(true)" type="button">LOGIN</button>
+                    <button onclick="login(false)" type="button">SIGN UP</button>
+                </div>
+            </form>
 
         </div>
         <script>
@@ -31,16 +42,27 @@
             var logpass
             var id
 
-            // login -------------------------------------------------------------------------------------------------------------------------------
 
-            function logindirect() {
-                var socket = io();
-                logname = prompt("Your name (max. 20)");
-                // console.log("Name: " + logname)
-                logpass = prompt("Your Password (max. 20)");
-                // console.log("Pas: " + logpass)
-                socket.emit("waitlogin", logname, logpass, id)
+            document.getElementById("name").addEventListener("click", () => {
+
+            });
+
+            function inputcheck(tocheck) {
+                if (tocheck.includes(" ") || tocheck.includes(":") || tocheck.includes(";") || tocheck == null) {
+                    return true
+                } else {
+                    return false
+                }
             }
+
+            document.getElementById('showPassword').onclick = function () {
+                if (this.checked) {
+                    document.getElementById('pass').type = "text";
+                } else {
+                    document.getElementById('pass').type = "password";
+                }
+            };
+
 
             $(function () {
                 var socket = io()
@@ -51,24 +73,88 @@
                     socket.on("waittrue", function (uname, upass) {
                         var usercookie = document.cookie = "username=" + logname + "; path=/";
                         var passcookie = document.cookie = "password=" + logpass + "; path=/";
-                        alert("You are logged in as " + logname + ", page will be reloaded.")
+                        // alert("You are logged in as " + logname + ", page will be reloaded.")
                         name = uname
                         window.top.location.reload();
 
                     });
 
-                    socket.on("waitfalse", function () {
-                        console.log("false login")
-                        alert("Incorrect login information, try again")
+                    socket.on("waitfalse", function (correct) {
+                        // console.log("false login")
+                        if (correct) {
+                            document.getElementById("dontdoname").innerText = "incorrect"
+                            document.getElementById("dontdoname").style.color = "red"
+                        } else {
+                            document.getElementById("dontdopass").innerText = "incorrect"
+                            document.getElementById("dontdopass").style.color = "red"
+                        }
                     });
                 });
 
             });
 
-            function login() {
+
+            $("form").submit(function (e) {
+                e.preventDefault();
+                login(true)
+            });
+
+            function login(indicator) {
+                console.log()
                 var socket = io();
-                logindirect()
+                logpass = document.getElementById("pass").value
+                logname = document.getElementById("name").value
+                if (inputcheck(logname)) {
+                    document.getElementById("dontdoname").innerText = "Don't use space, ; or :"
+                    document.getElementById("dontdoname").style.color = "red"
+                } else {
+                    document.getElementById("dontdoname").innerText = "Posible input"
+                    document.getElementById("dontdoname").style.color = "green"
+                }
+                if (inputcheck(logpass)) {
+                    document.getElementById("dontdopass").innerText = "Don't use space, ; or :"
+                    document.getElementById("dontdopass").style.color = "red"
+
+                } else {
+                    document.getElementById("dontdopass").innerText = "Posible input"
+                    document.getElementById("dontdopass").style.color = "green"
+                }
+                if (inputcheck(logname) && inputcheck(logname)) {
+
+                } else {
+                    if (indicator) {
+                        socket.emit("waitlogin", logname, logpass, id)
+
+                    } else {
+                        socket.emit("USER PENDING", logname, logpass, id)
+                        alert("Wait for an administrator to process your registration")
+                        document.getElementById("pass").value = ""
+                        document.getElementById("name").value = ""
+                        document.getElementById("dontdoname").innerText = ""
+                        document.getElementById("dontdopass").innerText = ""
+
+                    }
+
+                }
+
+
+
+                // socket.emit("waitlogin", logname, logpass, id)
             };
+            function signup() {
+                var socket = io()
+                logname = prompt("Your name (max. 20)");
+                // console.log("Name: ?" + logname + "?")
+                logpass = prompt("Your password (use _ for spaces)");
+                // console.log("Pas: ?" + logpass + "?")
+                if (logpass == null || logname == null || logname.includes(" ")) {
+                    alert("Non posible input.")
+                } else {
+                    socket.emit("USER PENDING", logname, logpass)
+                    alert("Now give us some time to check your account or contact an admin for faster confirmation")
+                }
+            }
+
 
 
         </script>
