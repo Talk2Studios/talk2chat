@@ -98,21 +98,22 @@
                         id = sid
                         setTimeout(inforefresh(), 100)
                     });
-                    socket.on("resinfo", function (eusers, ausers, oprooms, pusers) {
+                    socket.on("resinfo", function (eusers, ausers, oprooms, pusers, message) {
                         document.getElementById("lastrefresh").innerText = time()
                         document.getElementById("info-value-eusers").innerText = eusers
                         document.getElementById("info-value-ausers").innerText = ausers
                         document.getElementById("info-value-oproomsn").innerText = oprooms.length
                         document.getElementById("info-value-oprooms").innerText = ""
                         document.getElementById("info-value-pusers").innerText = pusers.length
+                        document.getElementById("info-value-sendmsg").innerText = message
                         var oproomsi = 0
                         for (var i = 0; oprooms.length != i; i++) {
-                            document.getElementById("info-value-oprooms").innerHTML += oprooms[oproomsi] + "<br>"
+                            document.getElementById("info-value-oprooms").innerHTML += oprooms[oproomsi] + ", "
                             oproomsi++
                         }
                     });
                     socket.on("lastmsg", function (clientroom, msg, bname) {
-                        document.getElementById("info-value-lastmsg").innerText = bname + "@" + clientroom + ": " + msg
+                        document.getElementById("info-value-lastmsg").innerText = bname + "@" + clientroom + ": " + msg.slice(0, 20)
                     });
                 });
 

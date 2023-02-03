@@ -38,13 +38,17 @@ try {
 
     var signupdelay = 30000
 
+    // number of send messages
+
+    var msdnum = 0
+
     // Version of the chat
 
-    var version = "v0.4.7"
+    var version = "v0.4.9"
 
     //Hosting server on port 80
 
-    http.listen(80, function () {
+    http.listen(5500, function () {
         console.log("Server is started")
         // setTimeout(sendserveron, 500)
         // function sendserveron() {
@@ -70,13 +74,24 @@ try {
     })
 
 
+    // class Connecton {
+    //     constructor(yx) {
+
+    //     }
+    //     test(test2) {
+    //         console.log(test2)
+    //     }
+    // }
 
 
-
-
-    // client.connect(6000, '192.168.101.114', function () {
+    // client.connect(8888, '192.168.101.102', function () {
 
     //     try {
+    //         // send("AUTH admin 1234");
+    //         // send("USER CREATE xyz 1234");
+    //         send("AUTH admin 1234");
+    //         send("USER DELETE xyz");
+
     //         console.log('Connected to server');
     //     } catch (err) {
     //         console.log("Error Error Error")
@@ -84,7 +99,7 @@ try {
     // });
 
     // client.on('data', function (data) {
-    //     console.log('Received from server: ' + data.toString());
+    //     console.log(data.toString());
     //     // client.write("EOF");
     // });
 
@@ -95,6 +110,7 @@ try {
     // function send(message) {
     //     client.write(message + "\n")
     // }
+
 
 
     var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian", "Nico", "Benjamin", "Loris", "Nat", "Florian", "Robin", "Silvan", "Timi", "Dilay", "Oliver_Macher", "Rubén_Fructuoso"]
@@ -137,7 +153,8 @@ try {
     <img src="/assets/icon.png" alt="chaticon"><span id="wr-1-name" class="name">Waiting Room<span
         class="lmsg">login & sign up</span></span>
   </span>
-</div>`
+</div>
+`
 
     var afterrooms = `
 <div id="chatroom-p" onclick="chancheroom('/roomp.html','chatroom-p')" class="roomcon">
@@ -147,23 +164,31 @@ try {
   </span>
 </div>
 </div>
-<div id="profile"onclick="chancheroom('/settings.html','profile')" class="roomcon">
+<div id="profile"onclick="logout()" class="roomcon">
 <span class="chatroom">
   <div id="profile-logo"></div><span id="profil-name" class="name">Username<span
-      class="lmsg">settings</span></span>
+      class="lmsg">logout</span></span>
 </span>
 </div>
 `
 
 
-    var terminal = `<article>
+    var terminal = `<article class="terminal-con">
+    <div id="terminal-filer-container">
+    <div class="terminal-filter-el">
+        <input type="checkbox" name="" id="terminal-filter-messages" class="terminal-filter-checkbox">
+        <span class="terminal-filter-text">Don't show messages</span>
+    </div>
+</div>
 <div id="serverlog">
 </div>
-</article`
+</article>`
 
     var auser = ["admin", "Colin", "Niklaus", "Oliver_Macher"]
 
     io.on("connection", function (socket) {
+        // new Connecton(socket)
+        // console.log(socket)
         io.to(socket.id).emit("getid", socket.id, version)
         socket.on("check wait", function (user, pass, sid) {
             if (users.includes(user)) {
@@ -181,8 +206,8 @@ try {
                         io.to(sid).emit("check true", user, arooms, terminal)
 
 
-                        console.log(time() + " 🟩 " + user + " logged in @wait bc")
-                        io.emit("consolelog", time() + " 🟩 " + user + " logged in @wait bc")
+                        console.log(time() + " 🟩 " + user + " logged in bc")
+                        io.emit("consolelog", time() + " 🟩 " + user + " logged in bc")
                     } else {
                         var arooms = ""
                         var ararray = 0
@@ -194,8 +219,8 @@ try {
                         io.to(sid).emit("check true", user, arooms)
 
 
-                        console.log(time() + " 🟩 " + user + " logged in @wait bc")
-                        io.emit("consolelog", time() + " 🟩 " + user + " logged in @wait bc")
+                        console.log(time() + " 🟩 " + user + " logged in bc")
+                        io.emit("consolelog", time() + " 🟩 " + user + " logged in bc")
                     }
 
                 } else {
@@ -219,7 +244,7 @@ try {
         socket.on("reqinfo", function (regid) {
             // console.log(time() + " ❔ Informtions requested")
             // io.emit("consolelog", time() + " ❔ Informtions requested")
-            socket.to(regid).emit("resinfo", users.length, usernum, openrooms, pusers)
+            socket.to(regid).emit("resinfo", users.length, usernum, openrooms, pusers, msdnum)
         });
 
         socket.on("requsers", function (sid) {
@@ -253,7 +278,6 @@ try {
                     io.emit("consolelog", time() + " 📝  Edit " + USERNAME + "[-A]")
                 }
             }
-            // socket.emit("relodeall")
         });
 
         socket.on("USER CREATE", function (USERNAME, PASSWORD, ROOMS) {
@@ -313,7 +337,11 @@ try {
             }
             io.emit("consolelog", time() + " 📝 Delete " + USERNAME)
 
-            // socket.emit("relodeall")
+        });
+
+        socket.on("relode", function (reloder) {
+            console.log(time() + "Reload")
+            socket.emit("RELODEALLCLIENTS",)
         });
 
         // socket.on("requsers", function (sid) {
@@ -430,6 +458,8 @@ try {
 
                                     io.to(clientroom).emit("chat message", msg, bname);
                                     io.emit("lastmsg", clientroom, msg, bname)
+                                    msdnum++
+
                                     // client.write("GET /")
                                     // client.end()
                                 } else {
@@ -445,7 +475,7 @@ try {
                                 if (clientroom != "0" && crooms.includes(clientroom)) {
                                     io.emit("lastmsg", clientroom, msg, bname)
                                 }
-
+                                msdnum++
                                 io.emit("consolelog", time() + " 📧 Message send from | " + bname + "@" + clientroom + "" + " | " + msg)
                             }
                             // send("MSG" + " SEND " + clientroom + " " + bname + " " + msg)
@@ -479,6 +509,14 @@ try {
         }
         return l;
     }
+    function checkms(l) {
+        if (l < 10) {
+            l = "00" + l;
+        } else if (l < 100) {
+            l = "0" + l;
+        }
+        return l;
+    }
 
     function time() {
         var today = new Date();
@@ -493,9 +531,12 @@ try {
         // add a zero in front of numbers<10
         m = checkTime(m);
         s = checkTime(s);
-        var alltime = ("[" +/*d + "." + mo + "." + y + " " + */h + ":" + m + ":" + s + "." + ms + "]")
+        mo = checkTime(mo);
+        d = checkTime(d);
+        ms = checkms(ms);
+        var alltime = (d + "-" + mo + "-" + y + " " + h + ":" + m + ":" + s + "," + ms)
         return alltime;
     }
 } catch (e) {
-    console.log("wdviuwubev9ibi")
+    console.log("all error")
 }

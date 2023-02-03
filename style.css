@@ -115,11 +115,11 @@ main {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    max-height: 700px;
+    max-height: 780px;
     width: 800px;
     /* background: rgb(66,21,163);
     background: linear-gradient(180deg, rgba(66,21,163,1) 0%, rgba(79,33,176,1) 100%); */
-    background-color: rgb(10, 0, 47);
+    background: radial-gradient(circle, rgba(32,0,110,1) 49%, rgba(10,0,47,1) 100%);
     border-radius: 5px;
 }
 main.waitmain {
@@ -180,7 +180,7 @@ input {
     width: 100%;
     border-radius: 0;
     border: none;
-    background: rgb(193, 167, 251);
+    background: #9163F0;
     height: 45px;
     font-size: 20px;
     padding: 0 20px 0 20px;
@@ -198,17 +198,26 @@ input {
 button {
     cursor: pointer;
     height: 45px;
-    background: rgb(138, 97, 225);
+    background: #8733F0;
     border-radius: 0;
     border: none;
     font-weight: bold;
     color: #fff;
     padding: 0 20px;
     border-radius: 0 5px 5px 0;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    
 }
 
 button:hover {
     background: rgb(113, 85, 216);
+}
+
+button:active {
+    background: rgb(10, 0, 47);
+}
+button span {
+    cursor: pointer;
 }
 
 input:focus-visible {
@@ -227,6 +236,7 @@ h1 {
     background: rgb(22, 1, 98);
     margin: 0;
     height: 80px;
+    display: none;
 }
 
 img {

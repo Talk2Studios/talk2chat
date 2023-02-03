@@ -24,7 +24,11 @@
                 <a href="adminpanelcl.html" class="apnav">Changelogs</a>
             </div>
             <div class="content-el" id="user-list">
-                <button onclick="creusermenu()" class="addbutton">+</button>
+                <div>
+                    <button onclick="creusermenu()" class="addbutton">+</button>
+                    <button onclick="relodeall()" class="addbutton shouldnot">Reload</button>
+                </div>
+
                 <div class="user-el">
                     <div class="user-container"><Span class="name">username</Span></div>
                     <div class="flex-div"><span class="rooms-of-user-title">rooms</span><span class="admin-perms-indi"
@@ -49,10 +53,10 @@
                 </div> -->
             </div>
 
-        </div>  
+        </div>
         <form action="" id="createuser-form">
             <span class="aptitles-titles">Create user <img src="/assets/grab.png" alt="grabbing"
-                    id="createuser-form-grabber"></span>
+                    id="createuser-form-grabber" class="grabber-icon"></span>
             <div class="info-items">
                 <span class="info-items-text">username</span>
             </div>
@@ -64,14 +68,14 @@
                 <span class="info-items-text">password</span>
             </div>
             <div class="info-items">
-                <input type="text" class="panel-input" maxlength="20" id="user-pw" autocomplete="off">
+                <input type="password" class="panel-input" maxlength="20" id="user-pw" autocomplete="off">
                 <span class="input-info" id="input-info-pw"></span>
             </div>
             <div class="info-items">
                 <span class="info-items-text">rooms</span>
             </div>
             <div class="info-items">
-                <input type="text" class="panel-input" maxlength="20" id="user-pw" autocomplete="off">
+                <input type="text" class="panel-input" maxlength="20" id="user-rooms" autocomplete="off">
                 <span class="input-info">separated by spaces</span>
             </div>
             <div class="info-items info-items-btn">
@@ -81,7 +85,7 @@
         </form>
         <form action="" id="edituser-form">
             <span class=" aptitles-titles">Edit user <img src="/assets/grab.png" alt="grabbing"
-                    id="edituser-form-grabber"></span>
+                    id="edituser-form-grabber" class="grabber-icon"></span>
             <div class="info-items">
                 <span class="info-items-text" id="edt-user-name">username</span>
             </div>
@@ -89,7 +93,7 @@
                 <span class="info-items-text">rooms</span>
             </div>
             <div class="info-items">
-                <input type="text" class="panel-input" maxlength="20" id="user-rooms" autocomplete="off">
+                <input type="text" class="panel-input" maxlength="20" id="edit-user-rooms" autocomplete="off">
                 <span class="input-info">separated by spaces</span>
             </div>
             <div class="info-items">
@@ -106,7 +110,7 @@
             </div>
 
             <div class="info-items info-items-btn">
-                <button onclick="editusermenu(false)" type="button"  class="shouldnot">Cancel</button>
+                <button onclick="editusermenu(false)" type="button" class="shouldnot">Cancel</button>
                 <button onclick="edituser()" type="button">Edit</button>
             </div>
         </form>
@@ -176,7 +180,7 @@
                     dragElement(document.getElementById("edituser-form"));
                     document.getElementById("edituser-form").classList.toggle("form-on")
                 }
-                document.getElementById("user-rooms").value = ""
+                document.getElementById("edit-user-rooms").value = ""
             }
 
 
@@ -186,7 +190,7 @@
             var socket = io()
 
             var USERNAME = document.getElementById("edt-user-name").innerText
-            var ROOMS = document.getElementById("user-rooms").value
+            var ROOMS = document.getElementById("edit-user-rooms").value
             var AFT = document.getElementById("admin-true-false").checked
             var aperms = "admin-perms-" + USERNAME
             if (AFT) {
@@ -201,11 +205,10 @@
         function creuser(event) {
             var socket = io()
             var USERNAME = document.getElementById("user-name").value
-            var PASSWORD = document.getElementById("user-name").value
-            var ROOMS = document.getElementById("user-name").value
+            var PASSWORD = document.getElementById("user-pw").value
+            var ROOMS = document.getElementById("user-rooms").value
             document.getElementById("createuser-form").classList.toggle("form-on")
             if (USERNAME.includes(";", ":", " ") || PASSWORD.includes(";", ":", " ")) {
-                console.log("no")
             } else {
                 socket.emit("USER CREATE", USERNAME, PASSWORD, ROOMS)
             }
@@ -222,7 +225,10 @@
         }
 
 
-
+        function relodeall() {
+            var socket = io()
+            socket.emit("relode")
+        }
 
 
         function dragElement(elmnt) {

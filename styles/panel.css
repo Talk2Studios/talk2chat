@@ -23,7 +23,6 @@ main.waitmain {
     justify-content: flex-start;
     height: 100%;
     overflow: auto;
-
 }
 
 span {
@@ -62,6 +61,8 @@ main.waitmain img {
 button {
     height: 20px;
     margin: 20px 0;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
 }
 
 button:active {
@@ -76,19 +77,34 @@ button:active {
     border-radius: 0 0 5px 5px;
     font-size: 18px;
     background: rgb(77, 56, 152);
+    transition: all .25s ease-in;
 }
 
 .apnav.current {
     background: rgb(22, 1, 98);
+    /* border: rgb(17, 0, 80) 3px solid; */
+    border-top: none;
 }
 
 .apnav:hover {
-    background: rgb(50, 21, 158);
+    background: rgb(22, 1, 98);
 }
 
 #panelnav {
-    margin: 0 0 30px 0;
     position: absolute;
+    /* background: rgb(77, 56, 152); */
+    height: 42.67px;
+    border-radius: 5px 0 5px 0;
+    display: flex;
+    align-items: flex-end;
+    top: 5px;
+    left: 5px;
+    padding-left: 15px;
+}
+
+.apnav:active {
+    background: rgb(61, 39, 142);
+
 }
 
 .content-el {
@@ -124,6 +140,10 @@ button:active {
     font-size: 26px;
     padding: 10px 0 0 0;
     margin: 0 0 0 15px;
+}
+
+.version-title {
+    padding: 15px 0;
 }
 
 .info-items-text {
@@ -174,15 +194,12 @@ img.infoicon {
     font-size: 12px;
 }
 
-/* .ifi {
-    position: absolute;
-    display: none;
-    transition: all .25s ease-in;
-    left: 30%;
-    text-align: left;
+.ifi {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
 }
 
-.info-items-text:hover .ifi {
+/* .info-items-text:hover .ifi {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -236,21 +253,22 @@ img.infoicon {
     color: red;
 }
 
-.content-el:nth-child(2) {
-    margin: 50px 0 0 20px;
-    box-shadow: none;
-}
+
 
 .user-el {
-    background: rgb(22, 1, 98);
+    background: radial-gradient(circle, rgb(14, 0, 65) 49%, rgba(10, 0, 47, 1) 100%);
     display: flex;
     align-items: center;
     min-height: 45px;
     border-radius: 5px;
     justify-content: space-between;
     width: 100%;
-    margin: 2px 0;
+    margin: 3px 0;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.content-el:nth-child(2) {
+    margin: 50px 0 0 20px;
 }
 
 .addbutton {
@@ -259,6 +277,7 @@ img.infoicon {
 
 .user-el:nth-child(2) {
     background: none;
+    box-shadow: none;
 }
 
 .name {
@@ -317,11 +336,11 @@ img.infoicon {
 
 #createuser-form-grabber,
 #edituser-form-grabber {
-    cursor: pointer;
+    cursor: grab;
 }
 
-#edit-grabber:active,
-#cre-grabber:active {
+#createuser-form-grabber:active,
+#edituser-form-grabber:active {
     cursor: grabbing;
 }
 
@@ -489,7 +508,7 @@ img.infoicon {
 }
 
 .shouldnot {
-    background: rgba(7, 0, 30, 0.566);
+    background: radial-gradient(circle, rgb(14, 0, 65) 49%, rgba(10, 0, 47, 1) 100%);
 }
 
 
@@ -505,7 +524,7 @@ img.infoicon {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: rgb(22, 1, 98);
+    background-color: #8733F0;
     text-align: center;
     color: #fff;
     padding: 5px 0;
@@ -524,18 +543,19 @@ img.infoicon {
 .tooltip .tooltiptext {
     top: -5px;
     left: 105%;
-  }
+}
 
-  .tooltip .tooltiptext::after {
+.tooltip .tooltiptext::after {
     content: " ";
     position: absolute;
     top: 50%;
-    right: 100%; /* To the left of the tooltip */
+    right: 100%;
+    /* To the left of the tooltip */
     margin-top: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent rgb(22, 1, 98) transparent transparent;
-  }
+    border-color: transparent #8733F0 transparent transparent;
+}
 
 .tooltip .tooltiptext {
     opacity: 0;
@@ -545,9 +565,11 @@ img.infoicon {
 .tooltip:hover .tooltiptext {
     opacity: 1;
 }
+
 .info-sheet {
     margin: 5px;
     background: rgb(22, 1, 98);
+    background: radial-gradient(circle, rgb(14, 0, 65) 49%, rgba(10, 0, 47, 1) 100%);
     border-radius: 5px;
     padding: 20px 20px 60px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;

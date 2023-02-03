@@ -68,7 +68,7 @@
             <li><a href="#">Ziele</a></li>
           </ul>
         </li>
-        <li id="chat-link"><a href="http://talk2chat.internet-box.ch:5500/talk2chat" class="current">Chat</a></li>
+        <li id="chat-link"><a href="http://talk2chat.internet-box.ch:5500/talk2chat">Chat</a></li>
       </ul>
     </nav>
   </header>
@@ -77,7 +77,7 @@
       <p class="name-ov-atw">Talk2 Studios</p>
       <p>Chat</p>
     </div>
-    <article class="theme">
+    <article class="theme" id="chatroom">
 
       <div id="room-container" class="chatrooms">
         <div class="chatrooms">
@@ -113,6 +113,8 @@
   <footer id="footerin">
   </footer>
   <script id="thisscript">
+
+
     var arraypass
     var arrayuser
     var array
@@ -121,6 +123,43 @@
     var id
     var name
     var tl = 0
+    var filterm = true
+
+    var welcome = `<div id="waitroom-1" onclick="chancheroom('/welcome.html','waitroom-1')" class="roomcon curroom">
+              <span class="chatroom">
+                <img src="/assets/icon.png" alt="chaticon"><span id="wr-1-name" class="name">Welcome<span
+                    class="lmsg">to Talk2 Chat</span></span>
+              </span>
+          </div>`
+
+    function logout() {
+      document.cookie = "username=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+      document.cookie = "password=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+      // document.cookie = name + '=';
+      window.location.reload();
+    }
+
+    function filters() {
+      document.getElementById('terminal-filter-messages').onclick = function () {
+        if (this.checked) {
+          filterm = false
+        } else {
+          filterm = true
+        }
+      };
+    }
+
+    try {
+      document.getElementById('terminal-filter-messages').onclick = function () {
+        if (this.checked) {
+          filterm = false
+        } else {
+          filterm = true
+        }
+      };
+    } catch {
+      setTimeout(filters, 1000)
+    }
 
     // The room your in
     const thisroom = "overroom"
@@ -138,7 +177,7 @@
         lastpass = arraypass[1]
         if (lastname != arrayuser[1] && lastpass != arraypass[1]) {
           document.getElementById("profil-name").innerHTML = arrayuser[1] + `<span
-      class="lmsg">settings</span>`
+      class="lmsg">logout</span>`
           if (document.cookie.length != 0) {
             functiongetCookie();
             socket.emit("check wait", arrayuser[1], arraypass[1], id)
@@ -172,6 +211,14 @@
     }
 
     $(function () {
+      var socket = io()
+      socket.on("RELODEALLCLIENTS", function () {
+        console.log("wrberberberberberberb")
+        document.location.reload(true)
+      });
+    });
+
+    $(function () {
       var socket = io();
       socket.on("getid", function (sid, ver) {
         id = sid
@@ -182,6 +229,7 @@
         } else {
           return false
         }
+
         socket.on("lastmsg", function (chatroom, msg, bname) {
           var lastmsgroom = "room" + chatroom + "lastmsg"
           if (msg.length > 12) {
@@ -191,15 +239,17 @@
             document.getElementById(lastmsgroom).innerText = bname + ": " + msg
           }
         });
-        socket.on("relodeall", function(){
-          location.reload()
-        });
       });
+
+
+
 
       socket.on("check true", function (uname, rooms, addterminal, terminalscript) {
         document.getElementById("room-container").innerHTML = rooms
         document.getElementById("profil-name").innerHTML = uname + `<span
-      class="lmsg">settings</span>`
+      class="lmsg">logout</span>`
+        document.getElementById("roomframe").src = "/welcome.html";
+        document.getElementById("waitroom-1").style.display = "none"
         if (addterminal === undefined) {
           // || terminalscript === undefined
         } else {
@@ -214,14 +264,16 @@
           document.getElementById("main-con").innerHTML += addterminal
         }
 
-        if (uname.includes(" ")) {
-          var spaceindex = uname.split(" ")
+        if (uname.includes("_")) {
+          var spaceindex = uname.split("_")
           document.getElementById("profile-logo").innerText = spaceindex[0].slice(0, 1) + spaceindex[1].slice(0, 1)
           document.getElementById("profile-logo").style.backgroundColor = getrgb()
         } else {
           document.getElementById("profile-logo").innerText = uname.slice(0, 2)
           document.getElementById("profile-logo").style.backgroundColor = getrgb()
         }
+
+
       });
 
     });
@@ -229,16 +281,16 @@
       var socket = io()
       socket.on("consolelog", function (terminallog) {
         // console.log("erhlten")
-        if (document.getElementById("serverlog")) {
-          if (tl === 0) {
-            document.getElementById("serverlog").innerHTML += '<div>' + terminallog + '</div>'
-            tl++
-          } else {
-            document.getElementById("serverlog").innerHTML += '<div class="serverlog-1">' + terminallog + '</div>'
-            tl--
+        if (terminallog.includes("Message") && filterm == false) {
+
+        } else {
+          if (document.getElementById("serverlog")) {
+
+            document.getElementById("serverlog").innerHTML += '<div class="terminal-item">' + terminallog + '</div>'
+            scrolldown()
           }
-          scrolldown()
         }
+
 
       });
     });

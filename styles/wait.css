@@ -20,6 +20,7 @@ main.waitmain {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: radial-gradient(circle, rgba(32, 0, 110, 1) 49%, rgba(10, 0, 47, 1) 100%);
 }
 
 main.waitmain span {
@@ -83,6 +84,7 @@ div.show-pass-div span {
 main span.dontdo {
     font-size: 14px;
 }
+
 main span.dontdo-on {
     display: flex;
 }
@@ -91,4 +93,21 @@ div.show-pass-div {
     display: flex;
     align-items: center;
     margin: 0 0 15px;
+}
+
+main.waitmain.welcome span {
+
+    font-size: 50px;
+}
+
+main.waitmain.welcome img {
+    height: 150px;
+    width: auto;
+}
+
+main.waitmain.welcome .talk2chat {
+    color: rgb(220, 204, 254);
+}
+.shouldnot {
+    background: radial-gradient(circle, rgb(14, 0, 65) 49%, rgba(10, 0, 47, 1) 100%);
 }

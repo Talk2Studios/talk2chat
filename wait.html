@@ -18,7 +18,7 @@
         <div class="container">
             <img src="/assets/icon.png" alt="logo">
             <span>Login or sign up to Talk2 Chat</span>
-            <form action="">
+            <form action="" id="form">
                 <span>Username <span class="dontdo" id="dontdoname"></span></span>
 
                 <input type="text" class="loginsignup" maxlength="20" autocomplete="off" id="name">
@@ -30,8 +30,8 @@
                 </div>
 
                 <div>
+                    <button onclick="login(false)" type="button" class="shouldnot">SIGN UP</button>
                     <button onclick="login(true)" type="button">LOGIN</button>
-                    <button onclick="login(false)" type="button">SIGN UP</button>
                 </div>
             </form>
 
@@ -41,11 +41,6 @@
             var logname
             var logpass
             var id
-
-
-            document.getElementById("name").addEventListener("click", () => {
-
-            });
 
             function inputcheck(tocheck) {
                 if (tocheck.includes(" ") || tocheck.includes(":") || tocheck.includes(";") || tocheck == null) {
@@ -124,39 +119,16 @@
                 } else {
                     if (indicator) {
                         socket.emit("waitlogin", logname, logpass, id)
-
                     } else {
                         socket.emit("USER PENDING", logname, logpass, id)
-                        alert("Wait for an administrator to process your registration")
+                        alert("Now give us some time to check your account or contact an admin for faster registration")
                         document.getElementById("pass").value = ""
                         document.getElementById("name").value = ""
                         document.getElementById("dontdoname").innerText = ""
                         document.getElementById("dontdopass").innerText = ""
-
                     }
-
-                }
-
-
-
-                // socket.emit("waitlogin", logname, logpass, id)
-            };
-            function signup() {
-                var socket = io()
-                logname = prompt("Your name (max. 20)");
-                // console.log("Name: ?" + logname + "?")
-                logpass = prompt("Your password (use _ for spaces)");
-                // console.log("Pas: ?" + logpass + "?")
-                if (logpass == null || logname == null || logname.includes(" ")) {
-                    alert("Non posible input.")
-                } else {
-                    socket.emit("USER PENDING", logname, logpass)
-                    alert("Now give us some time to check your account or contact an admin for faster confirmation")
                 }
             }
-
-
-
         </script>
     </main>
 </body>

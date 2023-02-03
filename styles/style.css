@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap');
+
 html,
 body {
     margin: 0;
@@ -19,7 +20,7 @@ iframe {
     border-radius: 0 5px 5px 0;
 }
 
-article {
+#chatroom {
     height: 1000px;
     background: none !important;
     display: flex;
@@ -146,6 +147,7 @@ div#profile.roomcon {
     align-self: flex-end;
     margin: 0 0 4px 0;
 }
+
 #serverlog {
     height: 800px;
     width: 90%;
@@ -153,13 +155,23 @@ div#profile.roomcon {
     background: rgb(30, 30, 30);
     overflow: auto;
     word-break: break-all;
+    border-radius: 5px;
 }
+
+.terminal-con {
+    background: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
 #serverlog div {
     color: #fff;
     font-weight: 300;
     padding: 0 0 0 4px;
 }
-.serverlog-1 {
+
+.terminal-item:nth-child(even) {
     background: rgb(37, 37, 38);
 }
 
@@ -181,4 +193,26 @@ div#profile.roomcon {
 /* Handle on hover */
 #serverlog::-webkit-scrollbar-thumb:hover {
     background: rgb(122, 122, 122);
+}
+
+.terminal-filer-container {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    background: rebeccapurple;
+}
+
+.terminal-filter-text {
+    color: white;
+}
+
+.terminal-filter-checkbox {
+    height: 25px;
+    width: 25px;
+    margin: 5px;
+}
+
+.terminal-filter-el {
+    display: flex;
+    align-items: center;
 }

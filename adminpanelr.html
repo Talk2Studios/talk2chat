@@ -23,12 +23,12 @@
                 <a href="adminpanelr.html" class="apnav current">Rooms</a>
                 <a href="adminpanelcl.html" class="apnav">Changelogs</a>
             </div>
-            <button class="refesh-button">REFRESH</button>
+            <button onclick="inforefresh()" class="refesh-button">REFRESH <br><span id="lastrefresh"></span></button>
         </div>
         <script>
 
             var id
-
+            inforefresh()
             $(function () {
                 var socket = io()
 
@@ -37,8 +37,35 @@
 
                 });
             });
+            function inforefresh() {
+                document.getElementById("lastrefresh").innerText = time()
+            }
 
 
+
+            function checkTime(l) {
+                if (l < 10) {
+                    l = "0" + l;
+                }
+                return l;
+            }
+
+            function time() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                var d = today.getDate();
+                var mo = today.getMonth();
+                var y = today.getFullYear();
+                var ms = today.getMilliseconds();
+                mo++
+                // add a zero in front of numbers<10
+                m = checkTime(m);
+                s = checkTime(s);
+                var alltime = (/*d + "." + mo + "." + y + " " + */"  " + h + ":" + m + ":" + s)
+                return alltime;
+            }
         </script>
     </main>
 </body>
