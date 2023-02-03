@@ -49,7 +49,7 @@ try {
     //Hosting server on port 80
 
     http.listen(5500, function () {
-        console.log("Server is started")
+        console.log("🔴🔴🔴🔴🔴Server is started🔴🔴🔴🔴🔴")
         // setTimeout(sendserveron, 500)
         // function sendserveron() {
         //     io.emit("consolelog", time() + "Server is started")
@@ -87,11 +87,13 @@ try {
     // client.connect(8888, '192.168.101.102', function () {
 
     //     try {
+    //         send("AUTH admin 1234")
+    //         send("ADMIN ADD Colin")
+    //         send("ADMIN CHECK Colin")
     //         // send("AUTH admin 1234");
-    //         // send("USER CREATE xyz 1234");
-    //         send("AUTH admin 1234");
-    //         send("USER DELETE xyz");
-
+    //         // send("USER CREATE Colin passwd");
+    //         // send("USER CREATE user user");
+    //         // send("USER CREATE Laurenz 1234");
     //         console.log('Connected to server');
     //     } catch (err) {
     //         console.log("Error Error Error")
@@ -184,13 +186,77 @@ try {
 </div>
 </article>`
 
+
+    // class mainlogin {
+    //     constructor(USERNAME, PASSWORD, socketv, csock) {
+    //         this.user = USERNAME
+    //         this.pass = PASSWORD
+    //         this.s = socketv
+    //         this.id = this.s.id
+    //         console.log(this)
+    //     }
+    //     x2() {
+    //         client.connect(8888, '192.168.101.102', function () {
+    //             console.log('Connected to server');
+
+    //             send("AUTH " + this.user + " " + this.pass)
+    //             logger(" [INFO] " + this.user + " login attempt")
+    //             client.on('data', function (data) {
+    //                 data = data.toString().split(":")
+    //                 if (data[0] === "OK") {
+    //                     var arooms = ""
+    //                     var ararray = 0
+    //                     if (data[1].includes("true")) {
+    //                         for (var i = 0; roomsalowed.length > i; i++) {
+    //                             arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
+    //                             ararray++
+    //                         }
+    //                         arooms = beforrooms + rooms0 + arooms + afterrooms
+    //                         io.to(sid).emit("check true", this.user, arooms, terminal)
+    //                     } else {
+    //                         for (var i = 0; roomsalowed.length > i; i++) {
+    //                             arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
+    //                             ararray++
+    //                         }
+    //                         arooms = beforrooms + arooms + afterrooms
+    //                         io.to(sid).emit("check true", this.user, arooms)
+    //                     }
+    //                     logger(" [INFO] " + this.user + " login successed")
+    //                     send("EOF")
+    //                 } else {
+    //                     logger(" [INFO] " + this.user + " login failed")
+
+    //                 }
+    //                 try {
+    //                     client.write("EOF")
+    //                 } catch {
+    //                     console.error("wevrwevwe");
+    //                 }
+
+    //             });
+    //         });
+    //     }
+
+    // }
+
+
+
+    // client.on('data', function (data) {
+    //     console.log("ALL LOG: " + data.toString());
+    // });
+
     var auser = ["admin", "Colin", "Niklaus", "Oliver_Macher"]
 
     io.on("connection", function (socket) {
         // new Connecton(socket)
         // console.log(socket)
-        io.to(socket.id).emit("getid", socket.id, version)
+
+        io.to(socket.id).emit("getid", socket, version)
+
         socket.on("check wait", function (user, pass, sid) {
+
+            // new mainlogin(USERNAME, PASSWORD, sid)
+
             if (users.includes(user)) {
                 var userposi = users.indexOf(user)
                 if (userpass[userposi] == pass) {
@@ -204,10 +270,7 @@ try {
                         }
                         arooms = beforrooms + rooms0 + arooms + afterrooms
                         io.to(sid).emit("check true", user, arooms, terminal)
-
-
-                        console.log(time() + " 🟩 " + user + " logged in bc")
-                        io.emit("consolelog", time() + " 🟩 " + user + " logged in bc")
+                        logger(" 🟩 " + user + " logged in bc")
                     } else {
                         var arooms = ""
                         var ararray = 0
@@ -217,27 +280,20 @@ try {
                         }
                         arooms = beforrooms + arooms + afterrooms
                         io.to(sid).emit("check true", user, arooms)
-
-
-                        console.log(time() + " 🟩 " + user + " logged in bc")
-                        io.emit("consolelog", time() + " 🟩 " + user + " logged in bc")
+                        logger(" 🟩 " + user + " logged in bc")
                     }
 
                 } else {
-                    console.log(time() + " ❗ falsches pw bc")
-
-                    io.emit("consolelog", time() + " ❗ falsches pw bc")
+                    logger(" ❗ falsches pw bc")
                     return false
                 }
             } else {
-                console.log(time() + " ❗ user existiert nicht bc " + " " + user + " " + pass)
-
-                io.emit("consolelog", time() + " ❗ user existiert nicht bc " + " " + user + " " + pass)
-
+                logger(" ❗ user existiert nicht bc " + " " + user + " " + pass)
                 return false
             }
             socket.on("disconnect", function () {
                 usernum--
+                logger("DISCONNECT")
             });
         });
 
@@ -247,13 +303,46 @@ try {
             socket.to(regid).emit("resinfo", users.length, usernum, openrooms, pusers, msdnum)
         });
 
+
+
+
         socket.on("requsers", function (sid) {
+
+            // client.connect(8888, '192.168.101.102', function () {
+            //     console.log('Connected to server');
+            //     try {
+            //         send("AUTH admin 1234");
+            //         send("USER LIST");
+            //         client.on('data', function (data) {
+            //             data = data.toString
+            //             console.log(data)
+            //             data = data.split(";")
+            //             console.log(data)
+            //             var USERi = 0
+            //             for (var i = 0; data.length != i; i++) {
+            //                 socket.emit("resusers", data[USERi], roomsalowed, auser)
+            //                 USERi++
+            //             }
+            //         });
+            //     } catch (err) {
+            //         console.log("Error Error Error")
+            //     }
+            // });
+
+
             var USERi = 0
             for (var i = 0; users.length != i; i++) {
                 socket.emit("resusers", users[USERi], roomsalowed, auser)
                 USERi++
             }
         });
+
+
+        function logger(conslog) {
+            socket.emit("consolelog", time() + conslog)
+            console.log(time() + conslog);
+        }
+
 
         socket.on("requsersp", function (sid) {
             var USERi = 0
@@ -268,14 +357,13 @@ try {
                 if (!auser.includes(USERNAME)) {
                     auser.push(USERNAME)
                     // send("ADMIN " + "ADD " + USERNAME)
-                    io.emit("consolelog", time() + " 📝  Edit " + USERNAME + "[A]")
-
+                    logger(" 📝  Edit " + USERNAME + "[A]")
                 }
             } else {
                 if (auser.includes(USERNAME)) {
                     auser.splice(auser.indexOf(USERNAME), 1)
                     // send("ADMIN " + "REMOVE " + USERNAME)
-                    io.emit("consolelog", time() + " 📝  Edit " + USERNAME + "[-A]")
+                    logger(" 📝  Edit " + USERNAME + "[-A]")
                 }
             }
         });
@@ -286,8 +374,7 @@ try {
                 userpass.push(PASSWORD)
                 // send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
             }
-
-            io.emit("consolelog", time() + " 📝 Create " + USERNAME + " [" + ROOMS + "]")
+            logger(" 📝 Create " + USERNAME + " [" + ROOMS + "]")
         });
 
         socket.on("USER PENDING", function (USERNAME, PASSWORD) {
@@ -300,11 +387,11 @@ try {
                     setTimeout(signupindexminus, signupdelay)
                 }
             }
-            io.emit("consolelog", time() + " 📝  Sign Up " + USERNAME)
+            logger(" 📝  Sign Up " + USERNAME)
 
         });
 
-        socket.ip
+
         socket.on("CONFIRM USER", function (USERNAME, PASSWORD) {
             if (pusers.includes(USERNAME)) {
                 var index = pusers.indexOf(USERNAME)
@@ -313,7 +400,7 @@ try {
                 puserpass.splice(index, 1)
                 pusers.splice(index, 1)
                 // send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
-                io.emit("consolelog", time() + " 📝 Pending " + USERNAME + "[confirmed]")
+                logger(" 📝 Pending " + USERNAME + "[confirmed]")
 
             }
         });
@@ -323,7 +410,7 @@ try {
                 puserpass.splice(pusers.indexOf(USERNAME), 1)
                 pusers.splice(pusers.indexOf(USERNAME), 1)
             }
-            io.emit("consolelog", time() + " 📝 Pending " + USERNAME + " [removed]")
+            logger(" 📝 Pending " + USERNAME + " [removed]")
         });
 
         socket.on("USER DEL", function (USERNAME) {
@@ -335,12 +422,11 @@ try {
             if (auser.includes(USERNAME)) {
                 auser.splice(auser.indexOf(USERNAME), 1)
             }
-            io.emit("consolelog", time() + " 📝 Delete " + USERNAME)
-
+            logger(" 📝 Delete " + USERNAME)
         });
 
         socket.on("relode", function (reloder) {
-            console.log(time() + "Reload")
+            logger("Reload")
             socket.emit("RELODEALLCLIENTS",)
         });
 
@@ -364,22 +450,15 @@ try {
                 var userposi = users.indexOf(user)
                 if (userpass[userposi] == pass) {
                     io.to(sid).emit("waittrue", user, pass)
-                    console.log(time() + " 🟩 " + user + " logged in bl")
-
-                    io.emit("consolelog", time() + " 🟩 " + user + " logged in bl")
-
+                    logger(" 🟩 " + user + " logged in bl")
                 } else {
                     io.to(sid).emit("waitfalse", false)
-                    console.log(time() + " ❗ falsches pw")
 
-                    io.emit("consolelog", time() + " ❗ falsches pw")
-
+                    logger(" ❗ falsches pw")
                 }
             } else {
-                console.log(time() + " ❗ user existiert nicht")
 
-                io.emit("consolelog", time() + " ❗ user existiert nicht")
-
+                logger(" ❗ user existiert nicht")
                 io.to(sid).emit("waitfalse", true)
             }
         });
@@ -390,9 +469,7 @@ try {
         socket.on("trylogin", function (user, pass, sid, clientroom) {
 
             socket.join(clientroom)
-            console.log(time() + " 🟩 " + user + " joined Room (" + clientroom + ")")
-
-            io.emit("consolelog", time() + " 🟩 " + user + " joined Room (" + clientroom + ")")
+            logger(" 🟩 " + user + " joined Room (" + clientroom + ")")
             if (users.includes(user)) {
                 var userposi = users.indexOf(user)
                 if (userpass[userposi] == pass) {
@@ -413,15 +490,10 @@ try {
                     }
                 } else {
                     io.to(sid).emit("loginfalse")
-                    console.log()
-                    io.emit("consolelog", time() + " ❗ falsches pw")
-
+                    logger("consolelog", time() + " ❗ falsches pw")
                 }
             } else {
-                console.log(time() + " ❗ user existiert nicht")
-
-                io.emit("consolelog", time() + " ❗ user existiert nicht")
-
+                logger(" ❗ user existiert nicht")
                 io.to(sid).emit("loginfalse")
             }
             socket.on("disconnect", function () {
@@ -441,9 +513,9 @@ try {
                     roomparray.splice(roomparray.indexOf(user + "@" + clientroom), 1);
                     io.to(clientroom).emit("user leave", roomparray, { for: "everyone" });
                 }
-                console.log(time() + " 🟥 " + user + " Leved room (" + clientroom + ")");
 
-                io.emit("consolelog", time() + " 🟥 " + user + " Leved room (" + clientroom + ")")
+                logger(" 🟥 " + user + " Leved room (" + clientroom + ")")
+
             });
 
             socket.on("chat message", function (msg, bname, clientroom) {
@@ -452,9 +524,9 @@ try {
                         if (msg.length < 501) {
                             if (msg.includes("<") || msg.includes(">")) {
                                 if (msg.includes("<img") || msg.includes("<a") || !msg.includes("<script")) {
-                                    console.log(time() + " 📧 Message send from | " + bname + "@" + clientroom + " | " + msg);
 
-                                    io.emit("consolelog", time() + " 📧 Message send from | " + bname + "@" + clientroom + " | " + msg)
+                                    logger(" 📧 Message send from | " + bname + "@" + clientroom + " | " + msg)
+
 
                                     io.to(clientroom).emit("chat message", msg, bname);
                                     io.emit("lastmsg", clientroom, msg, bname)
@@ -463,27 +535,22 @@ try {
                                     // client.write("GET /")
                                     // client.end()
                                 } else {
-                                    console.log(time() + " 📧🟥 html injection | " + bname + "@" + clientroom + " | ");
-
-                                    io.emit("consolelog", time() + " 📧🟥 html injection | " + bname + "@" + clientroom + " | ")
-
+                                    logger(" 📧🟥 html injection | " + bname + "@" + clientroom + " | ")
                                     io.emit("chat message", "HTML is not allowed", bname);
                                 }
                             } else {
-                                console.log(time() + " 📧 Message send from | " + bname + "@" + clientroom + " | " + msg);
                                 io.to(clientroom).emit("chat message", msg, bname);
                                 if (clientroom != "0" && crooms.includes(clientroom)) {
                                     io.emit("lastmsg", clientroom, msg, bname)
                                 }
                                 msdnum++
-                                io.emit("consolelog", time() + " 📧 Message send from | " + bname + "@" + clientroom + "" + " | " + msg)
+                                logger(" 📧 Message send from | " + bname + "@" + clientroom + "" + " | " + msg)
                             }
                             // send("MSG" + " SEND " + clientroom + " " + bname + " " + msg)
                         } else {
 
-                            console.log(time() + " 📧🟥 to long | " + bname + "@" + clientroom + " | " + msg.length);
+                            logger(" 📧🟥 to long | " + bname + "@" + clientroom + " | " + msg.length)
 
-                            io.emit("consolelog", time() + " 📧🟥 to long | " + bname + "@" + clientroom + " | " + msg.length)
 
                         }
                     } else {
@@ -491,10 +558,7 @@ try {
                         // console.log(time() + " 📧🟥 spam | " + bname + " (" + clientroom + ")" + " | ");
                     }
                 } else {
-                    console.log(time() + " 📧❗ kein gültiger Name | " + bname + "@" + clientroom + " | ");
-
-                    io.emit("consolelog", time() + " 📧❗ kein gültiger Name | " + bname + "@" + clientroom + " | ")
-
+                    logger(" 📧❗ kein gültiger Name | " + bname + "@" + clientroom + " | ")
                 }
 
 
@@ -537,6 +601,8 @@ try {
         var alltime = (d + "-" + mo + "-" + y + " " + h + ":" + m + ":" + s + "," + ms)
         return alltime;
     }
+
+
 } catch (e) {
     console.log("all error")
 }
