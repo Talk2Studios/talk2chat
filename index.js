@@ -1,7 +1,7 @@
 const { pid } = require("process");
 
 //inpoertieren der Libarys 
-try {
+//try {
     // const { stat } = require("fs");
 
     var app = require("express")();
@@ -251,7 +251,7 @@ try {
         // new Connecton(socket)
         // console.log(socket)
 
-        io.to(socket.id).emit("getid", socket, version)
+        io.to(socket.id).emit("getid", socket.id, version)
 
         socket.on("check wait", function (user, pass, sid) {
 
@@ -603,6 +603,6 @@ try {
     }
 
 
-} catch (e) {
-    console.log("all error")
-}
+//} catch (e) {
+//    console.log("all error")
+//}
