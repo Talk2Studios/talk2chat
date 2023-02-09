@@ -281,7 +281,7 @@
       var socket = io()
       socket.on("consolelog", function (terminallog) {
         // console.log("erhlten")
-        if (terminallog.includes("Message") && filterm == false) {
+        if (terminallog.includes("[MESSAGE]") && filterm == false) {
 
         } else {
           if (document.getElementById("serverlog")) {

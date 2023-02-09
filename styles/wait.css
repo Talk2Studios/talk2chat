@@ -108,6 +108,12 @@ main.waitmain.welcome img {
 main.waitmain.welcome .talk2chat {
     color: rgb(220, 204, 254);
 }
+
 .shouldnot {
     background: radial-gradient(circle, rgb(14, 0, 65) 49%, rgba(10, 0, 47, 1) 100%);
+}
+
+#version {
+    color: rgb(220, 204, 254);
+    font-size: 12px;
 }
