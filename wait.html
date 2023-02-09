@@ -43,7 +43,7 @@
             var id
 
             function inputcheck(tocheck) {
-                if (tocheck.includes(" ") || tocheck.includes(":") || tocheck.includes(";") || tocheck == null || tocheck == "") {
+                if (tocheck.includes(" ") || tocheck.includes(":") || tocheck.includes(";") || tocheck == null) {
                     return true
                 } else {
                     return false
@@ -60,7 +60,6 @@
 
 
             $(function () {
-
                 var socket = io()
 
                 socket.on("getid", function (sid) {
@@ -85,17 +84,6 @@
                             document.getElementById("dontdopass").style.color = "red"
                         }
                     });
-                });
-                socket.on("nomoresignup", function (index) {
-                    if (index === "c") {
-                        alert("Now give us some time to check your account or contact an admin for faster registration")
-                    } else if (index === "s") {
-                        alert("Many users have just signed up at once. Please try again later.")
-                    } else if (index === "u") {
-                        alert("No possible username, try again.")
-                    } else if (index === "p") {
-                        alert("No possible password, try again.")
-                    }
                 });
 
             });
@@ -133,6 +121,7 @@
                         socket.emit("waitlogin", logname, logpass, id)
                     } else {
                         socket.emit("USER PENDING", logname, logpass, id)
+                        alert("Now give us some time to check your account or contact an admin for faster registration")
                         document.getElementById("pass").value = ""
                         document.getElementById("name").value = ""
                         document.getElementById("dontdoname").innerText = ""
