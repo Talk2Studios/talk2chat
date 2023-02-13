@@ -30,6 +30,12 @@ var crooms = ["1", "2", "3"]
 
 var openroomsdouble = []
 
+// message delay
+
+var msgdelay = []
+
+var msgdelaytime = 500
+
 // max number of signups per min
 
 var signup = 10
@@ -44,7 +50,7 @@ var msdnum = 0
 
 // Version of the chat
 
-var version = "v0.4.9"
+var version = "v0.5.0"
 
 //Hosting server on port 80
 
@@ -116,8 +122,8 @@ function send(message) {
 
 
 
-var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian", "Nico", "Benjamin", "Loris", "Nat", "Florian", "Robin", "Silvan", "Timi", "Dilay", "Oliver_Macher", "Rubén_Fructuoso"]
-var userpass = ["password", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
+// var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian", "Nico", "Benjamin", "Loris", "Nat", "Florian", "Robin", "Silvan", "Timi", "Dilay", "Oliver_Macher", "Rubén_Fructuoso"]
+// var userpass = ["password", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
 var pusers = []
 var puserpass = []
 
@@ -502,21 +508,37 @@ io.on("connection", function (socket) {
             send("AUTH " + bname + " " + password)
             client.once('data', function (data) {
                 data = data.toString().split(":");
+
                 if (data[0] != "OK") {
                     logger(" [MESSAGE] - 📧❗ no user with this password | " + bname + "@" + clientroom + " | ")
-                } else if (msg === "") {
+                } else if (msgdelay.includes(bname)) {
                     logger(" [MESSAGE] - 📧❗ spam | " + bname + " (" + clientroom + ")" + " | ");
+                } else if (msg === "") {
+                    // logger(" [MESSAGE] - 📧❗ spam | " + bname + " (" + clientroom + ")" + " | ");
                 } else if (msg.length > 500) {
                     logger(" [MESSAAGE] - 📧❗ to long | " + bname + "@" + clientroom + " | " + msg.length)
                 } else if (msg.includes("<") || msg.includes(">")) {
                     logger(" [MESSAGE] - 📧❗ html injection | " + bname + "@" + clientroom + " | ")
                 } else {
                     logger(" [MESSAGE] - 📧 Message send from | " + bname + "@" + clientroom + " | " + msg)
-                    io.to(clientroom).emit("chat message", msg, bname);
-                    io.emit("lastmsg", clientroom, msg, bname)
-                    // send("MSG " + clientroom + " " + msg)
-                    msdnum++
+                    send("ADMIN LIST")
+                    client.once('data', function (data) {
+                        let adminlist = data.toString().split(";")
+                        if (adminlist.includes(bname)) {
+
+                        } else {
+                            msgdelay.push(bname)
+                            setTimeout(removedelay, msgdelaytime)
+                        }
+                        io.to(clientroom).emit("chat message", msg, bname, adminlist);
+                        io.emit("lastmsg", clientroom, msg, bname)
+                        // send("MSG " + clientroom + " " + msg)
+                        msdnum++
+                    });
+
+
                 }
+
                 try {
                     client.destroy()
                 } catch (err) {
@@ -527,6 +549,10 @@ io.on("connection", function (socket) {
     });
 
 });
+
+function removedelay(USERNAME) {
+    msgdelay.splice(msgdelay.indexOf(USERNAME), 1)
+}
 
 function signupindexminus() {
     signupindex--

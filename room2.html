@@ -211,11 +211,11 @@
             //wen eine nachricht erhalten wird erstellt es ein Nachricht element 9
             //Wen der gleiche die nachricht davor gesendet hat wird der name zwei den folgenden Nachrichten entfernt
             var lmsgname
-            socket.on("chat message", function (msg, bname) {
+            socket.on("chat message", function (msg, bname, adminlist) {
                 if (msg === "") {
                     console.log("kein spam 🤣")
                 } else {
-                    if (auser.includes(bname)) {
+                    if (adminlist.includes(bname)) {
                         if (bname === name) {
                             if (lmsgname === name) {
                                 $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
