@@ -1,142 +1,142 @@
 // const { pid } = require("process");
 
 // inpoertieren der Libarys 
-try {
-    // const { stat } = require("fs");
 
-    var app = require("express")();
-    var http = require("http").Server(app);
-    var io = require("socket.io")(http);
-    const net = require('net');
-    const client = new net.Socket();
-    // const client = net.connect({port: 8888, host: process.argv[2] ?? "localhost"})
+// const { stat } = require("fs");
 
-    // how many Uers are logged in
+var app = require("express")();
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
+const net = require('net');
+const client = new net.Socket();
+// const client = net.connect({port: 8888, host: process.argv[2] ?? "localhost"})
 
-    var usernum = 0
+// how many Uers are logged in
 
-    // Wich Users are online in witch room
+var usernum = 0
 
-    var roomparray = []
+// Wich Users are online in witch room
 
-    //Which Users are logged in on multiple devices/tabs
+var roomparray = []
 
-    var roompdouble = []
+//Which Users are logged in on multiple devices/tabs
 
-    // all Open rooms
+var roompdouble = []
 
-    var openrooms = ["0", "1", "2", "3"]
-    var crooms = ["1", "2", "3"]
+// all Open rooms
 
-    var openroomsdouble = []
+var openrooms = ["0", "1", "2", "3"]
+var crooms = ["1", "2", "3"]
 
-    // max number of signups per min
+var openroomsdouble = []
 
-    var signup = 10
+// max number of signups per min
 
-    var signupindex = 0
+var signup = 10
 
-    var signupdelay = 30000
+var signupindex = 0
 
-    // number of send messages
+var signupdelay = 30000
 
-    var msdnum = 0
+// number of send messages
 
-    // Version of the chat
+var msdnum = 0
 
-    var version = "v0.4.9"
+// Version of the chat
 
-    //Hosting server on port 80
+var version = "v0.4.9"
 
-    var serverport = 5500
+//Hosting server on port 80
 
-    http.listen(serverport, function () {
-        console.log(time() + " [SERVER] Sever on🔴 Port: " + serverport)
-        // setTimeout(sendserveron, 500)
-        // function sendserveron() {
-        //     io.emit("consolelog", time() + "Server is started")
-        // }
+var serverport = 5555
 
-    });
-
-
-    app.use((req, res) => {
-
-        var urlx = req.url.split("?");
-        var urlx = urlx[0];
-        if (urlx.slice(-10) == "/room.html") {
-            console.log(req.query.room)
-            res.send(sendRoom(req.query.room))
-
-        } else if (urlx.slice(-1) == "/") {
-            res.sendFile(__dirname + urlx + "index.html")
-        } else {
-            res.sendFile(__dirname + urlx)
-        }
-    })
-
-
-    // class Connecton {
-    //     constructor(yx) {
-
-    //     }
-    //     test(test2) {
-    //         console.log(test2)
-    //     }
+http.listen(serverport, function () {
+    console.log(time() + " [SERVER] Sever on🔴 Port: " + serverport)
+    // setTimeout(sendserveron, 500)
+    // function sendserveron() {
+    //     io.emit("consolelog", time() + "Server is started")
     // }
 
+});
 
-    // client.connect(8888, '192.168.101.102', function () {
 
-    //     try {
-    //         send("AUTH admin 1234")
-    //         send("USER CREATE hallo 1234")
-    //         // send("AUTH admin 1234");
-    //         // send("USER CREATE Colin passwd");
-    //         // send("USER CREATE user user");
-    //         // send("USER CREATE Laurenz 1234");
-    //         console.log('Connected to server');
-    //     } catch (err) {
-    //         console.log("Error Error Error")
-    //     }
-    // });
+app.use((req, res) => {
 
-    // client.on('data', function (data) {
-    //     console.log(data.toString());
-    //     // client.write("EOF");
-    // });
+    var urlx = req.url.split("?");
+    var urlx = urlx[0];
+    if (urlx.slice(-10) == "/room.html") {
+        console.log(req.query.room)
+        res.send(sendRoom(req.query.room))
 
-    client.on('close', function () {
-        console.log(time() + ' [JAVA] Connection closed');
-    });
-
-    function send(message) {
-        client.write(message + "\n")
+    } else if (urlx.slice(-1) == "/") {
+        res.sendFile(__dirname + urlx + "index.html")
+    } else {
+        res.sendFile(__dirname + urlx)
     }
+})
+
+
+// class Connecton {
+//     constructor(yx) {
+
+//     }
+//     test(test2) {
+//         console.log(test2)
+//     }
+// }
+
+
+// client.connect(8888, '127.69.69.69', function () {
+
+//     try {
+//         send("AUTH admin 1234")
+//         send("GROUP ")
+//         // send("AUTH admin 1234");
+//         // send("USER CREATE Colin passwd");
+//         // send("USER CREATE user user");
+//         // send("USER CREATE Laurenz 1234");
+//         console.log('Connected to server');
+//     } catch (err) {
+//         console.log("Error Error Error")
+//     }
+// });
+
+// client.on('data', function (data) {
+//     console.log(data.toString());
+//     // client.write("EOF");
+// });
+
+client.on('close', function () {
+    console.log(time() + ' [JAVA] - Connection closed');
+});
+
+function send(message) {
+    client.write(message + "\n")
+}
 
 
 
-    var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian", "Nico", "Benjamin", "Loris", "Nat", "Florian", "Robin", "Silvan", "Timi", "Dilay", "Oliver_Macher", "Rubén_Fructuoso"]
-    var userpass = ["password", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
-    var pusers = []
-    var puserpass = []
+var users = ["admin", "Colin", "Niklaus", "Ralle", "user", "Laurenz", "Nevio", "Gian", "Raffael", "Willi", "Nadin", "Julian", "Nico", "Benjamin", "Loris", "Nat", "Florian", "Robin", "Silvan", "Timi", "Dilay", "Oliver_Macher", "Rubén_Fructuoso"]
+var userpass = ["password", "passwd", "passwd", "1234", "user", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234", "1234"]
+var pusers = []
+var puserpass = []
 
-    var roomsalowed = [1, 2, 3,]
+var roomsalowed = [1, 2, 3,]
 
-    var roompasrt1 = `<div id="chatroom-`
-    var roompasrt2 = `" onclick="chancheroom('/room`
-    var roompasrt3 = `.html','chatroom-`
-    var roompasrt4 = `')" class="roomcon">
+var roompasrt1 = `<div id="chatroom-`
+var roompasrt2 = `" onclick="chancheroom('/room`
+var roompasrt3 = `.html','chatroom-`
+var roompasrt4 = `')" class="roomcon">
 <span class="chatroom">
   <img src="/assets/icon.png" alt="chaticon"><span id="cr-`
-    var roompasrt5 = `-name" class="name">Room `
-    var roompasrt6 = `<span class="lmsg" id="room`
-    var roompasrt7 = `lastmsg" >last
+var roompasrt5 = `-name" class="name">Room `
+var roompasrt6 = `<span class="lmsg" id="room`
+var roompasrt7 = `lastmsg" >last
       message</span></span>
 </span>
 </div>`
 
-    var rooms0 = `<div id="chatroom-01" onclick="chancheroom('/adminpanels.html','chatroom-01')" class="roomcon">
+var rooms0 = `<div id="chatroom-01" onclick="chancheroom('/adminpanels.html','chatroom-01')" class="roomcon">
 <span class="chatroom">
   <img src="/assets/adminico.png" alt="chaticon"><spanclass="name">Admin Panel<span class="lmsg"><br>Controle Panel</span></spanclass=>
 </span>
@@ -149,7 +149,7 @@ try {
 </div>
 `
 
-    var beforrooms = `<div class="chatrooms">
+var beforrooms = `<div class="chatrooms">
 <h2>Rooms</h2>
 <div id="waitroom-1" onclick="chancheroom('/wait.html','waitroom-1')" class="roomcon curroom">
   <span class="chatroom">
@@ -159,7 +159,7 @@ try {
 </div>
 `
 
-    var afterrooms = `
+var afterrooms = `
 <div id="chatroom-p" onclick="chancheroom('/roomp.html','chatroom-p')" class="roomcon">
   <span class="chatroom">
     <img src="/assets/icon.png" alt="chaticon"><span class="name">Private Rooms<span
@@ -176,11 +176,19 @@ try {
 `
 
 
-    var terminal = `<article class="terminal-con">
+var terminal = `<article class="terminal-con">
     <div id="terminal-filer-container">
     <div class="terminal-filter-el">
         <input type="checkbox" name="" id="terminal-filter-messages" class="terminal-filter-checkbox">
-        <span class="terminal-filter-text">Don't show messages</span>
+        <span class="terminal-filter-text">show messages</span>
+        <input type="checkbox" name="" id="terminal-filter-info" class="terminal-filter-checkbox">
+        <span class="terminal-filter-text">show info</span>
+        <input type="checkbox" name="" id="terminal-filter-admin" class="terminal-filter-checkbox">
+        <span class="terminal-filter-text">show admin</span>
+        <input type="checkbox" name="" id="terminal-filter-java" class="terminal-filter-checkbox">
+        <span class="terminal-filter-text">show java</span>
+        <input type="checkbox" name="" id="terminal-filter-error" class="terminal-filter-checkbox">
+        <span class="terminal-filter-text">show error</span>
     </div>
 </div>
 <div id="serverlog">
@@ -188,350 +196,253 @@ try {
 </article>`
 
 
-    // class mainlogin {
-    //     constructor(USERNAME, PASSWORD, socketv, csock) {
-    //         this.user = USERNAME
-    //         this.pass = PASSWORD
-    //         this.s = socketv
-    //         this.id = this.s.id
-    //         console.log(this)
-    //     }
-    //     x2() {
-    //         client.connect(8888, '192.168.101.102', function () {
-    //             console.log('Connected to server');
 
-    //             send("AUTH " + this.user + " " + this.pass)
-    //             logger(" [INFO] " + this.user + " login attempt")
-    //             client.on('data', function (data) {
-    //                 data = data.toString().split(":")
-    //                 if (data[0] === "OK") {
-    //                     var arooms = ""
-    //                     var ararray = 0
-    //                     if (data[1].includes("true")) {
-    //                         for (var i = 0; roomsalowed.length > i; i++) {
-    //                             arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
-    //                             ararray++
-    //                         }
-    //                         arooms = beforrooms + rooms0 + arooms + afterrooms
-    //                         io.to(sid).emit("check true", this.user, arooms, terminal)
-    //                     } else {
-    //                         for (var i = 0; roomsalowed.length > i; i++) {
-    //                             arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
-    //                             ararray++
-    //                         }
-    //                         arooms = beforrooms + arooms + afterrooms
-    //                         io.to(sid).emit("check true", this.user, arooms)
-    //                     }
-    //                     logger(" [INFO] " + this.user + " login successed")
-    //                     send("EOF")
-    //                 } else {
-    //                     logger(" [INFO] " + this.user + " login failed")
+client.on('data', function (data) {
+    console.log(time() + " [JAVA] - ALL LOG: " + data.toString());
+});
 
-    //                 }
-    //                 try {
-    //                     client.write("EOF")
-    //                 } catch {
-    //                     console.error("wevrwevwe");
-    //                 }
+io.on("connection", function (socket) {
+    io.to(socket.id).emit("getid", socket.id, version)
+    socket.on("check wait", function (user, pass, sid) {
+        client.connect(8888, '127.69.69.69', function () {
+            logger(' [JAVA] - Connected to server');
+            send("AUTH " + user + " " + pass)
+            logger(" [INFO] - " + user + " login attempt")
+            client.once('data', function (data) {
+                data = data.toString().split(":")
+                if (data[0] === "OK") {
+                    usernum++
+                    var arooms = ""
+                    var ararray = 0
+                    if (data[1].includes("true")) {
+                        for (var i = 0; roomsalowed.length > i; i++) {
+                            arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
+                            ararray++
+                        }
+                        arooms = beforrooms + rooms0 + arooms + afterrooms
+                        io.to(sid).emit("check true", user, arooms, terminal)
+                        logger(" [INFO] - " + user + " login successed [A]")
+                    } else {
+                        for (var i = 0; roomsalowed.length > i; i++) {
+                            arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
+                            ararray++
+                        }
+                        arooms = beforrooms + arooms + afterrooms
+                        io.to(sid).emit("check true", user, arooms)
+                        logger(" [INFO] - " + user + " login successed")
+                    }
+                } else {
+                    logger(" [INFO] - " + user + " login failed")
+                }
+            });
+            try {
+                send("EOF");
+            }
+            catch {
+                console.error("Login ERROR");
+            }
+        });
 
-    //             });
-    //         });
-    //     }
-
-    // }
-
-
-
-    client.on('data', function (data) {
-        console.log(time() + " [JAVA] ALL LOG: " + data.toString());
+        socket.on("disconnect", function () {
+            usernum--
+            // logger(" [SERVER] - Disconnect")
+        });
     });
 
-    var auser = ["admin", "Colin", "Niklaus", "Oliver_Macher"]
+    socket.on("reqinfo", function (regid) {
+        client.connect(8888, '127.69.69.69', function () {
+            send("AUTH admin 1234")
+            send("USER LIST")
+            client.once("data", function (data) {
+                if (data.toString().split(":")[0] === "OK")
+                    client.once("data", function (data) {
+                        let userlength = data.toString().split(";").length - 1
+                        socket.to(regid).emit("resinfo", userlength, usernum, openrooms, pusers, msdnum)
+                        send("EOF")
+                    });
 
-    io.on("connection", function (socket) {
-        // new Connecton(socket)
-        // console.log(socket)
-
-        io.to(socket.id).emit("getid", socket.id, version)
-
-        socket.on("check wait", function (user, pass, sid) {
-
-            // new mainlogin(USERNAME, PASSWORD, sid)
-
-
-            client.connect(8888, '192.168.101.102', function () {
-                console.log(time() + ' [JAVA] Connected to server');
-
-
-                send("AUTH " + user + " " + pass)
-                logger(" [INFO] " + user + " login attempt")
-                client.once('data', function (data) {
-                    data = data.toString().split(":")
-                    if (data[0] === "OK") {
-                        usernum++
-                        var arooms = ""
-                        var ararray = 0
-                        if (data[1].includes("true")) {
-                            for (var i = 0; roomsalowed.length > i; i++) {
-                                arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
-                                ararray++
-                            }
-                            arooms = beforrooms + rooms0 + arooms + afterrooms
-                            io.to(sid).emit("check true", user, arooms, terminal)
-                        } else {
-                            for (var i = 0; roomsalowed.length > i; i++) {
-                                arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
-                                ararray++
-                            }
-                            arooms = beforrooms + arooms + afterrooms
-                            io.to(sid).emit("check true", user, arooms)
-                        }
-                        logger(" [INFO] " + user + " login successed")
-                    } else {
-                        logger(" [INFO] " + user + " login failed")
-
-                    }
-                    try {
-                        send("EOF");
-                    }
-                    catch {
-                        console.error("Login ERROR");
-                    }
-
-
-                });
 
             });
 
-            // if (users.includes(user)) {
-            //     var userposi = users.indexOf(user)
-            //     if (userpass[userposi] == pass) {
-            //         usernum++
-            //         if (auser.includes(user)) {
-            //             var arooms = ""
-            //             var ararray = 0
-            //             for (var i = 0; roomsalowed.length > i; i++) {
-            //                 arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
-            //                 ararray++
-            //             }
-            //             arooms = beforrooms + rooms0 + arooms + afterrooms
-            //             io.to(sid).emit("check true", user, arooms, terminal)
-            //             logger(" 🟩 " + user + " logged in bc")
-            //         } else {
-            //             var arooms = ""
-            //             var ararray = 0
-            //             for (var i = 0; roomsalowed.length > i; i++) {
-            //                 arooms += roompasrt1 + roomsalowed[ararray] + roompasrt2 + roomsalowed[ararray] + roompasrt3 + roomsalowed[ararray] + roompasrt4 + roomsalowed[ararray] + roompasrt5 + roomsalowed[ararray] + roompasrt6 + roomsalowed[ararray] + roompasrt7
-            //                 ararray++
-            //             }
-            //             arooms = beforrooms + arooms + afterrooms
-            //             io.to(sid).emit("check true", user, arooms)
-            //             logger(" 🟩 " + user + " logged in bc")
-            //         }
 
-            //     } else {
-            //         logger(" ❗ falsches pw bc")
-            //         return false
-            //     }
-            // } else {
-            //     logger(" ❗ user existiert nicht bc " + " " + user + " " + pass)
-            //     return false
-            // }
-
-            socket.on("disconnect", function () {
-                usernum--
-                logger(" [SERVER] Disconnect")
-            });
         });
+    });
 
-        socket.on("reqinfo", function (regid) {
-            // console.log(time() + " ❔ Informtions requested")
-            // io.emit("consolelog", time() + " ❔ Informtions requested")
-            socket.to(regid).emit("resinfo", users.length, usernum, openrooms, pusers, msdnum)
-        });
-
-
-
-
-        socket.on("requsers", function (sid) {
-            client.connect(8888, '192.168.101.102', function () {
-                send("AUTH admin 1234")
-                send("USER LIST")
-                send("EOF")
+    socket.on("requsers", function (sid) {
+        client.connect(8888, '127.69.69.69', function () {
+            send("AUTH admin 1234")
+            send("USER LIST")
+            client.once("data", function (data) {
                 client.once("data", function (data) {
-                    let userlist = data.toString
-                    console.log(userlist)
-                    var USERi = 0
-                    for (var i = 0; users.length != i; i++) {
-                        socket.emit("resusers", users[USERi], roomsalowed, auser)
-                        USERi++
-                    }
+                    let userlist = data.toString().split(";")
+                    userlist.pop()
+                    send("ADMIN LIST")
+                    client.once("data", function (data) {
+                        let adminlist = data.toString()
+                        send("EOF")
+                        var USERi = 0
+                        for (var i = 0; userlist.length != i; i++) {
+                            socket.emit("resusers", userlist[USERi], roomsalowed, adminlist)
+                            USERi++
+                        }
+                    });
                 });
             });
-
-
-
         });
+    });
 
-
-        function logger(conslog) {
+    function logger(conslog) {
+        try {
             io.emit("consolelog", time() + conslog)
             console.log(time() + conslog);
+        } catch (err) {
+            console.log("Log ERROR")
         }
 
+    }
 
-        socket.on("requsersp", function (sid) {
-            var USERi = 0
-            for (var i = 0; pusers.length != i; i++) {
-                socket.emit("resusersp", pusers[USERi], puserpass[USERi])
-                USERi++
-            }
-        });
 
-        socket.on("USER EDIT", function (USERNAME, ROOMS, AFT) {
-            if (AFT == true) {
-                // if (!auser.includes(USERNAME)) {
-                //     auser.push(USERNAME)
-                //     logger(" [ADMIN] 📝  Edit " + USERNAME + "[A]")
-                // }
-                client.connect(8888, '192.168.101.102', function () {
+    socket.on("requsersp", function (sid) {
+        var USERi = 0
+        for (var i = 0; pusers.length != i; i++) {
+            socket.emit("resusersp", pusers[USERi], puserpass[USERi])
+            USERi++
+        }
+    });
+    socket.on("USER EDIT", function (USERNAME, ROOMS, AFT, NPASSWORD) {
+        if (AFT == true) {
+            client.connect(8888, '127.69.69.69', function () {
 
-                    send("AUTH admin 1234")
-                    send("ADMIN " + "ADD " + USERNAME)
-                    send("EOF")
-                });
-            } else {
-                // if (auser.includes(USERNAME)) {
-                //     auser.splice(auser.indexOf(USERNAME), 1)
-                //     logger(" [ADMIN] 📝  Edit " + USERNAME + "[-A]")
-                // }
-                client.connect(8888, '192.168.101.102', function () {
-                    send("AUTH admin 1234")
-                    send("ADMIN " + "REMOVE " + USERNAME)
-                    send("EOF")
-                });
-            }
-        });
-
-        socket.on("USER CREATE", function (USERNAME, PASSWORD, ROOMS) {
-            // if (!users.includes(USERNAME)) {
-            //     users.push(USERNAME)
-            //     userpass.push(PASSWORD)
-            // }
-            client.connect(8888, '192.168.101.102', function () {
                 send("AUTH admin 1234")
-                send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
+                send("ADMIN ADD " + USERNAME)
                 send("EOF")
-                logger(" [ADMIN] 📝 Create " + USERNAME + " [" + ROOMS + "]")
             });
-        });
+        } else {
+            client.connect(8888, '127.69.69.69', function () {
+                send("AUTH admin 1234")
+                send("ADMIN " + "REMOVE " + USERNAME)
+                send("EOF")
+            });
+        }
+        if (NPASSWORD != undefined) {
+            send("USER CHP " + USERNAME + " " + NPASSWORD)
+        }
 
-        socket.on("USER PENDING", function (USERNAME, PASSWORD) {
-            if (signup > signupindex) {
-                // if (!users.includes(USERNAME) && !pusers.includes(USERNAME)) {
-                //     pusers.push(USERNAME)
-                //     puserpass.push(PASSWORD)
-                //     signupindex++
-                //     setTimeout(signupindexminus, signupdelay)
-                // }
-                client.connect(8888, '192.168.101.102', function () {
-                    send("AUTH admin 1234")
-                    send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
-                    send("EOF")
-                    setTimeout(signupindexminus, signupdelay)
+    });
+
+    socket.on("USER CREATE", function (USERNAME, PASSWORD, ROOMS) {
+        client.connect(8888, '127.69.69.69', function () {
+            send("AUTH admin 1234")
+            send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
+            send("EOF")
+            logger(" [ADMIN] - 📝 Create " + USERNAME + " [" + ROOMS + "]")
+        });
+    });
+
+    socket.on("USER PENDING", function (USERNAME, PASSWORD) {
+        if (signup > signupindex) {
+            client.connect(8888, '127.69.69.69', function () {
+                send("AUTH admin 1234")
+                send("USER " + "LIST")
+                client.once("data", function (data) {
+                    client.once("data", function (data) {
+                        if (!data.toString().includes(USERNAME) && !pusers.includes(USERNAME)) {
+                            pusers.push(USERNAME)
+                            puserpass.push(PASSWORD)
+                            signupindex++
+                            setTimeout(signupindexminus, signupdelay)
+                        }
+                        send("EOF")
+                    });
                 });
-            }
-            logger(" [INFO] 📝  Sign Up " + USERNAME)
-        });
+            });
+            logger(" [INFO] - 📝  Sign Up " + USERNAME)
+        } else {
+            logger(" [ERROR] - 📝  No sign up available at the time")
+        }
+    });
 
-
-        socket.on("CONFIRM USER", function (USERNAME, PASSWORD) {
-            if (pusers.includes(USERNAME)) {
-                var index = pusers.indexOf(USERNAME)
-                users.push(USERNAME)
-                userpass.push(puserpass[index])
+    socket.on("CONFIRM USER", function (USERNAME, PASSWORD) {
+        if (pusers.includes(USERNAME)) {
+            var index = pusers.indexOf(USERNAME)
+            client.connect(8888, '127.69.69.69', function () {
+                send("AUTH admin 1234")
+                send("USER CREATE " + pusers[index] + " " + puserpass[index])
+                logger(" [ADMIN] - 📝 Pending " + USERNAME + " [confirmed]")
+                send("EOF")
                 puserpass.splice(index, 1)
                 pusers.splice(index, 1)
-                client.connect(8888, '192.168.101.102', function () {
-                    send("AUTH admin 1234")
-                    send("USER " + "CREATE " + USERNAME + " " + PASSWORD)
-                    logger(" [ADMIN] 📝 Pending " + USERNAME + "[confirmed]")
-                    send("EOF")
-                });
-            }
-        });
-
-        socket.on("REMOVE PENDING", function (USERNAME) {
-            if (pusers.includes(USERNAME)) {
-                puserpass.splice(pusers.indexOf(USERNAME), 1)
-                pusers.splice(pusers.indexOf(USERNAME), 1)
-            }
-            logger(" [ADMIN] 📝 Pending " + USERNAME + " [removed]")
-        });
-
-        socket.on("USER DEL", function (USERNAME) {
-            // if (users.includes(USERNAME)) {
-            //     userpass.splice(users.indexOf(USERNAME), 1)
-            //     users.splice(users.indexOf(USERNAME), 1)
-            // }
-            // if (auser.includes(USERNAME)) {
-            //     auser.splice(auser.indexOf(USERNAME), 1)
-            // }
-            client.connect(8888, '192.168.101.102', function () {
-                send("AUTH admin 1234")
-                send("USER " + "DELETE " + USERNAME)
-                send("EOF")
             });
-            logger(" [ADMIN] 📝 Delete " + USERNAME)
-        });
-
-        socket.on("relode", function (reloder) {
-            logger("[ADMIN] Admin send Reload")
-            socket.emit("RELODEALLCLIENTS",)
-        });
-
-        // socket.on("requsers", function (sid) {
-        //     send("USER " + "LIST")
-        //     do {
-        //         client.on('data', function (data) {
-        //             console.log('Received from server: ' + data.toString());
-        //             // client.write("EOF");
-        //         });
-        //     } while (data == undefined)
-
-        // });
-
-        function signupindexminus() {
-            signupindex--
         }
+    });
 
-        socket.on("waitlogin", function (user, pass, sid) {
-            if (users.includes(user)) {
-                var userposi = users.indexOf(user)
-                if (userpass[userposi] == pass) {
-                    io.to(sid).emit("waittrue", user, pass)
-                    logger(" [INFO] 🟩 " + user + " logged in bl")
+    socket.on("REMOVE PENDING", function (USERNAME) {
+        if (pusers.includes(USERNAME)) {
+            puserpass.splice(pusers.indexOf(USERNAME), 1)
+            pusers.splice(pusers.indexOf(USERNAME), 1)
+        }
+        logger(" [ADMIN] - 📝 Pending " + USERNAME + " [removed]")
+    });
+
+    socket.on("USER DEL", function (USERNAME) {
+        client.connect(8888, '127.69.69.69', function () {
+            send("AUTH admin 1234")
+            send("USER DELETE " + USERNAME)
+            send("EOF")
+            logger(" [ADMIN] - 📝 Delete " + USERNAME)
+        });
+
+    });
+
+    socket.on("relode", function (reloder) {
+        logger(" [RELOAD] - Admin send Reload")
+        io.emit("RELODEALLCLIENTS")
+    });
+
+    socket.on("waitlogin", function (user, pass, sid) {
+        try {
+            client.destroy()
+        } catch (err) {
+            console.log("this is the error " + err)
+        }
+        client.connect(8888, '127.69.69.69', function () {
+            send("AUTH " + user + " " + pass)
+            client.once('data', function (data) {
+                data = data.toString().split(":");
+                if (data[0] === "OK") {
+                    io.to(sid).emit("waittrue", user, pass);
+                    logger(" [INFO] - " + user + " logged in at wait");
                 } else {
-                    io.to(sid).emit("waitfalse", false)
-
-                    logger(" [ERROR] ❗ falsches pw")
+                    io.to(sid).emit("waitfalse");
+                    logger(" [ERROR] - " + user + " No user with this password");
                 }
-            } else {
-                logger(" [ERROR] ❗ user existiert nicht")
-                io.to(sid).emit("waitfalse", true)
-            }
+                try {
+                    client.destroy()
+                } catch (err) {
+                    console.log(" [JAVA] - no open Socket connection")
+                }
+            });
         });
+    });
 
-        socket.on("istyping", function (istypinguser, room, status) {
-            io.to(room).emit("useristyping", istypinguser, status)
-        });
-        socket.on("trylogin", function (user, pass, sid, clientroom) {
+    socket.on("istyping", function (istypinguser, room, status) {
+        io.to(room).emit("useristyping", istypinguser, status)
+    });
 
-            socket.join(clientroom)
-            logger(" [INFO] 🟩 " + user + " joined Room (" + clientroom + ")")
-            if (users.includes(user)) {
-                var userposi = users.indexOf(user)
-                if (userpass[userposi] == pass) {
+    socket.on("trylogin", function (user, pass, sid, clientroom) {
+
+        socket.join(clientroom)
+        logger(" [INFO] - 🟩 " + user + " joined Room (" + clientroom + ")")
+        try {
+            client.destroy()
+        } catch (err) {
+            console.log("this is the error " + err)
+        }
+        client.connect(8888, '127.69.69.69', function () {
+            send("AUTH " + user + " " + pass)
+            client.once('data', function (data) {
+                data = data.toString().split(":")
+                if (data[0] === "OK") {
                     io.to(sid).emit("logintrue", user, pass, version)
                     if (openrooms.includes(clientroom)) {
                         openroomsdouble.push(clientroom)
@@ -548,108 +459,112 @@ try {
                         io.to(clientroom).emit("user join", user, roomparray, false)
                     }
                 } else {
+                    logger(" [ERROR] - ❗ no user with this password")
                     io.to(sid).emit("loginfalse")
-                    logger(" [ERROR] ❗ falsches pw")
                 }
-            } else {
-                logger(" [ERROR] ❗ user existiert nicht")
-                io.to(sid).emit("loginfalse")
-            }
-            socket.on("disconnect", function () {
-                //wie viele User online sind
-                if (openroomsdouble.includes(clientroom)) {
-                    openroomsdouble.splice(openroomsdouble.indexOf(clientroom))
-                } else {
-                    openrooms.splice(openrooms.indexOf(clientroom))
-                }
-                if (roompdouble.includes(user + "@" + clientroom)) {
-                    roompdouble.splice(roompdouble.indexOf(user + "@" + clientroom), 1)
-                    if (roompdouble.includes(user + "@" + clientroom)) {
+                socket.on("disconnect", function () {
+                    //wie viele User online sind
+                    if (openroomsdouble.includes(clientroom)) {
+                        openroomsdouble.splice(openroomsdouble.indexOf(clientroom))
                     } else {
-                        io.to(clientroom).emit("user leave", roomparray, { for: "everyone" });
+                        openrooms.splice(openrooms.indexOf(clientroom))
                     }
-                } else {
-                    roomparray.splice(roomparray.indexOf(user + "@" + clientroom), 1);
-                    io.to(clientroom).emit("user leave", roomparray, { for: "everyone" });
-                }
-                logger(" [INFO] 🟥 " + user + " Leved room (" + clientroom + ")")
-            });
-
-            socket.on("chat message", function (msg, bname, clientroom) {
-                if (users.includes(bname)) {
-                    if (msg != "") {
-                        if (msg.length < 501) {
-                            if (msg.includes("<") || msg.includes(">")) {
-                                if (msg.includes("<img") || msg.includes("<a") || !msg.includes("<script")) {
-                                    logger(" [MESSAGE] 📧 Message send from | " + bname + "@" + clientroom + " | " + msg)
-                                    io.to(clientroom).emit("chat message", msg, bname);
-                                    io.emit("lastmsg", clientroom, msg, bname)
-                                    msdnum++
-                                    // client.write("GET /")
-                                    // client.end()
-                                } else {
-                                    logger(" [MESSAGE] 📧🟥 html injection | " + bname + "@" + clientroom + " | ")
-                                    io.emit("chat message", "HTML is not allowed", bname);
-                                }
-                            } else {
-                                io.to(clientroom).emit("chat message", msg, bname);
-                                if (clientroom != "0" && crooms.includes(clientroom)) {
-                                    io.emit("lastmsg", clientroom, msg, bname)
-                                }
-                                msdnum++
-                                logger(" [MESSAGE] 📧 Message send from | " + bname + "@" + clientroom + "" + " | " + msg)
-                            }
-                            // send("MSG" + " SEND " + clientroom + " " + bname + " " + msg)
+                    if (roompdouble.includes(user + "@" + clientroom)) {
+                        roompdouble.splice(roompdouble.indexOf(user + "@" + clientroom), 1)
+                        if (roompdouble.includes(user + "@" + clientroom)) {
                         } else {
-                            logger(" [MESSAAGE] 📧🟥 to long | " + bname + "@" + clientroom + " | " + msg.length)
+                            io.to(clientroom).emit("user leave", roomparray, { for: "everyone" });
                         }
                     } else {
-                        // console.log(time() + " 📧🟥 spam | " + bname + " (" + clientroom + ")" + " | ");
+                        roomparray.splice(roomparray.indexOf(user + "@" + clientroom), 1);
+                        io.to(clientroom).emit("user leave", roomparray, { for: "everyone" });
                     }
+                    logger(" [INFO] - 🟥 " + user + " Leved room (" + clientroom + ")")
+                });
+                try {
+                    client.destroy()
+                } catch (err) {
+                    console.log(" [JAVA] - no open Socket connection")
+                }
+            });
+        });
+
+    });
+
+    socket.on("chat message", function (msg, bname, clientroom, password) {
+        console.log(bname + password)
+        try {
+            client.destroy()
+        } catch (err) {
+            console.log("this is the error " + err)
+        }
+        client.connect(8888, '127.69.69.69', function () {
+            send("AUTH " + bname + " " + password)
+            client.once('data', function (data) {
+                data = data.toString().split(":");
+                if (data[0] != "OK") {
+                    logger(" [MESSAGE] - 📧❗ no user with this password | " + bname + "@" + clientroom + " | ")
+                } else if (msg === "") {
+                    logger(" [MESSAGE] - 📧❗ spam | " + bname + " (" + clientroom + ")" + " | ");
+                } else if (msg.length > 500) {
+                    logger(" [MESSAAGE] - 📧❗ to long | " + bname + "@" + clientroom + " | " + msg.length)
+                } else if (msg.includes("<") || msg.includes(">")) {
+                    logger(" [MESSAGE] - 📧❗ html injection | " + bname + "@" + clientroom + " | ")
                 } else {
-                    logger(" [MESSAGE] 📧❗ kein gültiger Name | " + bname + "@" + clientroom + " | ")
+                    logger(" [MESSAGE] - 📧 Message send from | " + bname + "@" + clientroom + " | " + msg)
+                    io.to(clientroom).emit("chat message", msg, bname);
+                    io.emit("lastmsg", clientroom, msg, bname)
+                    // send("MSG " + clientroom + " " + msg)
+                    msdnum++
+                }
+                try {
+                    client.destroy()
+                } catch (err) {
+                    console.log(" [JAVA] - no open Socket connection")
                 }
             });
         });
     });
 
+});
 
-    function checkTime(l) {
-        if (l < 10) {
-            l = "0" + l;
-        }
-        return l;
-    }
-    function checkms(l) {
-        if (l < 10) {
-            l = "00" + l;
-        } else if (l < 100) {
-            l = "0" + l;
-        }
-        return l;
-    }
-
-    function time() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        var d = today.getDate();
-        var mo = today.getMonth();
-        var y = today.getFullYear();
-        var ms = today.getMilliseconds();
-        mo++
-        // add a zero in front of numbers<10
-        m = checkTime(m);
-        s = checkTime(s);
-        mo = checkTime(mo);
-        d = checkTime(d);
-        ms = checkms(ms);
-        var alltime = (/*d + "-" + mo + "-" + y + " " + */h + ":" + m + ":" + s + "," + ms)
-        return alltime;
-    }
-
-
-} catch (e) {
-    console.log("all error")
+function signupindexminus() {
+    signupindex--
 }
+
+function checkTime(l) {
+    if (l < 10) {
+        l = "0" + l;
+    }
+    return l;
+}
+function checkms(l) {
+    if (l < 10) {
+        l = "00" + l;
+    } else if (l < 100) {
+        l = "0" + l;
+    }
+    return l;
+}
+
+function time() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    var d = today.getDate();
+    var mo = today.getMonth();
+    var y = today.getFullYear();
+    var ms = today.getMilliseconds();
+    mo++
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+    mo = checkTime(mo);
+    d = checkTime(d);
+    ms = checkms(ms);
+    var alltime = (/*d + "-" + mo + "-" + y + " " + */h + ":" + m + ":" + s + "," + ms)
+    return alltime;
+}
+
+

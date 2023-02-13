@@ -123,7 +123,6 @@
     var id
     var name
     var tl = 0
-    var filterm = true
 
     var welcome = `<div id="waitroom-1" onclick="chancheroom('/welcome.html','waitroom-1')" class="roomcon curroom">
               <span class="chatroom">
@@ -137,28 +136,6 @@
       document.cookie = "password=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
       // document.cookie = name + '=';
       window.location.reload();
-    }
-
-    function filters() {
-      document.getElementById('terminal-filter-messages').onclick = function () {
-        if (this.checked) {
-          filterm = false
-        } else {
-          filterm = true
-        }
-      };
-    }
-
-    try {
-      document.getElementById('terminal-filter-messages').onclick = function () {
-        if (this.checked) {
-          filterm = false
-        } else {
-          filterm = true
-        }
-      };
-    } catch {
-      setTimeout(filters, 1000)
     }
 
     // The room your in
@@ -211,15 +188,12 @@
     }
 
     $(function () {
-      var socket = io()
-      socket.on("RELODEALLCLIENTS", function () {
-        console.log("wrberberberberberberb")
-        document.location.reload(true)
-      });
-    });
-
-    $(function () {
       var socket = io();
+
+      socket.on("RELODEALLCLIENTS", function () {
+        window.top.location.reload(true);
+      });
+
       socket.on("getid", function (sid, ver) {
         id = sid
         document.title = "Talk2 Chat | Beta " + ver
@@ -241,27 +215,22 @@
         });
       });
 
-
-
-
       socket.on("check true", function (uname, rooms, addterminal, terminalscript) {
         document.getElementById("room-container").innerHTML = rooms
         document.getElementById("profil-name").innerHTML = uname + `<span
       class="lmsg">logout</span>`
         document.getElementById("roomframe").src = "/welcome.html";
         document.getElementById("waitroom-1").style.display = "none"
-        if (addterminal === undefined) {
-          // || terminalscript === undefined
-        } else {
-          // try {
-          //   document.getElementById("serverlog")
-          // } catch (err) {
-          //   console.log(err)
-          //   document.getElementById("main-con").innerHTML += addterminal
-          // }
+        if (addterminal != undefined) {
+          if (document.getElementById("terminal-filer-container") === null) {
+            document.getElementById("main-con").innerHTML += addterminal
+            document.getElementById("terminal-filter-messages").checked = true
+            document.getElementById("terminal-filter-admin").checked = true
+            document.getElementById("terminal-filter-info").checked = true
+            document.getElementById("terminal-filter-java").checked = true
+            document.getElementById("terminal-filter-error").checked = true
+          }
 
-          // document.getElementById("thisscript").innerHTML += terminalscript
-          document.getElementById("main-con").innerHTML += addterminal
         }
 
         if (uname.includes("_")) {
@@ -272,23 +241,25 @@
           document.getElementById("profile-logo").innerText = uname.slice(0, 2)
           document.getElementById("profile-logo").style.backgroundColor = getrgb()
         }
-
-
       });
 
     });
     $(function () {
       var socket = io()
       socket.on("consolelog", function (terminallog) {
-        // console.log("erhlten")
-        if (terminallog.includes("[MESSAGE]") && filterm == false) {
+        if (terminallog.includes("[MESSAGE]") && document.getElementById("terminal-filter-messages").checked === false) {
+
+        } else if (terminallog.includes("[INFO]") && document.getElementById("terminal-filter-info").checked === false) {
+
+        } else if (terminallog.includes("[ADMIN]") && document.getElementById("terminal-filter-admin").checked === false) {
+
+        } else if (terminallog.includes("[JAVA]") && document.getElementById("terminal-filter-java").checked === false) {
+
+        } else if (terminallog.includes("[ERROR]") && document.getElementById("terminal-filter-error").checked === false) {
 
         } else {
-          if (document.getElementById("serverlog")) {
-
-            document.getElementById("serverlog").innerHTML += '<div class="terminal-item">' + terminallog + '</div>'
-            scrolldown()
-          }
+          document.getElementById("serverlog").innerHTML += '<div class="terminal-item">' + terminallog + '</div>'
+          scrolldown()
         }
 
 

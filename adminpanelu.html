@@ -36,21 +36,6 @@
                         <div class="user-btn"></div>
                     </div>
                 </div>
-                <!-- <div class="user-el" id="testUsername">
-                    <div class="user-container"><Span class="name" id="name-testUsername">testUsername</Span></div>
-                    <div><span class="rooms-of-user" id="rooms-testUsername">1 2 3 4 5
-                            65</span><span class="admin-perms-indi"
-                            id="admin-perms-testUsername">&nbsp;&nbsp;&nbsp;</span><button class="user-button"
-                            onclick="editusermenu('testUsername')">edit</button><button
-                            onclick="deluser('testUsername')" class="user-button">delete</button></div>
-                </div>
-                <div class="user-el" id="Colin">
-                    <div class="user-container"><Span class="name" id="name-Colin">Colin</Span></div>
-                    <div><span class="rooms-of-user" id="rooms-Colin">1 2 3 4 5
-                            65</span><span class="admin-perms-indi" id="admin-perms-Colin">A</span><button
-                            class="user-button" onclick="editusermenu('Colin')">edit</button><button
-                            onclick="deluser('Colin')" class="user-button">delete</button></div>
-                </div> -->
             </div>
 
         </div>
@@ -93,7 +78,14 @@
                 <span class="info-items-text">rooms</span>
             </div>
             <div class="info-items">
-                <input type="text" class="panel-input" maxlength="20" id="edit-user-rooms" autocomplete="off">
+                <input type="text" class="panel-input" id="edit-user-rooms" autocomplete="off">
+                <span class="input-info">separated by spaces</span>
+            </div>
+            <div class="info-items">
+                <span class="info-items-text">New password</span>
+            </div>
+            <div class="info-items">
+                <input type="text" class="panel-input" id="edit-user-pw" autocomplete="off">
                 <span class="input-info">separated by spaces</span>
             </div>
             <div class="info-items">
@@ -133,7 +125,6 @@
                 var adminindi = "&nbsp;&nbsp;&nbsp;"
                 if (ADMINS.includes(USER)) {
                     adminindi = "A"
-                    ROOMS = "*"
                 }
                 document.getElementById("user-list").innerHTML += ` <div class="user-el" id="` + USER + `">
                     <div class="user-container"><Span class="name" id="name-` + USER + `">` + USER + `</Span></div>
@@ -142,7 +133,6 @@
                             class="user-button" onclick="editusermenu('` + USER + `')">edit</button><button
                             onclick="deluser('` + USER + `')" class="user-button">delete</button></div>
                 </div><div class="spacer"></div>`
-
             });
         });
         function creusermenu(i) {
@@ -224,12 +214,10 @@
 
         }
 
-
         function relodeall() {
             var socket = io()
             socket.emit("relode")
         }
-
 
         function dragElement(elmnt) {
             var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;

@@ -334,6 +334,10 @@ img.infoicon {
     border-radius: 5px;
 }
 
+#edituser-form {
+    height: 375px;
+}
+
 #createuser-form-grabber,
 #edituser-form-grabber {
     cursor: grab;

@@ -14,7 +14,7 @@
 
 <body>
     <div class="allcontainer">
-        <h1>Admin Chat</h1>
+        <h1>Room 1</h1>
         <main>
             <div id="messages">
             </div>
@@ -173,6 +173,7 @@
                 });
 
                 socket.on("loginfalse", function () {
+                    window.top.location.reload(true);
                     logindirect(id)
                 });
             });
@@ -211,45 +212,42 @@
             //wen eine nachricht erhalten wird erstellt es ein Nachricht element 9
             //Wen der gleiche die nachricht davor gesendet hat wird der name zwei den folgenden Nachrichten entfernt
             var lmsgname
-            socket.on("chat message", function (msg, bname) {
-                if (msg === "") {
-                    console.log("kein spam 🤣")
-                } else {
-                    if (auser.includes(bname)) {
-                        if (bname === name) {
-                            if (lmsgname === name) {
-                                $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                            }
-                            else {
-                                $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"><span  class="adminicon tage">admin</span>You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                            }
-                        } else {
-                            if (lmsgname === bname) {
-                                $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                            }
-                            else {
-                                $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme">' + bname + '<span class="adminicon tage">admin</span></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                            }
+            socket.on("chat message", function (msg, bname, adminlist) {
+                if (auser.includes(bname)) {
+                    if (bname === name) {
+                        if (lmsgname === name) {
+                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                        else {
+                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"><span  class="adminicon tage">admin</span>You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
                         }
                     } else {
-                        if (bname === name) {
-                            if (lmsgname === name) {
-                                $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                            }
-                            else {
-                                $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username">You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                            }
-                        } else {
-                            if (lmsgname === bname) {
-                                $("#messages").append($('<div class="nachricht"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                            }
-                            else {
-                                $("#messages").append($('<div class="nachricht"><div class="info"><span class="username">' + bname + '</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
-                            }
-
+                        if (lmsgname === bname) {
+                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                        else {
+                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username auserneme">' + bname + '<span class="adminicon tage">admin</span></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
                         }
                     }
+                } else {
+                    if (bname === name) {
+                        if (lmsgname === name) {
+                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                        else {
+                            $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username">You</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                    } else {
+                        if (lmsgname === bname) {
+                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+                        else {
+                            $("#messages").append($('<div class="nachricht"><div class="info"><span class="username">' + bname + '</span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));
+                        }
+
+                    }
                 }
+
 
 
                 lmsgname = bname
@@ -257,11 +255,11 @@
             });
             //nachricht abschicken 7
             $("form").submit(function (e) {
-                if ($("#m").length > 501) {
+                if ($("#m").val().length > 500) {
                     return false
                 }
                 e.preventDefault();
-                socket.emit("chat message", $("#m").val(), name, thisroom)
+                socket.emit("chat message", $("#m").val(), name, thisroom, arraypass[1])
                 $("#m").val("");
                 return false
             });

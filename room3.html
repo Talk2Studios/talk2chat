@@ -261,7 +261,7 @@
                     return false
                 }
                 e.preventDefault();
-                socket.emit("chat message", $("#m").val(), name, thisroom)
+                socket.emit("chat message", $("#m").val(), name, thisroom, arraypass[1])
                 $("#m").val("");
                 return false
             });
