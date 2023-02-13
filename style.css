@@ -40,16 +40,21 @@ body {
     align-self: flex-start;
 }
 
-#onlineusers .onlineuser, .onlineuser-content {
+#onlineusers .onlineuser,
+.onlineuser-content {
     height: 50px;
     width: 220px;
 }
+
 .onlineuser {
     padding: 0 0 0 30px;
 }
-#onlineusers span, #onlineusers h2 {
+
+#onlineusers span,
+#onlineusers h2 {
     color: white;
 }
+
 #onlineusers h2 {
     height: 85px;
     margin: 0;
@@ -58,6 +63,7 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 #onlineusers img {
     height: 35px;
     width: 35px;
@@ -66,18 +72,22 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .onlineuser-content {
     display: flex;
     align-items: center;
 }
+
 #onlineusers span.typing {
     color: rgb(220, 204, 254);
     font-size: 12px;
 }
+
 .name {
     display: flex;
     flex-direction: column;
 }
+
 .new-user {
     color: rgb(193, 167, 251);
     list-style-type: none;
@@ -119,9 +129,10 @@ main {
     width: 800px;
     /* background: rgb(66,21,163);
     background: linear-gradient(180deg, rgba(66,21,163,1) 0%, rgba(79,33,176,1) 100%); */
-    background: radial-gradient(circle, rgba(32,0,110,1) 49%, rgba(10,0,47,1) 100%);
+    background: radial-gradient(circle, rgba(32, 0, 110, 1) 49%, rgba(10, 0, 47, 1) 100%);
     border-radius: 5px;
 }
+
 main.waitmain {
     width: 1050px;
 }
@@ -206,7 +217,7 @@ button {
     padding: 0 20px;
     border-radius: 0 5px 5px 0;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    
+
 }
 
 button:hover {
@@ -216,6 +227,7 @@ button:hover {
 button:active {
     background: rgb(10, 0, 47);
 }
+
 button span {
     cursor: pointer;
 }
@@ -270,7 +282,7 @@ div.mymsg.nachricht {
 
 .mymsg .chatmsg {
     align-self: flex-end;
-    background: rgba(35, 14, 108, 0.5);
+    background: rgba(10, 0, 47, 1);
 }
 
 .auser,

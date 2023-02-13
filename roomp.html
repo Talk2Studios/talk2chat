@@ -229,7 +229,7 @@
                 if (msg === "") {
                     console.log("kein spam 🤣")
                 } else {
-                    if (adminlist.includes(bname)) {
+                    if (adminlist) {
                         if (bname === name) {
                             if (lmsgname === name) {
                                 $("#messages").append($('<div class="nachricht mymsg"><div class="info"><span class="username auserneme"></span></div><span class="chatmsg">' + msg + "<br>" + time() + '</span></div>'));

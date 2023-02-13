@@ -62,7 +62,6 @@ button {
     height: 20px;
     margin: 20px 0;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-
 }
 
 button:active {
@@ -75,6 +74,7 @@ button:active {
     text-decoration: none;
     padding: 15px 10px 5px;
     border-radius: 0 0 5px 5px;
+    margin: 0 1px;
     font-size: 18px;
     background: rgb(77, 56, 152);
     transition: all .25s ease-in;

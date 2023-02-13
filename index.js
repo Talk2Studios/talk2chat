@@ -34,7 +34,7 @@ var openroomsdouble = []
 
 var msgdelay = []
 
-var msgdelaytime = 500
+var msgdelaytime = 1000
 
 // max number of signups per min
 
@@ -54,7 +54,7 @@ var version = "v0.5.0"
 
 //Hosting server on port 80
 
-var serverport = 5555
+var serverport = 6969
 
 http.listen(serverport, function () {
     console.log(time() + " [SERVER] Sever on🔴 Port: " + serverport)
@@ -409,7 +409,7 @@ io.on("connection", function (socket) {
         try {
             client.destroy()
         } catch (err) {
-            console.log("this is the error " + err)
+            logger(" [ERROR] - this is the error " + err)
         }
         client.connect(8888, '127.69.69.69', function () {
             send("AUTH " + user + " " + pass)
@@ -425,7 +425,7 @@ io.on("connection", function (socket) {
                 try {
                     client.destroy()
                 } catch (err) {
-                    console.log(" [JAVA] - no open Socket connection")
+                    logger(" [JAVA] - no open Socket connection")
                 }
             });
         });
@@ -442,7 +442,7 @@ io.on("connection", function (socket) {
         try {
             client.destroy()
         } catch (err) {
-            console.log("this is the error " + err)
+            logger(" [ERROR] - this is the error " + err)
         }
         client.connect(8888, '127.69.69.69', function () {
             send("AUTH " + user + " " + pass)
@@ -490,7 +490,7 @@ io.on("connection", function (socket) {
                 try {
                     client.destroy()
                 } catch (err) {
-                    console.log(" [JAVA] - no open Socket connection")
+                    logger(" [JAVA] - no open Socket connection")
                 }
             });
         });
@@ -498,7 +498,6 @@ io.on("connection", function (socket) {
     });
 
     socket.on("chat message", function (msg, bname, clientroom, password) {
-        console.log(bname + password)
         try {
             client.destroy()
         } catch (err) {
@@ -508,7 +507,6 @@ io.on("connection", function (socket) {
             send("AUTH " + bname + " " + password)
             client.once('data', function (data) {
                 data = data.toString().split(":");
-
                 if (data[0] != "OK") {
                     logger(" [MESSAGE] - 📧❗ no user with this password | " + bname + "@" + clientroom + " | ")
                 } else if (msgdelay.includes(bname)) {
@@ -520,23 +518,18 @@ io.on("connection", function (socket) {
                 } else if (msg.includes("<") || msg.includes(">")) {
                     logger(" [MESSAGE] - 📧❗ html injection | " + bname + "@" + clientroom + " | ")
                 } else {
+                    var adminindi = false
+                    if (data[1].includes("true")) {
+                        adminindi = true
+                    } else {
+                        msgdelay.push(bname)
+                        setTimeout(removedelay, msgdelaytime)
+                    }
                     logger(" [MESSAGE] - 📧 Message send from | " + bname + "@" + clientroom + " | " + msg)
-                    send("ADMIN LIST")
-                    client.once('data', function (data) {
-                        let adminlist = data.toString().split(";")
-                        if (adminlist.includes(bname)) {
-
-                        } else {
-                            msgdelay.push(bname)
-                            setTimeout(removedelay, msgdelaytime)
-                        }
-                        io.to(clientroom).emit("chat message", msg, bname, adminlist);
-                        io.emit("lastmsg", clientroom, msg, bname)
-                        // send("MSG " + clientroom + " " + msg)
-                        msdnum++
-                    });
-
-
+                    io.to(clientroom).emit("chat message", msg, bname, adminindi);
+                    io.emit("lastmsg", clientroom, msg, bname)
+                    // send("MSG " + clientroom + " " + msg)
+                    msdnum++
                 }
 
                 try {
@@ -547,8 +540,9 @@ io.on("connection", function (socket) {
             });
         });
     });
-
 });
+
+
 
 function removedelay(USERNAME) {
     msgdelay.splice(msgdelay.indexOf(USERNAME), 1)

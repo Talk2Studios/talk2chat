@@ -152,7 +152,7 @@ div#profile.roomcon {
     height: 800px;
     width: 90%;
     border: black 5px solid;
-    background: rgb(30, 30, 30);
+    background: rgb(0, 12, 24);
     overflow: auto;
     word-break: break-all;
     border-radius: 5px;
@@ -165,14 +165,14 @@ div#profile.roomcon {
     justify-content: flex-start;
 }
 
-#serverlog div {
+#serverlog div {    
     color: #fff;
     font-weight: 300;
     padding: 0 0 0 4px;
 }
 
-.terminal-item:nth-child(even) {
-    background: rgb(37, 37, 38);
+.terminal-item:nth-child(odd) {
+    background: rgba(6, 25, 64, 0.399);
 }
 
 /* width */
