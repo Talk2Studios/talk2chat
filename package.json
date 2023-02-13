@@ -60,7 +60,7 @@
     "serve-static": "^1.15.0",
     "setprototypeof": "^1.2.0",
     "side-channel": "^1.0.4",
-    "socket.io": "^4.5.4",
+    "socket.io": "^4.6.0",
     "socket.io-adapter": "^2.4.0",
     "socket.io-parser": "^4.2.1",
     "statuses": "^2.0.1",
