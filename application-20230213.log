@@ -20936,3 +20936,197 @@
 2023-02-13 16:00:34.948 [Thread-254] INFO  org.example.Main - Add login to: Colin
 2023-02-13 16:00:34.950 [Thread-254] INFO  org.example.Main - Auth: Colin 3
 2023-02-13 16:00:34.950 [Thread-254] TRACE org.example.Main - Reading from Client
+2023-02-13 22:04:52.412 [main] INFO  org.example.Main - Starting Server
+2023-02-13 22:04:52.418 [main] INFO  org.example.Main - Started server on Port 8888
+2023-02-13 22:05:03.877 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:03.880 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:03.897 [Thread-0] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:03.912 [Thread-0] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:03.930 [Thread-0] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:03.940 [Thread-0] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:03.944 [Thread-0] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:03.952 [Thread-0] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:03.956 [Thread-0] INFO  org.example.Main - New server instance started
+2023-02-13 22:05:13.821 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:13.822 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:13.823 [Thread-1] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:13.825 [Thread-1] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:13.825 [Thread-1] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:13.826 [Thread-1] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:13.827 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:13.827 [Thread-1] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:13.828 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:13.828 [Thread-1] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:13.828 [Thread-1] INFO  org.example.Main - New server instance started
+2023-02-13 22:05:13.828 [Thread-2] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:13.829 [Thread-2] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:13.829 [Thread-2] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:13.831 [Thread-2] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:13.832 [Thread-2] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:13.833 [Thread-2] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:13.833 [Thread-2] INFO  org.example.Main - New server instance started
+2023-02-13 22:05:20.486 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:20.488 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:20.488 [Thread-3] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:20.490 [Thread-3] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:20.490 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:20.490 [Thread-3] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:20.491 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:20.491 [Thread-4] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:20.492 [Thread-3] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:20.493 [Thread-4] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:20.494 [Thread-3] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:20.495 [Thread-4] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:20.495 [Thread-3] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:20.495 [Thread-3] INFO  org.example.Main - New server instance started
+2023-02-13 22:05:20.497 [Thread-4] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:20.497 [Thread-4] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:20.498 [Thread-4] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:20.500 [Thread-4] INFO  org.example.Main - New server instance started
+2023-02-13 22:05:21.209 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:21.210 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:21.210 [Thread-5] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:21.211 [Thread-5] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:21.211 [Thread-5] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:21.212 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:21.212 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:21.212 [Thread-5] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:21.213 [Thread-5] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:21.213 [Thread-6] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:21.214 [Thread-5] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:21.214 [Thread-5] INFO  org.example.Main - New server instance started
+2023-02-13 22:05:21.215 [Thread-6] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:21.215 [Thread-6] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:21.217 [Thread-6] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:21.218 [Thread-6] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:21.219 [Thread-6] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:21.220 [Thread-6] INFO  org.example.Main - New server instance started
+2023-02-13 22:05:21.445 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:21.446 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:21.447 [Thread-7] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:21.447 [Thread-7] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:21.448 [Thread-7] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:21.449 [Thread-7] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:21.450 [Thread-7] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:21.451 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:05:21.451 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:05:21.451 [Thread-7] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:21.452 [Thread-8] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:05:21.452 [Thread-8] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:05:21.453 [Thread-8] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:05:21.452 [Thread-7] INFO  org.example.Main - New server instance started
+2023-02-13 22:05:21.454 [Thread-8] ERROR org.example.Main - db is Not reachable
+2023-02-13 22:05:21.454 [Thread-8] INFO  org.example.Main - Stop server instance
+2023-02-13 22:05:21.455 [Thread-8] DEBUG org.example.Main - Instance stopped
+2023-02-13 22:05:21.459 [Thread-8] INFO  org.example.Main - New server instance started
+2023-02-13 22:06:16.259 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:06:16.260 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:06:16.261 [Thread-9] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:06:16.261 [Thread-9] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:06:16.263 [Thread-9] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:06:16.265 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:06:16.266 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:06:16.266 [Thread-10] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:06:16.267 [Thread-10] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:06:16.267 [Thread-10] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:06:16.267 [Thread-9] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-13 22:06:16.267 [Thread-9] INFO  org.example.Main - Start loop
+2023-02-13 22:06:16.268 [Thread-9] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:16.268 [Thread-9] TRACE org.example.Main - New Command[AUTH, Colin, passwd]
+2023-02-13 22:06:16.269 [Thread-10] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-13 22:06:16.269 [Thread-9] INFO  org.example.Main - Check password from Colin
+2023-02-13 22:06:16.269 [Thread-10] INFO  org.example.Main - Start loop
+2023-02-13 22:06:16.269 [Thread-10] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:16.269 [Thread-9] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-13 22:06:16.270 [Thread-10] TRACE org.example.Main - New Command[AUTH, Colin, passwd]
+2023-02-13 22:06:16.270 [Thread-10] INFO  org.example.Main - Check password from Colin
+2023-02-13 22:06:16.270 [Thread-10] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-13 22:06:16.577 [Thread-9] INFO  org.example.Main - Check if User Colin is Admin
+2023-02-13 22:06:16.577 [Thread-10] INFO  org.example.Main - Check if User Colin is Admin
+2023-02-13 22:06:16.590 [Thread-10] DEBUG org.example.Main - mySql: username to ID
+2023-02-13 22:06:16.590 [Thread-9] DEBUG org.example.Main - mySql: username to ID
+2023-02-13 22:06:16.596 [Thread-10] INFO  org.example.Main - Add login to: Colin
+2023-02-13 22:06:16.596 [Thread-9] INFO  org.example.Main - Add login to: Colin
+2023-02-13 22:06:16.609 [Thread-10] INFO  org.example.Main - Auth: Colin 3
+2023-02-13 22:06:16.609 [Thread-10] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:16.609 [Thread-9] INFO  org.example.Main - Auth: Colin 3
+2023-02-13 22:06:16.611 [Thread-9] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:16.873 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:06:16.874 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:06:16.874 [Thread-11] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:06:16.876 [Thread-11] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:06:16.876 [Thread-11] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:06:16.879 [Thread-11] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-13 22:06:16.879 [Thread-11] INFO  org.example.Main - Start loop
+2023-02-13 22:06:16.880 [Thread-11] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:16.880 [Thread-11] TRACE org.example.Main - New Command[AUTH, Colin, passwd]
+2023-02-13 22:06:16.881 [Thread-11] INFO  org.example.Main - Check password from Colin
+2023-02-13 22:06:16.881 [Thread-11] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-13 22:06:16.891 [Thread-11] INFO  org.example.Main - Check if User Colin is Admin
+2023-02-13 22:06:16.896 [Thread-11] DEBUG org.example.Main - mySql: username to ID
+2023-02-13 22:06:16.901 [Thread-11] INFO  org.example.Main - Add login to: Colin
+2023-02-13 22:06:16.907 [Thread-11] INFO  org.example.Main - Auth: Colin 3
+2023-02-13 22:06:16.908 [Thread-11] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:16.908 [Thread-11] TRACE org.example.Main - New Command[EOF]
+2023-02-13 22:06:16.908 [Thread-11] INFO  org.example.Main - Client Disconnected
+2023-02-13 22:06:16.909 [Thread-11] DEBUG org.example.Main - Variables are set
+2023-02-13 22:06:16.909 [Thread-11] INFO  org.example.Main - New server instance started
+2023-02-13 22:06:18.737 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:06:18.739 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:06:18.740 [Thread-12] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:06:18.740 [Thread-12] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:06:18.741 [Thread-12] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:06:18.742 [Thread-12] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-13 22:06:18.742 [Thread-12] INFO  org.example.Main - Start loop
+2023-02-13 22:06:18.743 [Thread-12] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:18.744 [Thread-12] TRACE org.example.Main - New Command[AUTH, Colin, passwd]
+2023-02-13 22:06:18.745 [Thread-12] INFO  org.example.Main - Check password from Colin
+2023-02-13 22:06:18.745 [Thread-12] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-13 22:06:18.748 [Thread-12] INFO  org.example.Main - Check if User Colin is Admin
+2023-02-13 22:06:18.755 [Thread-12] DEBUG org.example.Main - mySql: username to ID
+2023-02-13 22:06:18.760 [Thread-12] INFO  org.example.Main - Add login to: Colin
+2023-02-13 22:06:18.767 [Thread-12] INFO  org.example.Main - Auth: Colin 3
+2023-02-13 22:06:18.768 [Thread-12] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:19.711 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:06:19.711 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:06:19.712 [Thread-13] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:06:19.712 [Thread-13] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:06:19.713 [Thread-13] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:06:19.714 [Thread-13] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-13 22:06:19.714 [Thread-13] INFO  org.example.Main - Start loop
+2023-02-13 22:06:19.714 [Thread-13] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:19.715 [Thread-13] TRACE org.example.Main - New Command[AUTH, admin, 1234]
+2023-02-13 22:06:19.716 [Thread-13] INFO  org.example.Main - Check password from admin
+2023-02-13 22:06:19.716 [Thread-13] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-13 22:06:19.722 [Thread-13] INFO  org.example.Main - Check if User admin is Admin
+2023-02-13 22:06:19.726 [Thread-13] DEBUG org.example.Main - mySql: username to ID
+2023-02-13 22:06:19.730 [Thread-13] INFO  org.example.Main - Add login to: admin
+2023-02-13 22:06:19.736 [Thread-13] INFO  org.example.Main - Auth: admin 0
+2023-02-13 22:06:19.736 [Thread-13] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:19.737 [Thread-13] TRACE org.example.Main - New Command[USER, LIST]
+2023-02-13 22:06:19.737 [Thread-13] INFO  org.example.Main - Check if User admin is Admin
+2023-02-13 22:06:19.742 [Thread-13] DEBUG org.example.Main - Admin requests userList
+2023-02-13 22:06:19.746 [Thread-13] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:19.747 [Thread-13] TRACE org.example.Main - New Command[EOF]
+2023-02-13 22:06:19.747 [Thread-13] INFO  org.example.Main - Client Disconnected
+2023-02-13 22:06:19.747 [Thread-13] DEBUG org.example.Main - Variables are set
+2023-02-13 22:06:19.748 [Thread-13] INFO  org.example.Main - New server instance started
+2023-02-13 22:06:28.645 [main] INFO  org.example.Main - New client connected
+2023-02-13 22:06:28.646 [main] INFO  org.example.Main - Starting new server instance
+2023-02-13 22:06:28.646 [Thread-14] DEBUG org.example.Main - Setting Variable
+2023-02-13 22:06:28.646 [Thread-14] DEBUG org.example.Main - Initialize Mysql module
+2023-02-13 22:06:28.647 [Thread-14] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-13 22:06:28.648 [Thread-14] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-13 22:06:28.648 [Thread-14] INFO  org.example.Main - Start loop
+2023-02-13 22:06:28.648 [Thread-14] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:28.649 [Thread-14] TRACE org.example.Main - New Command[AUTH, admin, 1234]
+2023-02-13 22:06:28.649 [Thread-14] INFO  org.example.Main - Check password from admin
+2023-02-13 22:06:28.649 [Thread-14] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-13 22:06:28.654 [Thread-14] INFO  org.example.Main - Check if User admin is Admin
+2023-02-13 22:06:28.658 [Thread-14] DEBUG org.example.Main - mySql: username to ID
+2023-02-13 22:06:28.661 [Thread-14] INFO  org.example.Main - Add login to: admin
+2023-02-13 22:06:28.666 [Thread-14] INFO  org.example.Main - Auth: admin 0
+2023-02-13 22:06:28.666 [Thread-14] TRACE org.example.Main - Reading from Client
+2023-02-13 22:06:28.667 [Thread-14] TRACE org.example.Main - New Command[USER, LIST]
+2023-02-13 22:06:28.667 [Thread-14] INFO  org.example.Main - Check if User admin is Admin
+2023-02-13 22:06:28.670 [Thread-14] 
