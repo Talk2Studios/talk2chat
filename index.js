@@ -338,7 +338,9 @@ io.on("connection", function (socket) {
         }
 
     });
-
+    // TODO fix confirm all
+    //! crash
+    //* Rechtschreibung in Dashboard
     socket.on("USER CREATE", function (USERNAME, PASSWORD, ROOMS) {
         client.connect(8888, '127.69.69.69', function () {
             send("AUTH admin 1234")
