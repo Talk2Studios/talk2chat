@@ -54,7 +54,7 @@ var version = "v0.5.0"
 
 //Hosting server on port 80
 
-var serverport = 6969
+var serverport = 80
 
 http.listen(serverport, function () {
     console.log(time() + " [SERVER] Sever on🔴 Port: " + serverport)
