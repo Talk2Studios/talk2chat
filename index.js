@@ -127,6 +127,9 @@ function send(message) {
 var pusers = []
 var puserpass = []
 
+var rusers = []
+var ruserpass = []
+
 var roomsalowed = [1, 2, 3,]
 
 var roompasrt1 = `<div id="chatroom-`
