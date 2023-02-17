@@ -373,9 +373,14 @@ io.on("connection", function (socket) {
         }
     });
 
-    socket.on("CONFIRM USER", function (USERNAME, PASSWORD) {
+    socket.on("CONFIRM USER", function (USERNAME) {
         if (pusers.includes(USERNAME)) {
             var index = pusers.indexOf(USERNAME)
+            try {
+                client.destroy()
+            } catch (err) {
+                logger(" [ERROR] - this is the error " + err)
+            }
             client.connect(8888, '127.69.69.69', function () {
                 send("AUTH admin 1234")
                 send("USER CREATE " + pusers[index] + " " + puserpass[index])
@@ -384,6 +389,11 @@ io.on("connection", function (socket) {
                 puserpass.splice(index, 1)
                 pusers.splice(index, 1)
             });
+            try {
+                client.destroy()
+            } catch (err) {
+                logger(" [ERROR] - this is the error " + err)
+            }
         }
     });
 

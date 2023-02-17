@@ -71,10 +71,10 @@
                 var useri = 0
                 for (var i = 0; alluser.length > i; i++) {
                     console.log(alluser[useri])
-                    var PASSWORD = document.getElementById("pw-" + alluser[useri])
+                    socket.emit("CONFIRM USER", alluser[useri])
                     var child = document.getElementById(alluser[useri])
                     document.getElementById("user-list").removeChild(child)
-                    socket.emit("CONFIRM USER", alluser[useri], PASSWORD)
+                    console.log(useri)
                     useri++
                 }
                 alluser = []
