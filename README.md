@@ -21,7 +21,7 @@
 # Talk2 Chat
 
 Our own chatapp to download and try for yourself. A product of the third laboratory work of the 2022 Wibilea Bassislehrjahr.<br>
-Explain video: <a href="https://www.youtube.com/@Code--Zone">Code--Zone</a>
+The documentation: <a href="https://www.youtube.com/@Code--Zone">Code--Zone</a>
 
 ## contributing
 
@@ -31,7 +31,7 @@ Explain video: <a href="https://www.youtube.com/@Code--Zone">Code--Zone</a>
 
 ### Backend
 
-- Niklaus Külling<br>
+- Niklaus Külling
 
 # Installation
 
@@ -55,7 +55,11 @@ $ npm init
 ```
 npm install --save socketio
 
-npm install --save express@4.15.2
+npm install --save express
+```
+**OR**
+```
+npm install --save Socketio express
 ```
 
 ## Start Node.js
@@ -68,8 +72,9 @@ node index.js
 ```
 ## Start Java Server
 
-1. Open the CMD, Terminal or a terminal thats build in a programm and navigate to the folder where you have the x.jar file.
-2. Type in this command to start de Server
+1. Be sure you have installed JAVA 19, if not download and install it <a href="https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html" target="_blank">hier</a>.
+2. Open the CMD, Terminal or a terminal thats build in a programm and navigate to the folder where you have the x.jar file.
+3. Type in this command to start de Server
 
 ```
 java -jar x.jar
@@ -78,8 +83,8 @@ java -jar x.jar
 
 We used XAMPP for this, but feel free to use another program.
 
-Move the messages Directory in the data directory of XAMPP
-If you installed XAMPP normaly you will finde the place for the database here
+Move the messages Directory in the data directory of XAMPP.
+If you installed XAMPP normaly you will finde the directory for the databases here
 ```
 C:\xampp\mysql\data
 ```
