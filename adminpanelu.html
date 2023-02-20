@@ -86,7 +86,7 @@
             </div>
             <div class="info-items">
                 <input type="text" class="panel-input" id="edit-user-pw" autocomplete="off">
-                <span class="input-info">separated by spaces</span>
+                <span class="input-info">Don't use ; : or spaces</span>
             </div>
             <div class="info-items">
                 <span class="info-items-text">Administrator</span>
@@ -182,13 +182,14 @@
             var USERNAME = document.getElementById("edt-user-name").innerText
             var ROOMS = document.getElementById("edit-user-rooms").value
             var AFT = document.getElementById("admin-true-false").checked
+            var NEWPW = document.getElementById("edit-user-pw").value
             var aperms = "admin-perms-" + USERNAME
             if (AFT) {
                 document.getElementById(aperms).innerHTML = "A"
             } else {
                 document.getElementById(aperms).innerHTML = "&nbsp;&nbsp;&nbsp;"
             }
-            socket.emit("USER EDIT", USERNAME, ROOMS, AFT)
+            socket.emit("USER EDIT", USERNAME, ROOMS, AFT, NEWPW)
             document.getElementById("edituser-form").classList.toggle("form-on")
         }
 
