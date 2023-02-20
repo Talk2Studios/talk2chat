@@ -20,6 +20,7 @@
                 <a href="adminpanels.html" class="apnav">Dashboard</a>
                 <a href="adminpanelu.html" class="apnav">Users</a>
                 <a href="adminpanelp.html" class="apnav current">Pending</a>
+                <a href="adminpanelre.html" class="apnav">Removed</a>
                 <a href="adminpanelr.html" class="apnav">Rooms</a>
                 <a href="adminpanelcl.html" class="apnav">Changelogs</a>
             </div>
@@ -70,10 +71,10 @@
                 var useri = 0
                 for (var i = 0; alluser.length > i; i++) {
                     console.log(alluser[useri])
-                    var PASSWORD = document.getElementById("pw-" + alluser[useri])
+                    socket.emit("CONFIRM USER", alluser[useri])
                     var child = document.getElementById(alluser[useri])
                     document.getElementById("user-list").removeChild(child)
-                    socket.emit("CONFIRM USER", alluser[useri], PASSWORD)
+                    console.log(useri)
                     useri++
                 }
                 alluser = []

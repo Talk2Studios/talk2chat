@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/panel.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+
+<body>
+    <h1>Admin Panel</h1>
+    <main class="waitmain">
+        <div class="container">
+            <div id="panelnav">
+                <a href="adminpanels.html" class="apnav">Dashboard</a>
+                <a href="adminpanelu.html" class="apnav">Users</a>
+                <a href="adminpanelp.html" class="apnav">Pending</a>
+                <a href="adminpanelre.html" class="apnav current">Removed</a>
+                <a href="adminpanelr.html" class="apnav">Rooms</a>
+                <a href="adminpanelcl.html" class="apnav">Changelogs</a>
+            </div>
+            <div class="content-el" id="user-list">
+                <button onclick="confirmall()" class="addbutton">All</button>
+                <div class="user-el">
+                    <div class="user-container"><Span class="name">username</Span></div>
+                    <div class="flex-div"><span class="pw-of-user-title">password</span>
+                        <div class="user-btn"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+
+
+        var id
+        var alluser = []
+        $(function () {
+            var socket = io()
+
+            socket.on("getid", function (sid) {
+                id = sid
+                socket.emit("requsersp", sid)
+            });
+
+            socket.on("resusersp", function (USER, PASSWORD) {
+                alluser.push(USER)
+                console.log(alluser)
+                document.getElementById("user-list").innerHTML += `<div class="user-el" id="` + USER + `">
+                    <div class="user-container"><Span class="name" id="name-` + USER + `">` + USER + `</Span></div>
+                    <div>
+                        <span class="rooms-of-user" id="pw-` + USER + `">` + PASSWORD + `</span>
+                        <button onclick="removeuser('` + USER + `')" class="user-button shouldnot">remove</button>
+                        <button onclick="confirmuser('` + USER + `')" class="user-button">confirm</button>
+                    </div>
+                </div><div class="spacer"></div>`
+
+            });
+        });
+
+        function confirmall() {
+            var socket = io()
+            if (confirm("Do you realy want do confirm all users")) {
+                var useri = 0
+                for (var i = 0; alluser.length > i; i++) {
+                    console.log(alluser[useri])
+                    var PASSWORD = document.getElementById("pw-" + alluser[useri])
+                    var child = document.getElementById(alluser[useri])
+                    document.getElementById("user-list").removeChild(child)
+                    socket.emit("CONFIRM USER", alluser[useri], PASSWORD)
+                    useri++
+                }
+                alluser = []
+            }
+        }
+
+        function confirmuser(USERNAME) {
+            var socket = io()
+            console.log(USERNAME)
+            var PASSWORD = document.getElementById("pw-" + USERNAME)
+            socket.emit("CONFIRM USER", USERNAME, PASSWORD)
+            var child = document.getElementById(USERNAME)
+            document.getElementById("user-list").removeChild(child)
+        }
+
+        function removeuser(USERNAME) {
+            var socket = io()
+            socket.emit("REMOVE PENDING", USERNAME)
+            var child = document.getElementById(USERNAME)
+            document.getElementById("user-list").removeChild(child)
+        }
+    </script>
+</body>
+
+</html>

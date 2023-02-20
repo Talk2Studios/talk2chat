@@ -165,10 +165,14 @@ div#profile.roomcon {
     justify-content: flex-start;
 }
 
-#serverlog div {    
+#serverlog div {
     color: #fff;
     font-weight: 300;
     padding: 0 0 0 4px;
+}
+
+.terminal-item {
+    font-family: monospace;
 }
 
 .terminal-item:nth-child(odd) {

@@ -512,7 +512,7 @@ img.infoicon {
 }
 
 .shouldnot {
-    background: radial-gradient(circle, rgb(14, 0, 65) 49%, rgba(10, 0, 47, 1) 100%);
+    background: rgb(32, 0, 110);
 }
 
 

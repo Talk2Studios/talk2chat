@@ -20,6 +20,7 @@
                 <a href="adminpanels.html" class="apnav">Dashboard</a>
                 <a href="adminpanelu.html" class="apnav current">Users</a>
                 <a href="adminpanelp.html" class="apnav">Pending</a>
+                <a href="adminpanelre.html" class="apnav">Removed</a>
                 <a href="adminpanelr.html" class="apnav">Rooms</a>
                 <a href="adminpanelcl.html" class="apnav">Changelogs</a>
             </div>
@@ -130,8 +131,8 @@
                     <div class="user-container"><Span class="name" id="name-` + USER + `">` + USER + `</Span></div>
                     <div><span class="rooms-of-user" id="rooms-` + USER + `">` + ROOMS + `</span>
                         <span class="admin-perms-indi" id="admin-perms-` + USER + `">` + adminindi + `</span><button
-                            class="user-button" onclick="editusermenu('` + USER + `')">edit</button><button
-                            onclick="deluser('` + USER + `')" class="user-button">delete</button></div>
+                            onclick="deluser('` + USER + `')" class="user-button shouldnot">delete</button><button
+                            class="user-button" onclick="editusermenu('` + USER + `')">edit</button></div>
                 </div><div class="spacer"></div>`
             });
         });
