@@ -1,0 +1,97 @@
+2023-02-20 07:17:01.381 [main] INFO  org.example.Main - Starting Server
+2023-02-20 07:17:01.387 [main] INFO  org.example.Main - Started server on Port 8888
+2023-02-20 07:17:45.510 [main] INFO  org.example.Main - New client connected
+2023-02-20 07:17:45.513 [main] INFO  org.example.Main - Starting new server instance
+2023-02-20 07:17:45.514 [Thread-0] DEBUG org.example.Main - Setting Variable
+2023-02-20 07:17:45.520 [Thread-0] DEBUG org.example.Main - Initialize Mysql module
+2023-02-20 07:17:45.529 [Thread-0] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-20 07:17:45.543 [Thread-0] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-20 07:17:45.543 [Thread-0] INFO  org.example.Main - Start loop
+2023-02-20 07:17:45.544 [Thread-0] TRACE org.example.Main - Reading from Client
+2023-02-20 07:17:45.544 [Thread-0] TRACE org.example.Main - New Command[AUTH, Colin, passwd]
+2023-02-20 07:17:45.546 [Thread-0] INFO  org.example.Main - Check password from Colin
+2023-02-20 07:17:45.548 [Thread-0] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-20 07:17:45.831 [Thread-0] INFO  org.example.Main - Check if User Colin is Admin
+2023-02-20 07:17:45.840 [Thread-0] DEBUG org.example.Main - mySql: username to ID
+2023-02-20 07:17:45.845 [Thread-0] INFO  org.example.Main - Add login to: Colin
+2023-02-20 07:17:45.855 [Thread-0] INFO  org.example.Main - Auth: Colin 3
+2023-02-20 07:17:45.855 [Thread-0] TRACE org.example.Main - Reading from Client
+2023-02-20 07:17:45.856 [Thread-0] TRACE org.example.Main - New Command[EOF]
+2023-02-20 07:17:45.857 [Thread-0] INFO  org.example.Main - Client Disconnected
+2023-02-20 07:17:45.857 [Thread-0] DEBUG org.example.Main - Variables are set
+2023-02-20 07:17:45.858 [Thread-0] INFO  org.example.Main - New server instance started
+2023-02-20 07:22:41.530 [main] INFO  org.example.Main - New client connected
+2023-02-20 07:22:41.530 [main] INFO  org.example.Main - Starting new server instance
+2023-02-20 07:22:41.530 [Thread-1] DEBUG org.example.Main - Setting Variable
+2023-02-20 07:22:41.530 [Thread-1] DEBUG org.example.Main - Initialize Mysql module
+2023-02-20 07:22:41.531 [Thread-1] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-20 07:22:41.532 [Thread-1] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-20 07:22:41.532 [Thread-1] INFO  org.example.Main - Start loop
+2023-02-20 07:22:41.532 [Thread-1] TRACE org.example.Main - Reading from Client
+2023-02-20 07:22:41.533 [Thread-1] TRACE org.example.Main - New Command[AUTH, admin, 1234]
+2023-02-20 07:22:41.533 [Thread-1] INFO  org.example.Main - Check password from admin
+2023-02-20 07:22:41.533 [Thread-1] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-20 07:22:41.537 [Thread-1] INFO  org.example.Main - Check if User admin is Admin
+2023-02-20 07:22:41.540 [Thread-1] DEBUG org.example.Main - mySql: username to ID
+2023-02-20 07:22:41.543 [Thread-1] INFO  org.example.Main - Add login to: admin
+2023-02-20 07:22:41.547 [Thread-1] INFO  org.example.Main - Auth: admin 0
+2023-02-20 07:22:41.547 [Thread-1] TRACE org.example.Main - Reading from Client
+2023-02-20 07:22:41.548 [Thread-1] TRACE org.example.Main - New Command[USER, LIST]
+2023-02-20 07:22:41.548 [Thread-1] INFO  org.example.Main - Check if User admin is Admin
+2023-02-20 07:22:41.551 [Thread-1] DEBUG org.example.Main - Admin requests userList
+2023-02-20 07:22:41.554 [Thread-1] TRACE org.example.Main - Reading from Client
+2023-02-20 07:22:41.555 [Thread-1] TRACE org.example.Main - New Command[EOF]
+2023-02-20 07:22:41.555 [Thread-1] INFO  org.example.Main - Client Disconnected
+2023-02-20 07:22:41.555 [Thread-1] DEBUG org.example.Main - Variables are set
+2023-02-20 07:22:41.556 [Thread-1] INFO  org.example.Main - New server instance started
+2023-02-20 07:22:42.876 [main] INFO  org.example.Main - New client connected
+2023-02-20 07:22:42.877 [main] INFO  org.example.Main - Starting new server instance
+2023-02-20 07:22:42.877 [Thread-2] DEBUG org.example.Main - Setting Variable
+2023-02-20 07:22:42.878 [Thread-2] DEBUG org.example.Main - Initialize Mysql module
+2023-02-20 07:22:42.878 [Thread-2] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-20 07:22:42.879 [Thread-2] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-20 07:22:42.880 [Thread-2] INFO  org.example.Main - Start loop
+2023-02-20 07:22:42.880 [Thread-2] TRACE org.example.Main - Reading from Client
+2023-02-20 07:22:42.880 [Thread-2] TRACE org.example.Main - New Command[AUTH, admin, 1234]
+2023-02-20 07:22:42.880 [Thread-2] INFO  org.example.Main - Check password from admin
+2023-02-20 07:22:42.881 [Thread-2] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-20 07:22:42.886 [Thread-2] INFO  org.example.Main - Check if User admin is Admin
+2023-02-20 07:22:42.891 [Thread-2] DEBUG org.example.Main - mySql: username to ID
+2023-02-20 07:22:42.894 [Thread-2] INFO  org.example.Main - Add login to: admin
+2023-02-20 07:22:42.899 [Thread-2] INFO  org.example.Main - Auth: admin 0
+2023-02-20 07:22:42.900 [Thread-2] TRACE org.example.Main - Reading from Client
+2023-02-20 07:22:42.900 [Thread-2] TRACE org.example.Main - New Command[USER, LIST]
+2023-02-20 07:22:42.900 [Thread-2] INFO  org.example.Main - Check if User admin is Admin
+2023-02-20 07:22:42.904 [Thread-2] DEBUG org.example.Main - Admin requests userList
+2023-02-20 07:22:42.908 [Thread-2] TRACE org.example.Main - Reading from Client
+2023-02-20 07:22:42.908 [Thread-2] TRACE org.example.Main - New Command[ADMIN, LIST]
+2023-02-20 07:22:42.909 [Thread-2] DEBUG org.example.Main - mySql: ID to username
+2023-02-20 07:22:42.911 [Thread-2] INFO  org.example.Main - Check if User admin is Admin
+2023-02-20 07:22:42.914 [Thread-2] DEBUG org.example.Main - User requests AdminList
+2023-02-20 07:22:42.918 [Thread-2] TRACE org.example.Main - Reading from Client
+2023-02-20 07:22:42.919 [Thread-2] TRACE org.example.Main - New Command[EOF]
+2023-02-20 07:22:42.919 [Thread-2] INFO  org.example.Main - Client Disconnected
+2023-02-20 07:22:42.919 [Thread-2] DEBUG org.example.Main - Variables are set
+2023-02-20 07:22:42.920 [Thread-2] INFO  org.example.Main - New server instance started
+2023-02-20 07:23:56.110 [main] INFO  org.example.Main - New client connected
+2023-02-20 07:23:56.111 [main] INFO  org.example.Main - Starting new server instance
+2023-02-20 07:23:56.111 [Thread-3] DEBUG org.example.Main - Setting Variable
+2023-02-20 07:23:56.111 [Thread-3] DEBUG org.example.Main - Initialize Mysql module
+2023-02-20 07:23:56.111 [Thread-3] DEBUG org.example.Main - Ping: localhost on Port: 3306
+2023-02-20 07:23:56.113 [Thread-3] INFO  org.example.Main - db is reachable with address and port: localhost:3306
+2023-02-20 07:23:56.113 [Thread-3] INFO  org.example.Main - Start loop
+2023-02-20 07:23:56.113 [Thread-3] TRACE org.example.Main - Reading from Client
+2023-02-20 07:23:56.114 [Thread-3] TRACE org.example.Main - New Command[AUTH, admin, 1234]
+2023-02-20 07:23:56.114 [Thread-3] INFO  org.example.Main - Check password from admin
+2023-02-20 07:23:56.114 [Thread-3] DEBUG org.example.Main - Encrypt something with SHA512
+2023-02-20 07:23:56.119 [Thread-3] INFO  org.example.Main - Check if User admin is Admin
+2023-02-20 07:23:56.122 [Thread-3] DEBUG org.example.Main - mySql: username to ID
+2023-02-20 07:23:56.126 [Thread-3] INFO  org.example.Main - Add login to: admin
+2023-02-20 07:23:56.130 [Thread-3] INFO  org.example.Main - Auth: admin 0
+2023-02-20 07:23:56.130 [Thread-3] TRACE org.example.Main - Reading from Client
+2023-02-20 07:23:56.130 [Thread-3] TRACE org.example.Main - New Command[USER, LIST]
+2023-02-20 07:23:56.131 [Thread-3] INFO  org.example.Main - Check if User admin is Admin
+2023-02-20 07:23:56.134 [Thread-3] DEBUG org.example.Main - Admin requests userList
+2023-02-20 07:23:56.137 [Thread-3] TRACE org.example.Main - Reading from Client
+2023-02-20 07:23:56.138 [Thread-3] TRACE org.example.Main - New Command[ADMIN, LIST]
+2023-02-20 07:23:56.138 [Thread-3] DEBUG org.example.
