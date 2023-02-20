@@ -58,11 +58,6 @@ var serverport = 80
 
 http.listen(serverport, function () {
     console.log(time() + " [SERVER] Sever on🔴 Port: " + serverport)
-    // setTimeout(sendserveron, 500)
-    // function sendserveron() {
-    //     io.emit("consolelog", time() + "Server is started")
-    // }
-
 });
 
 
@@ -325,20 +320,26 @@ io.on("connection", function (socket) {
                 send("AUTH admin 1234")
                 send("ADMIN ADD " + USERNAME)
                 send("EOF")
+                logger(" [ADMIN] - 📝 has admin " + USERNAME + "[" + AFT + "]")
             });
         } else {
             client.connect(8888, '127.69.69.69', function () {
                 send("AUTH admin 1234")
                 send("ADMIN " + "REMOVE " + USERNAME)
                 send("EOF")
+                logger(" [ADMIN] - 📝 has admin " + USERNAME + "[" + AFT + "]")
             });
         }
+        console.log(NPASSWORD);
         if (NPASSWORD != undefined) {
+            send("AUTH admin 1234")
             send("USER CHP " + USERNAME + " " + NPASSWORD)
+            send("EOF")
+            logger(" [ADMIN] - 📝 chanche password of " + USERNAME)
         }
 
     });
-    // TODO fix confirm all
+    // TODO: fix confirm all
     //! crash
     //* Rechtschreibung in Dashboard
     socket.on("USER CREATE", function (USERNAME, PASSWORD, ROOMS) {
