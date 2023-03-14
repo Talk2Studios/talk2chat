@@ -20,7 +20,12 @@
 
 # Talk2 Chat
 
-Our own chatapp to download and try for yourself. A product of the third laboratory work of the 2022 Wibilea Bassislehrjahr.<br>
+## Info
+- this Chatapp is developed on Windows but it probably works on ULinux Ubuntu aswel
+- We used XAMPP to host the MySQLü
+ 
+
+Our own chatapp to download and try for yourself. A product of the third laboratory work of the 2022/23 Wibilea Bassislehrjahr.<br>
 The documentation: <a href="https://www.youtube.com/@Code--Zone">Code--Zone</a>
 
 ## contributing
@@ -39,7 +44,7 @@ The documentation: <a href="https://www.youtube.com/@Code--Zone">Code--Zone</a>
 
 if You already installed node.js you can skip the first point.
 
-1. Download node <a href="https://nodejs.org/de/download/" target="_blank">hier</a> and install it on your PC.
+1. Download node.js <a href="https://nodejs.org/de/download/" target="_blank">hier</a> and install it on your PC.
 2. Create a new folder where you want to save the Website and copy all he stuff from github in this folder
 3. Open the Terminal as <strong><u>administrator</u></strong> and navigate to the folder you just have created.
 4. Now we init a node Projekt (optional):
